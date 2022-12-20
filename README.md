@@ -1,2 +1,2 @@
 # Quantum Computation
-by Jannik Obenhoff and Niklas Schweiger | Technical University Munich
+Jannik Obenhoff and Niklas Schweiger | Technical University Munich
