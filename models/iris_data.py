@@ -1,17 +1,17 @@
-from matplotlib import pyplot as plt
-from sklearn.datasets import load_iris
-from sklearn.preprocessing import MinMaxScaler
-import pandas as pd
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from qiskit.utils import algorithm_globals
-from sklearn.svm import SVC
-from qiskit.circuit.library import ZZFeatureMap, RealAmplitudes
-from qiskit.algorithms.optimizers import COBYLA
-from qiskit.primitives import Sampler
-from IPython.display import clear_output
 import time
+
+import pandas as pd
+from IPython.display import clear_output
+from matplotlib import pyplot as plt
+from qiskit.algorithms.optimizers import COBYLA
+from qiskit.circuit.library import ZZFeatureMap, RealAmplitudes
+from qiskit.primitives import Sampler
+from qiskit.utils import algorithm_globals
 from qiskit_machine_learning.algorithms.classifiers import VQC
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.svm import SVC
 
 if __name__ == "__main__":
     iris_data = load_iris()
