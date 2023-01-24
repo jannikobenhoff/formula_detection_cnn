@@ -8,6 +8,8 @@ app = Flask(__name__)
 last_time = time.time()
 
 _set = {"values": []}
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
     if request.method == "POST":

@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     a = ';'.join(str(i[0]) for i in numbers[0].imagearray.reshape(-1, 1))
     b = ';'.join(str(i[0]) for i in numbers[1].imagearray.reshape(-1, 1))
-    data = {"values": [a, b, a]}
+    data = {"values": [a]}
     # print(data)
     response = requests.post("http://127.0.0.1:7777/", json=data)
     df = pd.read_json(requests.get("http://127.0.0.1:7777/").text)
