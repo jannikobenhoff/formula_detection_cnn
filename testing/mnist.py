@@ -1,129 +1,108 @@
-import numpy as np
+import gzip
 import pandas as pd
-import scipy.signal
-import torchvision
-from PIL import Image
-import scipy
+import numpy as np
 import matplotlib.pyplot as plt
-import cv2
-import torch
-from sklearn.svm import SVC
-import requests
+from sklearn.svm import LinearSVC, SVC
+from sklearn.metrics import accuracy_score, classification_report
+from joblib import dump
+from scanning import *
+
+def training_images(train=True):
+    if train:
+        file = '__files/train-images-idx3-ubyte.gz'
+    else:
+        file = '__files/t10k-images-idx3-ubyte.gz'
+
+    with gzip.open(file, 'r') as f:
+        # first 4 bytes is a magic number
+        magic_number = int.from_bytes(f.read(4), 'big')
+        # second 4 bytes is the number of images
+        image_count = int.from_bytes(f.read(4), 'big')
+        # third 4 bytes is the row count
+        row_count = int.from_bytes(f.read(4), 'big')
+        # fourth 4 bytes is the column count
+        column_count = int.from_bytes(f.read(4), 'big')
+        # rest is the image pixel data, each pixel is stored as an unsigned byte
+        # pixel values are 0 to 255
+        image_data = f.read()
+        images = np.frombuffer(image_data, dtype=np.uint8)\
+            .reshape((image_count, row_count, column_count))
+        images = images.reshape(len(images), -1)
+        return images
 
 
-class Zahl():
-    def __init__(self, imagearray):
-        super(Zahl, self).__init__()
-        self.imagearray = imagearray
+def training_labels(train=True):
+    if train:
+        file = '__files/train-labels-idx1-ubyte.gz'
+    else:
+        file = '__files/t10k-labels-idx1-ubyte.gz'
+    with gzip.open(file, 'r') as f:
+        # first 4 bytes is a magic number
+        magic_number = int.from_bytes(f.read(4), 'big')
+        # second 4 bytes is the number of labels
+        label_count = int.from_bytes(f.read(4), 'big')
+        # rest is the label data, each label is stored as unsigned byte
+        # label values are 0 to 9
+        label_data = f.read()
+        labels = np.frombuffer(label_data, dtype=np.uint8)
+        return labels
 
-    def flat(self):
-        return self.imagearray.reshape(-1, 28*28)
-
-
-def scale(imagearray):
-    breite = len(imagearray[0])
-    höhe = len(imagearray)
-    anzahl = int(np.ceil(breite / höhe))
-    resized_image = cv2.resize(imagearray, (28*anzahl, 28))
-    return resized_image
-    # breite = len(imagearray[0])
-    # höhe = len(imagearray)
-    #
-    # k = int(np.floor(höhe/28))
-    # print(np.floor(höhe/28), höhe/k)
-    #
-    # print("k", k)
-    # anzahl = int(np.ceil(breite/höhe))
-    # print("Anzahl: ", anzahl)
-    # kk = int(np.floor(breite/(anzahl*28)))
-    #
-    # out = np.ndarray([1 + int(höhe/k), anzahl*32]).astype("uint8")
-    #
-    # index1 = 0
-    # for i in range(0, höhe, k):
-    #     index2 = 0
-    #     for ii in range(0, breite, kk):
-    #         out[index1][index2] = imagearray[i, ii]
-    #         index2 += 1
-    #     index1 += 1
-    #
-    # out = np.delete(out, 0, 0)
-    # out = np.delete(out, -1, 0)
-    # for i in range(anzahl):
-    #     out = np.delete(out, -1, 1)
-    # return out
-
-
-def baw(imagearray):
-    for i in range(imagearray.shape[0]):
-        for ii in range(imagearray.shape[1]):
-            if imagearray[i][ii] > 125:
-                imagearray[i][ii] = 0
-            else:
-                imagearray[i][ii] = 255
-    return imagearray
 
 if __name__ == "__main__":
-    img = Image.open("__files/zahl.jpg").convert('L')
+    images_train = training_images(True)
+
+    labels_train = training_labels(True)
+
+    print(images_train.shape)
+    size = 1000
+
+    labels_train = labels_train[0:size * 2]
+    images_train = images_train[0:size * 2]
+
+    param_C = 5
+    param_gamma = 0.05*255
+    svm = SVC(C=param_C)
+
+    svm.fit(images_train, labels_train)
+
+    img = Image.open("__files/zahl4.jpg").convert('L')
+
     img = np.array(img)
+
     img = baw(img)
+    images = scanning(img)
+    zahlen = []
+    for img in images:
+        img = addBorder(img)
+        img = scale(img)
+        zahlen.append(Zahl(img))
 
-    print(img.shape)
-    img = scale(img)
+    print(images_train[0].shape)
+    index = 1
+    pred = svm.predict(zahlen[index].flat())
+    pred2 = svm.predict(images_train[0].reshape(1, -1))
+    print(pred, pred2, labels_train[0])
 
-    # 28 * 28 = 784
-    # 28 * 4 = 112
-    numbers = []
-    for i in range(int(img.shape[1]/28)):
-        zahl = Zahl(img[:, 28*i:28*(i+1)])
-        numbers.append(zahl)
+    plt.imshow(images_train[0].reshape(28, 28), "gray")
+    plt.show()
 
-    plt.imshow(numbers[0].imagearray, cmap="gray")
-    # plt.show()
+    plt.imshow(zahlen[index].flat().reshape(28, 28), "gray")
+    plt.show()
 
-    a = ';'.join(str(i[0]) for i in numbers[0].imagearray.reshape(-1, 1))
-    b = ';'.join(str(i[0]) for i in numbers[1].imagearray.reshape(-1, 1))
-    data = {"values": [a]}
-    # print(data)
-    response = requests.post("http://127.0.0.1:7777/", json=data)
-    df = pd.read_json(requests.get("http://127.0.0.1:7777/").text)
-    print(df["values"])
-
+    # dump(svm, "model.joblib")
+    # fig, axes = plt.subplots(4, 5, figsize=(10, 8))
+    # index = 0
+    # for i in range(4):
+    #     for ii in range(5):
+    #         im = images_test[index].reshape(28, 28)
+    #         axes[i][ii].imshow(im)
+    #         axes[i][ii].title.set_text("Pred: {}, True: {}".format(pred[index], labels_test[index]))
+    #         axes[i][ii].get_xaxis().set_visible(False)
+    #         axes[i][ii].get_yaxis().set_visible(False)
+    #         index = index + 1
     #
-    # train_loader = torch.utils.data.DataLoader(
-    #     torchvision.datasets.MNIST('__files', train=True, download=True,
-    #                                transform=torchvision.transforms.Compose([
-    #                                    torchvision.transforms.ToTensor(),
-    #                                    torchvision.transforms.Normalize(
-    #                                        (0.1307,), (0.3081,))
-    #                                ])),
-    #     batch_size=128, shuffle=True)
-    # examples = enumerate(train_loader)
-    # batch_idx, (example_data, example_targets) = next(examples)
-    # fig = plt.figure()
-    # for i in range(6):
-    #     plt.subplot(2, 3, i + 1)
-    #     plt.tight_layout()
-    #     plt.imshow(example_data[i][0], cmap='gray', interpolation='none')
-    #     plt.title("Ground Truth: {}".format(example_targets[i]))
-    #     plt.xticks([])
-    #     plt.yticks([])
+    # plt.tight_layout()
     # # plt.show()
-    #
-    # #print(example_data.detach().numpy().reshape(len(example_data),-1).shape)
-    # param_C = 5
-    # param_gamma = 0.05 * 255
-    # svm = SVC(C=param_C)  # , gamma=param_gamma)
-    #
-    # # svm = SVC(kernel="rbf", C=5, gamma=0.05) #LinearSVC(dual=False)
-    # #svm.fit(example_data.detach().numpy().reshape(-1, 1), example_targets)
-    #
-    # for img, label in train_loader:
-    #     # print(img.shape)
-    #     # print(img.reshape(128, -1).shape)
-    #     if img.shape[0] == 128:
-    #         svm.fit(img.reshape(128, -1), label)
-    #
-    # # print(numbers[0].flat().shape)
-    # pred = svm.predict(numbers[3].flat())
-    # print(pred)
+    # plt.savefig("plot.pdf")
+
+
