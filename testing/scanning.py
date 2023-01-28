@@ -18,7 +18,7 @@ class Zahl():
 
 
 def baw(imagearray):
-    imagearray[imagearray > 110] = 0
+    imagearray[imagearray > 70] = 0
     imagearray[imagearray > 0] = 255
     return imagearray
 
@@ -97,8 +97,34 @@ def addBorder(imagearray):
     return out
 
 
+def scan_process(img_file, plot=True):
+    """
+    Input: .JPG Foto
+    Output: List array mit Zahlen() Elementen
+    """
+    image = Image.open(img_file).convert('L')
+    image = np.array(image)
+    image = baw(image)
+    imageList = scanning(image)
+    zahlenListe = []
+    for image in imageList:
+        image = addBorder(image)
+        image = scale(image)
+        zahlenListe.append(Zahl(image))
+
+    # if plot:
+    #     fig, axes = plt.subplots(1, len(zahlenListe))
+    #
+    #     for i in range(len(zahlenListe)):
+    #         axes[i].imshow(zahlenListe[i].imagearray, cmap="gray")
+    #         axes[i].get_yaxis().set_visible(False)
+    #         axes[i].get_xaxis().set_visible(False)
+    #     plt.savefig("plt.pdf")
+
+    return zahlenListe
+
 if __name__ == "__main__":
-    img = Image.open("__files/zahl.jpg").convert('L')
+    img = Image.open("__files/test.jpg").convert('L')
 
     img = np.array(img)
     # plt.imshow(img, cmap="gray")
