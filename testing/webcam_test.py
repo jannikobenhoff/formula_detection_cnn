@@ -35,7 +35,7 @@ class VideoCamera(object):
         img.save("screen.jpg")
         classified_zahlen = scan_process("screen.jpg")
         if len(classified_zahlen) != 0:
-            return classified_zahlen[0]
+            return classified_zahlen
         else:
             return None
 
@@ -94,6 +94,7 @@ sidebar = html.Div(
     # style=SIDEBAR_STYLE,
 )
 
+pil_img = Image.open("screen.jpg")
 
 app.layout = html.Div(
     [
@@ -107,6 +108,10 @@ app.layout = html.Div(
 
     ]),
     dbc.Row([html.Hr()]),
+    html.Img(id="pic1", style={"height": "10%", "width": "10%"}),
+    html.Img(id="pic2", style={"height": "10%", "width": "10%"}),
+    html.Img(id="pic3", style={"height": "10%", "width": "10%"}),
+    html.Img(id="pic4", style={"height": "10%", "width": "10%"}),
     # dbc.Row(dcc.Graph(figure={
     #                 'data': [
     #                     {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
@@ -119,29 +124,42 @@ app.layout = html.Div(
     #                 },
     #
     #             })),
-    # dcc.Graph(
+    # dbc.Row(
+    #     dcc.Graph(
     #             id='imshow',
-    #         )
+    #         ))
+
 
 ], style={'background-color': '#0B0B0C', "height": "100vh", "width": "100%"})
 
+
 @app.callback(
-    Output(component_id='imshow', component_property='figure'),
+    Output(component_id='pic1', component_property='src'),
+    Output(component_id='pic2', component_property='src'),
+    Output(component_id='pic3', component_property='src'),
+    Output(component_id='pic4', component_property='src'),
     Input(component_id='submit-val', component_property='n_clicks'),
     #State('input-on-submit', 'value')
 )
 def update_output(n_clicks):
     print("A: ", n_clicks)
+    pil_img = Image.open("screen.jpg").convert('L')
+
     if n_clicks > 0:
-        #firstZahl = VideoCamera().take_screen()
-        #if firstZahl != None:
-        print("--plotting--")
-        # img = Image.open("screen.jpg").convert('L')
-        # img = np.array(img)
-        # fig = px.imshow(img)
-        #fig = go.Figure(go.Scatter(x=[1,2,3,4,5], y=[1,2,3,4,5]))
-        #fig.update_layout(transition_duration=50)
-        # return fig
+        zahlenList = VideoCamera().take_screen()
+        pil_img = Image.open("screen.jpg").convert('L')
+
+        if len(zahlenList) == 4 and zahlenList[0] != None:
+            print("--plotting--")
+
+            return Image.fromarray(zahlenList[0].imagearray),\
+                   Image.fromarray(zahlenList[1].imagearray),\
+                   Image.fromarray(zahlenList[2].imagearray),\
+                   Image.fromarray(zahlenList[3].imagearray)
+        return pil_img, pil_img, pil_img, pil_img
+    else:
+        return pil_img, pil_img, pil_img, pil_img
+
 
 
 if __name__ == '__main__':
