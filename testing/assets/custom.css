@@ -12,12 +12,22 @@ H1 {
     margin: 0%;
     overflow-x: hidden;
     text-align: center;
-    color: white;
+    color: black;
     font-family: "Rand-Bold";
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
+
 Span {
+    margin: 0%;
+    overflow-x: hidden;
+    text-align: center;
+    color: black;
+    font-family: "Rand-Medium";
+    font-size: 1rem;
+}
+
+H5 {
     margin: 0%;
     overflow-x: hidden;
     text-align: center;
@@ -29,6 +39,7 @@ Span {
 Div {
     margin: 0%;
     overflow-x: hidden;
+    overflow-y: hidden;
     text-align: center;
     color: white;
     font-family: "Rand-Medium";
@@ -47,5 +58,7 @@ Button {
     border: 2px solid white;
     padding: 1.2%;
 }
+
+
 
 

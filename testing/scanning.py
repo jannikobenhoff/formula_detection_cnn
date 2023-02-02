@@ -85,11 +85,13 @@ def addBorder(imagearray):
     sidelength = max(imagearray.shape)
     border = int(sidelength*0.4)
     sidelength = border + sidelength
-    print(sidelength)
+    print(imagearray.shape, sidelength)
 
+    if sidelength < 25:
+        return np.empty(shape=0)
     out = np.zeros([sidelength, sidelength], dtype=np.uint8)
 
-    print(imagearray.shape, sidelength)
+
     x_start, y_start = int((sidelength-imagearray.shape[0])/2), int((sidelength-imagearray.shape[1])/2)
     out[x_start:x_start + imagearray.shape[0], y_start:y_start + imagearray.shape[1]] = imagearray
 
@@ -97,20 +99,23 @@ def addBorder(imagearray):
     return out
 
 
-def scan_process(img_file, plot=True):
+def scan_process(img_file, plot=True, save=False):
     """
     Input: .JPG Foto
     Output: List array mit Zahlen() Elementen
     """
     image = Image.open(img_file).convert('L')
+    if save:
+        image.save("screen.jpg")
     image = np.array(image)
     image = baw(image)
     imageList = scanning(image)
     zahlenListe = []
     for image in imageList:
         image = addBorder(image)
-        image = scale(image)
-        zahlenListe.append(Zahl(image))
+        if image != np.empty(shape=0):
+            image = scale(image)
+            zahlenListe.append(Zahl(image))
 
     # if plot:
     #     fig, axes = plt.subplots(1, len(zahlenListe))
