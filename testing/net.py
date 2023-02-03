@@ -297,7 +297,7 @@ def train(model: torch.nn.Module,
 def read_images(image_path: str, symbol, model, size=(28, 28), show_image=False):
 
     custom_image = torchvision.io.read_image(str(image_path)).type(torch.float32) / 255
-    custom_transforms = transforms.Compose([transforms.Resize(size)])
+    custom_transforms = transforms.Compose([transforms.Resize(size), transforms.Grayscale()])
     custom_image = custom_transforms(custom_image)
 
     model.eval()
@@ -312,7 +312,7 @@ def read_images(image_path: str, symbol, model, size=(28, 28), show_image=False)
     print("True Symbol: ", symbol)
 
     if show_image:
-        plt.imshow(custom_image.squeeze().permute(1, 2, 0))
+        plt.imshow(custom_image.squeeze()) # .permute(1, 2, 0))
         plt.title("Prediction: "+custom_image_pred_label+" True: "+symbol)
         plt.axis = False
         plt.show()
@@ -449,7 +449,7 @@ if __name__ == '__main__':
 
     """train model"""
 
-    train_model = False
+    train_model = True
     if train_model:
         # Set random seeds
         torch.manual_seed(42)
@@ -470,7 +470,7 @@ if __name__ == '__main__':
         # train 1000 test 500 lr = 0.01 -> doesn't work
         # train 1000 test 500 lr = 0.001 augmentation_bin = 31 -> 6 176s
         # Adjust number of iterations
-        adjust_iterations = True
+        adjust_iterations = False
 
         if adjust_iterations:
             train_it = 1000
@@ -514,7 +514,7 @@ if __name__ == '__main__':
 
     single_test = True
     if single_test:
-        torch.manual_seed(96)
+        torch.manual_seed(1400)
 
         # 1. Get a batch of images and labels from the DataLoader
         img_batch, label_batch = next(iter(train_dataloader))
@@ -530,8 +530,8 @@ if __name__ == '__main__':
         # 4. Print out what's happening and convert model logits -> pred probs -> pred label
         sym_pred = labels[torch.argmax(torch.softmax(pred, dim=1), dim=1)]
         sym_label = labels[label_single]
-        print(f"Output logits:\n{pred}\n")
-        print(f"Output prediction probabilities:\n{torch.softmax(pred, dim=1)}\n")
+        #print(f"Output logits:\n{pred}\n")
+        #print(f"Output prediction probabilities:\n{torch.softmax(pred, dim=1)}\n")
         print(f"Output prediction label:\n{sym_pred}\n")
         print(f"Actual label:\n{sym_label}")
 
@@ -541,8 +541,8 @@ if __name__ == '__main__':
     f.write(str(class_dict))
     i_want_to_read_image = False
     if i_want_to_read_image:
-        image_path = "__files/costum_images/pi_test_1.jpg"
-        symbol = "pi"
+        image_path = "__files/costum_images/pi_test_1 .jpg"
+        symbol = "6"
         select_model = 1  # [Fashion_model, tiny_model]
         model = models[select_model]
         size = (28, 28)  # model_tiny needs (28, 28)
