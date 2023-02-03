@@ -18,6 +18,8 @@ class Zahl():
 
 
 def baw(imagearray):
+    # imagearray[imagearray < 70] = 0
+    # imagearray[imagearray > 0] = 255
     imagearray[imagearray > 70] = 0
     imagearray[imagearray > 0] = 255
     return imagearray
@@ -115,6 +117,8 @@ def scan_process(img_file, plot=True, save=False):
         image = addBorder(image)
         if image != np.empty(shape=0):
             image = scale(image)
+            '''Schwarze Zahl, weißer Hintergrund'''
+            image = np.invert(image)
             zahlenListe.append(Zahl(image))
 
     # if plot:

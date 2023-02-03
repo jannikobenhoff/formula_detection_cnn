@@ -21,6 +21,7 @@ from dash.dependencies import Output, Input, State, MATCH, ALL
 from queue import Queue
 
 from scanning import scan_process, Zahl
+from testing.transfer import predict
 
 
 class VideoCamera(object):
@@ -228,7 +229,7 @@ app.layout = html.Div(
         button_group,
         webcam,
         dbc.Row([html.Hr()]),
-        html.Div(id={"type": "pics", "index": 0}, n_clicks=0),
+        html.Div(id={"type": "pics", "index": 0}, n_clicks=0, style={"justify-content": "center", "align-items": "center"}),
         html.Div(id={"type": "pics", "index": 1}, n_clicks=0),
         html.Div(id="pics", n_clicks=0, style={"margin": 20}),
         html.Div(id="pics2", n_clicks=0, style={"margin": 20}),
@@ -252,8 +253,7 @@ def ready(click):
     for i, zahl in enumerate(zahlenList):
         if i not in del_img:
             img_list.append(zahl)
-    print(len(img_list))
-
+    predict(img_list)
 
 def parse_contents(contents, filename):
     data = contents.encode("utf8").split(b";base64,")[1]
@@ -268,7 +268,7 @@ def parse_contents(contents, filename):
                         )
     img_list.append(
         html.Button(id="delete",
-                    children=html.Div([html.Span('Deselect'),
+                    children=html.Div([html.H5('Reselect'),
                                        html.Img(src="/assets/icons/reload.png",
                                                 height=50,
                                                 style={"filter": "brightness(1) invert(0)"}
@@ -314,7 +314,7 @@ def update_input(click, content, filename):
                                     )
                 img_list.append(
                     html.Button(id="delete",
-                                children=html.Div([html.Span('Reselect'),
+                                children=html.Div([html.H5('Reselect'),
                                                    html.Img(src="/assets/icons/reload.png",
                                                             height=50,
                                                             style={"filter": "brightness(1) invert(0)"}
@@ -368,15 +368,15 @@ def delete_images(click):
                 )
         img_list.append(
             html.Button(id="ready",
-                        children=html.Div([html.Span('Ready!'),
+                        children=html.Div([html.H5('   Ready!   '),
                                            html.Img(src="/assets/icons/neural.png",
                                                     height=50,
                                                     style={"filter": "brightness(1) invert(0)"}
                                                     ),
                                            ], style={"flex-direction": "column", "justify-content": "center",
-                                                     "align-items": "center"}),
+                                                         "align-items": "center"}),
                         style={"height": "100px", "border-radius": "1.5rem",
-                               "background-color": "#C2654E", "border": "none", "margin-left": 30}))
+                               "background-color": "green", "border": "none", "margin-left": 30}))
         return img_list
 
 
