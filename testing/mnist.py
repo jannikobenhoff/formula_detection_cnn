@@ -1,11 +1,6 @@
 import gzip
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.svm import LinearSVC, SVC
-from sklearn.metrics import accuracy_score, classification_report
-from joblib import dump
-from scanning import *
+from sklearn.svm import SVC
+from dashboard.scanning import *
 
 def training_images(train=True):
     if train:

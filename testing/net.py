@@ -1,17 +1,10 @@
-from scanning import scale
 import torch
-import numpy as np
-import pandas as pd
 import torchvision
-import cv2
-import scipy
 import matplotlib.pyplot as plt
 import os
-from PIL import Image
 from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms, utils, datasets
+from torchvision import transforms, datasets
 from torch import nn
-import shutil
 from tqdm.auto import tqdm
 from timeit import default_timer as timer
 from torchvision.transforms import functional
