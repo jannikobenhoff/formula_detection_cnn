@@ -201,6 +201,8 @@ def train_step(model: torch.nn.Module,
         y_pred_class = torch.argmax(torch.softmax(y_pred, dim=1), dim=1)
         train_acc += (y_pred_class == y).sum().item() / len(y_pred)
 
+        trained_model = model
+
         count += 1
         if count == iterations:
             break
@@ -208,7 +210,7 @@ def train_step(model: torch.nn.Module,
     train_loss = train_loss / iterations
     train_acc = train_acc / iterations
 
-    return train_loss, train_acc
+    return train_loss, train_acc, trained_model
 
 
 def test_step(model: torch.nn.Module,
@@ -256,6 +258,7 @@ def train(model: torch.nn.Module,
           loss_fn: torch.nn.Module = nn.CrossEntropyLoss(),
           epochs: int = 5, test_it: int = 5, train_it: int = 5):
     # 2. Create empty results dictionary
+    global trained_model
     results = {"train_loss": [],
                "train_acc": [],
                "test_loss": [],
@@ -264,7 +267,7 @@ def train(model: torch.nn.Module,
 
     # 3. Loop through training and testing steps for a number of epochs
     for epoch in tqdm(range(epochs)):
-        train_loss, train_acc = train_step(model=model,
+        train_loss, train_acc, trained_model = train_step(model=model,
                                            dataloader=train_dataloader,
                                            loss_fn=loss_fn,
                                            optimizer=optimizer, iterations=train_it)
@@ -288,7 +291,7 @@ def train(model: torch.nn.Module,
         results["test_acc"].append(test_acc)
 
     # 6. Return the filled results at the end of the epochs
-    return results
+    return results, trained_model
 
 
 def read_images(image_path: str, symbol, model, size=(28, 28), show_image=False):
@@ -446,7 +449,7 @@ if __name__ == '__main__':
 
     """train model"""
 
-    train_model = True
+    train_model = False
     if train_model:
         # Set random seeds
         torch.manual_seed(42)
@@ -484,7 +487,7 @@ if __name__ == '__main__':
 
         model = models[select_model]
 
-        model_0_results = train(model=model,
+        model_0_results, model = train(model=model,
                                 train_dataloader=train_dataloader,
                                 test_dataloader=test_dataloader,
                                 optimizer=optimizer,
@@ -505,35 +508,24 @@ if __name__ == '__main__':
             m.save("model_fashion.torch")
 
     else:
-        model = torch.jit.load
+        model = torch.jit.load('model.torch')
 
     """test models"""
 
     single_test = True
     if single_test:
         torch.manual_seed(230)
-        model_tiny = TinyVGG(input_shape=1,  # number of color channels (3 for RGB, 1 for BW)
-                             hidden_units=10,
-                             output_shape=len(train_data.classes)).to(device)
-
-        models = [model_Fashion, model_tiny]
-
-        select_model = 0
-
-        img, label = next(iter(train_dataloader))
-        print(f"Image shape: {img.shape} -> [batch_size, color_channels, height, width]")
-        print(f"Label shape: {label.shape}")
 
         # 1. Get a batch of images and labels from the DataLoader
         img_batch, label_batch = next(iter(train_dataloader))
         # 2. Get a single image from the batch and unsqueeze the image so its shape fits the model
         img_single, label_single = img_batch[0].unsqueeze(dim=0), label_batch[0]
         print(f"Single image shape: {img_single.shape}\n")
-
+        print("Image Single Tensor: ", img_single)
         # 3. Perform a forward pass on a single image
-        models[select_model].eval()
+        model.eval()
         with torch.inference_mode():
-            pred = models[select_model](img_single.to(device))
+            pred = model(img_single.to(device))
 
         # 4. Print out what's happening and convert model logits -> pred probs -> pred label
         sym_pred = labels[torch.argmax(torch.softmax(pred, dim=1), dim=1)]
