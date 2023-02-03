@@ -5,7 +5,7 @@ import pandas as pd
 import torchvision
 import cv2
 import scipy
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import os
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader
@@ -14,6 +14,7 @@ from torch import nn
 import shutil
 from tqdm.auto import tqdm
 from timeit import default_timer as timer
+
 
 device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 a = 1
@@ -125,13 +126,13 @@ def walk_through_dir(dir_path):
 def train_step(model: torch.nn.Module,
                dataloader: torch.utils.data.DataLoader,
                loss_fn: torch.nn.Module,
-               optimizer: torch.optim.Optimizer):
+               optimizer: torch.optim.Optimizer, iterations: int = 5):
     # Put model in train mode
     model.train()
 
     # Setup train loss and train accuracy values
     train_loss, train_acc = 0, 0
-
+    count = 0
     # Loop through data loader data batches
     for batch, (X, y) in enumerate(dataloader):
         # Send data to target device
@@ -157,21 +158,26 @@ def train_step(model: torch.nn.Module,
         y_pred_class = torch.argmax(torch.softmax(y_pred, dim=1), dim=1)
         train_acc += (y_pred_class == y).sum().item() / len(y_pred)
 
+        count += 1
+        if count == iterations:
+            break
     # Adjust metrics to get average loss and accuracy per batch
-    train_loss = train_loss / len(dataloader)
-    train_acc = train_acc / len(dataloader)
+    train_loss = train_loss / iterations
+    train_acc = train_acc / iterations
+
     return train_loss, train_acc
 
 
 def test_step(model: torch.nn.Module,
               dataloader: torch.utils.data.DataLoader,
-              loss_fn: torch.nn.Module):
+              loss_fn: torch.nn.Module, iterations: int = 5):
     # Put model in eval mode
     model.eval()
 
     # Setup test loss and test accuracy values
     test_loss, test_acc = 0, 0
 
+    count = 0
     # Turn on inference context manager
     with torch.inference_mode():
         # Loop through DataLoader batches
@@ -190,9 +196,13 @@ def test_step(model: torch.nn.Module,
             test_pred_labels = test_pred_logits.argmax(dim=1)
             test_acc += ((test_pred_labels == y).sum().item() / len(test_pred_labels))
 
+            count += 1
+            if count == iterations:
+                break
     # Adjust metrics to get average loss and accuracy per batch
-    test_loss = test_loss / len(dataloader)
-    test_acc = test_acc / len(dataloader)
+    test_loss = test_loss / iterations
+    test_acc = test_acc / iterations
+
     return test_loss, test_acc
 
 
@@ -201,7 +211,7 @@ def train(model: torch.nn.Module,
           test_dataloader: torch.utils.data.DataLoader,
           optimizer: torch.optim.Optimizer,
           loss_fn: torch.nn.Module = nn.CrossEntropyLoss(),
-          epochs: int = 5):
+          epochs: int = 5, test_it: int = 5, train_it: int = 5):
     # 2. Create empty results dictionary
     results = {"train_loss": [],
                "train_acc": [],
@@ -214,10 +224,10 @@ def train(model: torch.nn.Module,
         train_loss, train_acc = train_step(model=model,
                                            dataloader=train_dataloader,
                                            loss_fn=loss_fn,
-                                           optimizer=optimizer)
+                                           optimizer=optimizer, iterations=train_it)
         test_loss, test_acc = test_step(model=model,
                                         dataloader=test_dataloader,
-                                        loss_fn=loss_fn)
+                                        loss_fn=loss_fn, iterations=test_it)
 
         # 4. Print out what's happening
         print(
@@ -236,6 +246,31 @@ def train(model: torch.nn.Module,
 
     # 6. Return the filled results at the end of the epochs
     return results
+
+
+def read_images(image_path: str, symbol, model, size=(28, 28), show_image=False):
+
+    custom_image = torchvision.io.read_image(str(image_path)).type(torch.float32) / 255
+    custom_transforms = transforms.Compose([transforms.Resize(size)])
+    custom_image = custom_transforms(custom_image)
+
+    model.eval()
+    with torch.inference_mode():
+        custom_pred = model(custom_image.unsqueeze(dim=0))
+
+    custom_image_pred_probs = torch.softmax(custom_pred, dim=1)
+    custom_image_pred_label = torch.argmax(custom_image_pred_probs, dim=1)
+    custom_image_pred_label = labels[custom_image_pred_label]
+
+    print("Custom Image Prediction: "+custom_image_pred_label)
+    print("True Symbol: ", symbol)
+
+    if show_image:
+        plt.imshow(custom_image.squeeze().permute(1, 2, 0))
+        plt.title("Prediction: "+custom_image_pred_label+" True: "+symbol)
+        plt.axis = False
+
+    return custom_image, custom_image_pred_label
 
 
 model_Fashion = NN().to(device)
@@ -294,14 +329,19 @@ if __name__ == '__main__':
                         #dest = shutil.move(source, destination)
                 if not c % 10000:
                     print(c)
+        print("Train images: ", c)
+        print("Test images: ", d)
 
-    walk_through_dir('__files')
-    print("Train images: ", c)
-    print("Test images: ", d)
+    # Show directory system
+
+    show_directories = False
+
+    if show_directories:
+        walk_through_dir('__files')
 
     """transform data"""
 
-    augment = False #True for data augmentation
+    augment = False   # True for data augmentation
     augment_bins = 31
     pic_size = 28
     if augment:
@@ -323,83 +363,134 @@ if __name__ == '__main__':
     img, label = train_data[0][0], train_data[0][1]
 
     #print(f"Image tensor:\n{img}")
+
     print(f"Image shape: {img.shape}")
     print(f"Image datatype: {img.dtype}")
     print(f"Image label: {label}")
     print(f"Label datatype: {type(label)}")
 
-    batch_size = 32
+    batch_size = 100
+
     num_workers = os.cpu_count()
 
     train_dataloader = DataLoader(dataset=train_data, batch_size=batch_size, num_workers=num_workers, shuffle=True)
 
     test_dataloader = DataLoader(dataset=test_data, batch_size=1, num_workers=1, shuffle=False)
 
-    """test models"""
+    """models"""
 
-    torch.manual_seed(42)
     model_tiny = TinyVGG(input_shape=3,  # number of color channels (3 for RGB, 1 for BaW)
                          hidden_units=10,
                          output_shape=len(train_data.classes)).to(device)
 
     models = [model_Fashion, model_tiny]
 
-    select_model = 1
+    """train model"""
 
-    img, label = next(iter(train_dataloader))
-    print(f"Image shape: {img.shape} -> [batch_size, color_channels, height, width]")
-    print(f"Label shape: {label.shape}")
+    train_model = True
+    if train_model:
+        # Set random seeds
+        torch.manual_seed(42)
+        torch.cuda.manual_seed(42)
+
+        # Set number of epochs
+        NUM_EPOCHS = 1
+
+        # Recreate an instance of TinyVGG
+        model_tiny = TinyVGG(input_shape=3,  # number of color channels (3 for RGB)
+                          hidden_units=10,
+                          output_shape=len(train_data.classes)).to(device)
+
+        # Setup loss function and optimizer
+        loss_fn = nn.CrossEntropyLoss()
+        optimizer = torch.optim.Adam(params=model_tiny.parameters(), lr=0.001)
+
+        # Start the timer
+
+        start_time = timer()
+
+        # train 1000 test 500 lr = 0.001 -> 194s acc 87
+        # train 1000 test 500 lr = 0.01 -> doesn't work
+        # train 1000 test 500 lr = 0.001 augmentation_bin = 31 -> 6 176s
+        # Adjust number of iterations
+        adjust_iterations = True
+
+        if adjust_iterations:
+            train_it = 1000
+            test_it = 500
+        else:
+            train_it = len(train_data)
+            test_it = len(test_data)
+
+        # Train
+
+        select_model = 1  # [model_Fashion, model_tiny]
+
+        models = [model_Fashion, model_tiny]
+
+        model = models[select_model]
+
+        model_0_results = train(model=model,
+                                train_dataloader=train_dataloader,
+                                test_dataloader=test_dataloader,
+                                optimizer=optimizer,
+                                loss_fn=loss_fn,
+                                epochs=NUM_EPOCHS, train_it=train_it, test_it=test_it)
+
+        # End the timer and print out how long it took
+        end_time = timer()
+        print(f"Total training time: {end_time - start_time:.3f} seconds")
+
+        # save model
+        m = torch.jit.script(model)
+        m.save("model.torch")
+    """test models"""
+
+    single_test = False
+    if single_test:
+        torch.manual_seed(42)
+        model_tiny = TinyVGG(input_shape=3,  # number of color channels (3 for RGB, 1 for BaW)
+                             hidden_units=10,
+                             output_shape=len(train_data.classes)).to(device)
+
+        models = [model_Fashion, model_tiny]
+
+        select_model = 1
+
+        img, label = next(iter(train_dataloader))
+        print(f"Image shape: {img.shape} -> [batch_size, color_channels, height, width]")
+        print(f"Label shape: {label.shape}")
+
+        # 1. Get a batch of images and labels from the DataLoader
+        img_batch, label_batch = next(iter(train_dataloader))
+        # 2. Get a single image from the batch and unsqueeze the image so its shape fits the model
+        img_single, label_single = img_batch[0].unsqueeze(dim=0), label_batch[0]
+        print(f"Single image shape: {img_single.shape}\n")
+
+        # 3. Perform a forward pass on a single image
+        models[select_model].eval()
+        with torch.inference_mode():
+            pred = models[select_model](img_single.to(device))
+
+        # 4. Print out what's happening and convert model logits -> pred probs -> pred label
+        sym_pred = labels[torch.argmax(torch.softmax(pred, dim=1), dim=1)]
+        sym_label = labels[label_single]
+        print(f"Output logits:\n{pred}\n")
+        print(f"Output prediction probabilities:\n{torch.softmax(pred, dim=1)}\n")
+        print(f"Output prediction label:\n{sym_pred}\n")
+        print(f"Actual label:\n{sym_label}")
+
+    """custom images"""
+
+    i_want_to_read_image = True
+    if i_want_to_read_image:
+        image_path = "__files/costum_images/pi_test_1.jpg"
+        symbol = "pi"
+        select_model = 1  # []
+        model = models[select_model]
+        size = (28, 28)  # model_tiny needs (28, 28)
+        custom_image, pred_label = read_images(image_path, symbol, model, size=size, show_image=True)
 
 
-    # 1. Get a batch of images and labels from the DataLoader
-    img_batch, label_batch = next(iter(train_dataloader))
-    # 2. Get a single image from the batch and unsqueeze the image so its shape fits the model
-    img_single, label_single = img_batch[0].unsqueeze(dim=0), label_batch[0]
-    print(f"Single image shape: {img_single.shape}\n")
-
-    # 3. Perform a forward pass on a single image
-    models[select_model].eval()
-    with torch.inference_mode():
-        pred = models[select_model](img_single.to(device))
-
-    # 4. Print out what's happening and convert model logits -> pred probs -> pred label
-    sym_pred = labels[torch.argmax(torch.softmax(pred, dim=1), dim=1)]
-    sym_label = labels[label_single]
-    print(f"Output logits:\n{pred}\n")
-    print(f"Output prediction probabilities:\n{torch.softmax(pred, dim=1)}\n")
-    print(f"Output prediction label:\n{sym_pred}\n")
-    print(f"Actual label:\n{sym_label}")
-
-    # Set random seeds
-    torch.manual_seed(42)
-    torch.cuda.manual_seed(42)
-
-    # Set number of epochs
-    NUM_EPOCHS = 1
-
-    # Recreate an instance of TinyVGG
-    model_0 = TinyVGG(input_shape=3,  # number of color channels (3 for RGB)
-                      hidden_units=10,
-                      output_shape=len(train_data.classes)).to(device)
-
-    # Setup loss function and optimizer
-    loss_fn = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(params=model_0.parameters(), lr=0.001)
-
-    # Start the timer
-
-    start_time = timer()
-
-    # Train model_0
-    model_0_results = train(model=model_0,
-                            train_dataloader=train_dataloader,
-                            test_dataloader=test_dataloader,
-                            optimizer=optimizer,
-                            loss_fn=loss_fn,
-                            epochs=NUM_EPOCHS)
-
-    # End the timer and print out how long it took
-    end_time = timer()
-    print(f"Total training time: {end_time - start_time:.3f} seconds")
 
 
