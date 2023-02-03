@@ -22,7 +22,7 @@ def shutil_or_just_labels(train_path, test_path, shutil=False):
     # train_path = "__files/train_images"
     # test_path = "__files/test_images"
 
-    sub_dirs = [x[0] for x in os.walk('__files/train_images')]
+    sub_dirs = [x[0] for x in os.walk(train_path)]
     sub_dirs.pop(0)
     for i in range(len(sub_dirs)):
         if '\\' in sub_dirs[i]:

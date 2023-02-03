@@ -514,14 +514,14 @@ if __name__ == '__main__':
 
     single_test = True
     if single_test:
-        torch.manual_seed(230)
+        torch.manual_seed(96)
 
         # 1. Get a batch of images and labels from the DataLoader
         img_batch, label_batch = next(iter(train_dataloader))
         # 2. Get a single image from the batch and unsqueeze the image so its shape fits the model
         img_single, label_single = img_batch[0].unsqueeze(dim=0), label_batch[0]
         print(f"Single image shape: {img_single.shape}\n")
-        print("Image Single Tensor: ", img_single)
+        # print("Image Single Tensor: ", img_single)
         # 3. Perform a forward pass on a single image
         model.eval()
         with torch.inference_mode():
@@ -537,6 +537,8 @@ if __name__ == '__main__':
 
     """custom images"""
 
+    f = open('__files/labels', 'w')
+    f.write(str(class_dict))
     i_want_to_read_image = False
     if i_want_to_read_image:
         image_path = "__files/costum_images/pi_test_1.jpg"
