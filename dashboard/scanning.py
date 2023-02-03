@@ -25,6 +25,10 @@ def baw(imagearray):
     return imagearray
 
 
+def wab(imagearray):
+    imagearray[imagearray < 250] = 0
+    return imagearray
+
 def scanning(imagearray):
     zahldrin = []
     zahlen = []
@@ -83,7 +87,7 @@ def scale(imagearray):
     return resized_image
 
 
-def addBorder(imagearray):
+def addBorder(imagearray, reverse=False):
     sidelength = max(imagearray.shape)
     border = int(sidelength*0.4)
     sidelength = border + sidelength
@@ -92,7 +96,8 @@ def addBorder(imagearray):
     if sidelength < 25:
         return np.empty(shape=0)
     out = np.zeros([sidelength, sidelength], dtype=np.uint8)
-
+    if reverse:
+        out[out == 0] = 255
 
     x_start, y_start = int((sidelength-imagearray.shape[0])/2), int((sidelength-imagearray.shape[1])/2)
     out[x_start:x_start + imagearray.shape[0], y_start:y_start + imagearray.shape[1]] = imagearray
@@ -117,6 +122,7 @@ def scan_process(img_file, plot=True, save=False):
         image = addBorder(image)
         if image != np.empty(shape=0):
             image = scale(image)
+            # image = wab(image)
             '''Schwarze Zahl, weißer Hintergrund'''
             image = np.invert(image)
             zahlenListe.append(Zahl(image))
@@ -133,7 +139,7 @@ def scan_process(img_file, plot=True, save=False):
     return zahlenListe
 
 if __name__ == "__main__":
-    img = Image.open("__files/test.jpg").convert('L')
+    img = Image.open("../testing/__files/test.jpg").convert('L')
 
     img = np.array(img)
     # plt.imshow(img, cmap="gray")
