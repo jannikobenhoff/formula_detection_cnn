@@ -14,9 +14,53 @@ from torch import nn
 import shutil
 from tqdm.auto import tqdm
 from timeit import default_timer as timer
-
+from torchvision.transforms import functional
+import torch.nn.functional as F
 
 device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+
+
+class NeuralNetwork(nn.Module):
+    def __init__(self, num_classes=82):
+        super(NeuralNetwork, self).__init__()
+
+        # Convolutional layer with 32 filters, kernel size of 3x3, and stride of 1
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1)
+        # Batch normalization layer
+        self.bn1 = nn.BatchNorm2d(32)
+        # Max pooling layer with kernel size of 2x2 and stride of 2
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+        # Convolutional layer with 64 filters, kernel size of 3x3, and stride of 1
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1)
+        # Batch normalization layer
+        self.bn2 = nn.BatchNorm2d(64)
+        # Max pooling layer with kernel size of 2x2 and stride of 2
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        # Flatten the output from the convolutional layers
+        self.fc1 = nn.Linear(1600, 128)
+        # Output layer with `num_classes` neurons
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        # Pass input through the first convolutional layer and activation function
+        x = F.relu(self.conv1(x))
+        # Pass the output through batch normalization
+        x = self.bn1(x)
+        # Pass the output through max pooling
+        x = self.pool(x)
+        # Pass input through the second convolutional layer and activation function
+        x = F.relu(self.conv2(x))
+        # Pass the output through batch normalization
+        x = self.bn2(x)
+        # Pass the output through max pooling
+        x = self.pool2(x)
+        # Flatten the output from the convolutional layers
+        x = x.view(x.size(0), -1)
+        # Pass the output through the first
+        x = F.relu(self.fc1(x))
+        # Pass the output through the second fully connected layer to produce the final output
+        x = self.fc2(x)
+        return x
 
 class NN(nn.Module):
 
@@ -27,7 +71,7 @@ class NN(nn.Module):
             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1),
             nn.BatchNorm2d(32),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2)
+            nn.MaxPool2d(kernel_size=2, stride=1)
         )
 
         self.layer2 = nn.Sequential(
@@ -37,10 +81,10 @@ class NN(nn.Module):
             nn.MaxPool2d(2)
         )
 
-        self.fc1 = nn.Linear(in_features=64 * 6 * 6, out_features=600)
+        self.fc1 = nn.Linear(in_features=10 * 6 * 6, out_features=600)
         self.drop = nn.Dropout(0.25)
         self.fc2 = nn.Linear(in_features=600, out_features=120)
-        self.fc3 = nn.Linear(in_features=120, out_features=10)
+        self.fc3 = nn.Linear(in_features=120, out_features=82)
 
     def forward(self, x):
         out = self.layer1(x)
@@ -273,8 +317,6 @@ def read_images(image_path: str, symbol, model, size=(28, 28), show_image=False)
     return custom_image, custom_image_pred_label
 
 
-model_Fashion = NN().to(device)
-
 if __name__ == '__main__':
     """get data"""
 
@@ -342,15 +384,27 @@ if __name__ == '__main__':
     """transform data"""
 
     augment = False   # True for data augmentation
+    rgb = False
     augment_bins = 31
     pic_size = 28
-    if augment:
-        data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)), transforms.Grayscale(),
-                                               transforms.TrivialAugmentWide(num_magnitude_bins=augment_bins),
-                                               transforms.ToTensor()])
+    if rgb:
+        channels = 3
+        if augment:
+            data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)),
+                                                   transforms.TrivialAugmentWide(num_magnitude_bins=augment_bins),
+                                                   transforms.ToTensor()])
+        else:
+            data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)),
+                                                   transforms.ToTensor()])
     else:
-        data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)), transforms.Grayscale(),
-                                               transforms.ToTensor()])
+        channels = 1
+        if augment:
+            data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)), transforms.Grayscale(),
+                                                   transforms.TrivialAugmentWide(num_magnitude_bins=augment_bins),
+                                                   transforms.ToTensor()])
+        else:
+            data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)), transforms.Grayscale(),
+                                                   transforms.ToTensor()])
     """create dataset"""
 
     train_data = datasets.ImageFolder(root=train_path, transform=data_transformer, target_transform=None)
@@ -380,11 +434,15 @@ if __name__ == '__main__':
 
     """models"""
 
-    model_tiny = TinyVGG(input_shape=3,  # number of color channels (3 for RGB, 1 for BaW)
-                         hidden_units=10,
+    model_tiny = TinyVGG(input_shape=channels,  # number of color channels (3 for RGB, 1 for BaW)
+                         hidden_units=32,
                          output_shape=len(train_data.classes)).to(device)
 
-    models = [model_Fashion, model_tiny]
+    model_Fashion = NN().to(device)
+
+    model_2 = NeuralNetwork().to(device)
+
+    models = [model_Fashion, model_tiny, model_2]
 
     """train model"""
 
@@ -396,11 +454,6 @@ if __name__ == '__main__':
 
         # Set number of epochs
         NUM_EPOCHS = 1
-
-        # Recreate an instance of TinyVGG
-        model_tiny = TinyVGG(input_shape=1,  # number of color channels (3 for RGB)
-                          hidden_units=10,
-                          output_shape=len(train_data.classes)).to(device)
 
         # Setup loss function and optimizer
         loss_fn = nn.CrossEntropyLoss()
@@ -427,7 +480,7 @@ if __name__ == '__main__':
 
         select_model = 1  # [model_Fashion, model_tiny]
 
-        models = [model_Fashion, model_tiny]
+        models = [model_Fashion, model_tiny, model_2]
 
         model = models[select_model]
 
@@ -443,24 +496,29 @@ if __name__ == '__main__':
         print(f"Total training time: {end_time - start_time:.3f} seconds")
 
         # save model
-        m = torch.jit.script(model)
-        m.save("model.torch")
+        save_model = True
+        if save_model:
+            m = torch.jit.script(model)
+            m.save("model.torch")
+        else:
+            m = torch.jit.script(model)
+            m.save("model_fashion.torch")
 
     else:
         model = torch.jit.load
 
     """test models"""
 
-    single_test = False
+    single_test = True
     if single_test:
-        torch.manual_seed(42)
-        model_tiny = TinyVGG(input_shape=3,  # number of color channels (3 for RGB, 1 for BaW)
+        torch.manual_seed(230)
+        model_tiny = TinyVGG(input_shape=1,  # number of color channels (3 for RGB, 1 for BW)
                              hidden_units=10,
                              output_shape=len(train_data.classes)).to(device)
 
         models = [model_Fashion, model_tiny]
 
-        select_model = 1
+        select_model = 0
 
         img, label = next(iter(train_dataloader))
         print(f"Image shape: {img.shape} -> [batch_size, color_channels, height, width]")
@@ -487,7 +545,7 @@ if __name__ == '__main__':
 
     """custom images"""
 
-    i_want_to_read_image = True
+    i_want_to_read_image = False
     if i_want_to_read_image:
         image_path = "__files/costum_images/pi_test_1.jpg"
         symbol = "pi"
