@@ -17,7 +17,6 @@ from timeit import default_timer as timer
 
 
 device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
-a = 1
 
 class NN(nn.Module):
 

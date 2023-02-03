@@ -73,59 +73,88 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-button_graoup = dbc.RadioItems(
-    [
-        {
-            "label": html.Div(
-                [
-                    html.Img(src="/assets/icons/calc.png",
-                             height=25,
-                             style={"filter": "brightness(0) invert(1)"}
-                             ),
-                    html.Span("Calculate", style={'font-size': 15, 'padding-left': 10}),
-                ], style={'display': 'inline-block', 'margin': 10, "background-color": "red", "height": "50"}
-
-            ),
-            "value": 1,
-
-        },
-        {
-            "label": html.Div(
-                [
-                    html.Img(src="/assets/icons/plot.png",
-                             height=25,
-                             style={"filter": "brightness(0) invert(1)"}
-                             ),
-                    html.Span("Calculate", style={'font-size': 15, 'padding-left': 10}),
-                ], style={'margin': 10}
-            ),
-            "value": 2,
-        },
-        {
-            "label": html.Div(
-                [
-                    html.Img(src="/assets/icons/function.png",
-                             height=25,
-                             style={"filter": "brightness(0) invert(1)"}
-                             ),
-                    html.Span("Equation", style={'font-size': 15, 'padding-left': 10}),
-                ], style={'margin': 10}
-            ),
-            "value": 3,
-        }
-    ],
-    value=1,
-    className="btn-group",
-    inputClassName="btn-check",
-    labelClassName="btn btn-outline-primary",
-
-    id="operation",
-)
-
 button_style = {"height": "100px", "border-radius": "1.5rem",
                 "background-color": "#397146", "border": "none", "margin": 5}
+
+operation_button_style = {"width": "70%","height": "100px", "border-radius": "1.5rem",
+                          "background-color": "#8C979A", "border": "none", "margin": 5}
+
+operation_button_style_clicked = {"width": "70%", "height": "100px", "border-radius": "1.5rem",
+                                  "background-color": "#DCCF57", "border": "none", "margin": 5}
+
+button_group = html.Div([
+    html.Div(
+        [
+            html.Button(
+                id={"type": "operation", "index": 0},
+                children=html.Div([html.H5("Calculate", style={'font-size': 15, 'padding-left': 10, "padding-bottom":10}),
+
+                          html.Img(src="/assets/icons/calc.png",
+                                   height=50,
+                                   style={"filter": "brightness(1) invert(0)"}
+                                   ),
+                          ]), style=button_style
+
+            ),
+            html.Button(id={"type": "operation", "index": 1},
+
+                        children=html.Div([html.H5("Plot", style={'font-size': 15, 'padding-left': 10, "padding-bottom":10}),
+
+                                  html.Img(src="/assets/icons/plot.png",
+                                           height=50,
+                                           style={"filter": "brightness(1) invert(0)"}
+                                           ),
+                                  ]), style=button_style
+                        ),
+            html.Button(id={"type": "operation", "index": 2},
+
+                        children=html.Div([
+                            html.H5("Equation", style={'font-size': 15, 'padding-left': 10, "padding-bottom":10}),
+                                  html.Img(src="/assets/icons/function.png",
+                                           height=50,
+                                           style={"filter": "brightness(1) invert(0)"}
+                                           ),
+                                  ]), style=button_style
+                        ),
+
+        ], style={"margin-top": 25,"margin-left": 25, "display": "flex", "flex-direction": "row", "width":"100%",
+                  "justify-content": "center", "align-items": "center"}
+    ),
+    html.Div(children=[
+        html.Div(html.Button(id={"type": "input", "index": 0}, n_clicks=0, style=button_style,
+                             children=html.Div([
+                                 html.Span('Take Photo'),
+                                 html.Img(src="/assets/icons/webcam.png",
+                                          height=50,
+                                          style={"filter": "brightness(1) invert(0)",
+                                                 "margin-top": 5}
+                                          ),
+                             ], style={"flex-direction": "column",
+                                       "justify-content": "center", "align-items": "center"}))
+
+                 ),
+        html.Div([
+            dcc.Upload(id={"type": "input", "index": 1},
+                       children=html.Button(
+                           children=html.Div([html.Span('Select Files'), html.Img(src="/assets/icons/upload.png",
+                                                                                  height=50,
+                                                                                  style={
+                                                                                      "filter": "brightness(1) invert(0)",
+                                                                                      "margin-top": 5}
+                                                                                  ),
+                                              ],
+                                             style={"flex-direction": "column",
+                                                    "justify-content": "center", "align-items": "center"}),
+                           style=button_style), ),
+        ])
+    ],
+        style={"margin-top": 25, "display": "flex", "flex-direction": "row",
+               "justify-content": "center", "align-items": "center","width":"100%"}
+    ), ], style={"display": "flex", "flex-direction": "row","width":"100%",
+                 "justify-content": "center", "align-items": "center"})
+
 # orange: #C2654E
-button_group = html.Div([html.Div(
+button_agroup = html.Div([html.Div(
     [dbc.RadioItems(
         id="operation",
         className="btn-group",
@@ -188,7 +217,7 @@ webcam = dbc.Row([
 
 app.layout = html.Div(
     [
-        html.Div(style={"height": "20%", 'background-color': "#855BE0", "border-bottom-left-radius": "2em",
+        html.Div(style={"height": "10%", 'background-color': "#855BE0", "border-bottom-left-radius": "2em",
                         "border-bottom-right-radius": "2em"},
                  children=dbc.Row([
                      dbc.Col([
@@ -211,7 +240,19 @@ app.layout = html.Div(
         dcc.Store(id='delete-image')
     ], style={'background-color': '#0B0B0C', "height": "100vh", "width": "100%"})
 
-del_img = []
+
+@app.callback(
+    Output("pics", "style"),
+    Input("ready", "n_clicks")
+)
+def ready(click):
+    print("READY!")
+    img_list = []
+    zahlenList = scan_process("screen.jpg")
+    for i, zahl in enumerate(zahlenList):
+        if i not in del_img:
+            img_list.append(zahl)
+    print(len(img_list))
 
 
 def parse_contents(contents, filename):
@@ -249,11 +290,13 @@ def parse_contents(contents, filename):
     Input({'type': 'input', 'index': 1}, 'contents'),
     State({'type': 'input', 'index': 1}, 'filename'),
 )
-
 def update_input(click, content, filename):
-    index = dash.ctx.triggered_id["index"]
+    try:
+        index = dash.ctx.triggered_id["index"]
+    except TypeError:
+        return html.Div()
     print(dash.ctx.triggered_id)
-
+    print(click)
     if index == 0:
         '''Webcam'''
         if click != 0 and click != None:
@@ -271,13 +314,14 @@ def update_input(click, content, filename):
                                     )
                 img_list.append(
                     html.Button(id="delete",
-                                children=html.Div([html.Span('Deselect'),
+                                children=html.Div([html.Span('Reselect'),
                                                    html.Img(src="/assets/icons/reload.png",
                                                             height=50,
                                                             style={"filter": "brightness(1) invert(0)"}
                                                             ),
-                                                   ], style={"flex-direction": "column", "justify-content": "center",
-                                                             "align-items": "center"}),
+                                                   ],
+                                                  style={"flex-direction": "column", "justify-content": "center",
+                                                         "align-items": "center"}),
                                 style={"height": "100px", "border-radius": "1.5rem",
                                        "background-color": "#C2654E", "border": "none", "margin-left": 30}))
                 return img_list
@@ -285,6 +329,9 @@ def update_input(click, content, filename):
         '''Uploaded Photo'''
         if content is not None:
             return parse_contents(content, filename)
+
+del_img = []
+
 @app.callback(
     Output({'type': 'img', 'index': MATCH}, 'style'),
     Input({'type': 'img', 'index': MATCH}, 'n_clicks'),
@@ -302,18 +349,6 @@ def select_images(click, index):
             return {"margin-right": "10px", "height": "5%", "width": "5%", "border": "2px white solid"}
     else:
         return {"margin-right": "10px", "height": "5%", "width": "5%", "border": "2px white solid"}
-
-
-
-# @app.callback(
-#     Output('output-image-upload', 'children'),
-#     Output('upload-pics', 'children'),
-#     Input('upload-image', 'contents'),
-#     State('upload-image', 'filename'),
-# )
-# def photo_upload(content, name):
-#     if content is not None:
-#         return parse_contents(content, name)
 
 
 @app.callback(
@@ -346,13 +381,24 @@ def delete_images(click):
 
 
 @app.callback(
-    Output(component_id='pics', component_property='children'),
-    #Input(component_id='submit-val', component_property='n_clicks'),
-     Input(component_id="operation", component_property="value"),
-
+    Output({"type": "operation", "index": ALL}, "style"),
+    Input({"type": "operation", "index": ALL}, "n_clicks")
 )
-def update_output(value):
-    print("Selected operation: ", value)
+def operation_select(click):
+    try:
+        index = dash.ctx.triggered_id["index"]
+    except TypeError:
+        return operation_button_style, operation_button_style, operation_button_style
+
+    match index:
+        case 0:
+            return operation_button_style_clicked, operation_button_style, operation_button_style
+        case 1:
+            return operation_button_style, operation_button_style_clicked, operation_button_style
+        case 2:
+            return operation_button_style, operation_button_style, operation_button_style_clicked
+        case _:
+            return operation_button_style, operation_button_style, operation_button_style
 
 
 if __name__ == '__main__':
