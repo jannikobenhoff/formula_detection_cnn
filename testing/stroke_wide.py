@@ -9,7 +9,6 @@ def stroking(imagepath):
     #img = Image.open("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/dashboard/__files/4_546.jpg")
     img = Image.open(imagepath)
     img = np.array(img)
-    print(img)
     '''255: weiß, 0: schwarz'''
     for i in range(img.shape[0]-1):
         for ii in range(img.shape[1]-1):
