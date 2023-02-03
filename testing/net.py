@@ -268,6 +268,7 @@ def read_images(image_path: str, symbol, model, size=(28, 28), show_image=False)
         plt.imshow(custom_image.squeeze().permute(1, 2, 0))
         plt.title("Prediction: "+custom_image_pred_label+" True: "+symbol)
         plt.axis = False
+        plt.show()
 
     return custom_image, custom_image_pred_label
 
@@ -344,11 +345,11 @@ if __name__ == '__main__':
     augment_bins = 31
     pic_size = 28
     if augment:
-        data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)),
+        data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)), transforms.Grayscale(),
                                                transforms.TrivialAugmentWide(num_magnitude_bins=augment_bins),
                                                transforms.ToTensor()])
     else:
-        data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)),
+        data_transformer = transforms.Compose([transforms.Resize(size=(pic_size, pic_size)), transforms.Grayscale(),
                                                transforms.ToTensor()])
     """create dataset"""
 
@@ -359,6 +360,7 @@ if __name__ == '__main__':
     class_dict = train_data.class_to_idx
     print(len(train_data), len(test_data))
     print(train_data)
+    print(class_dict)
     img, label = train_data[0][0], train_data[0][1]
 
     #print(f"Image tensor:\n{img}")
@@ -396,7 +398,7 @@ if __name__ == '__main__':
         NUM_EPOCHS = 1
 
         # Recreate an instance of TinyVGG
-        model_tiny = TinyVGG(input_shape=3,  # number of color channels (3 for RGB)
+        model_tiny = TinyVGG(input_shape=1,  # number of color channels (3 for RGB)
                           hidden_units=10,
                           output_shape=len(train_data.classes)).to(device)
 
@@ -443,6 +445,10 @@ if __name__ == '__main__':
         # save model
         m = torch.jit.script(model)
         m.save("model.torch")
+
+    else:
+        model = torch.jit.load
+
     """test models"""
 
     single_test = False
@@ -485,7 +491,7 @@ if __name__ == '__main__':
     if i_want_to_read_image:
         image_path = "__files/costum_images/pi_test_1.jpg"
         symbol = "pi"
-        select_model = 1  # []
+        select_model = 1  # [Fashion_model, tiny_model]
         model = models[select_model]
         size = (28, 28)  # model_tiny needs (28, 28)
         custom_image, pred_label = read_images(image_path, symbol, model, size=size, show_image=True)
