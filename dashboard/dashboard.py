@@ -5,6 +5,10 @@ import dash
 import dash_bootstrap_components as dbc
 import numpy as np
 from dash import dcc, html
+import plotly.graph_objs as go
+
+import wolframalpha
+from wolframclient.evaluation import WolframLanguageSession
 
 from flask import Flask, Response, request
 import cv2
@@ -126,6 +130,7 @@ app.layout = html.Div(
 
         button_group,
         webcam_group,
+        html.Dialog(children=html.P("hallo")),
         #html.Div(id="screen"),
         dbc.Row([html.Hr(style={"margin-top":25})]),
         html.Div(id={"type": "pics", "index": 0}, n_clicks=0,
@@ -134,30 +139,62 @@ app.layout = html.Div(
         html.Div(id={"type": "pics", "index": 1}, n_clicks=0),
         html.Div(id="pics", n_clicks=0),
         html.Div(id="pics2", n_clicks=0, style={"justify-content": "center", "display": "flex",
-                               "align-items": "center", "flex-direction": "row","margin-top":25}),
-        html.Div(id="upload-pics", n_clicks=0),
-        html.Div(id="upload-pics2", n_clicks=0, style={"margin": 20}),
+                               "align-items": "center", "flex-direction": "row", "margin-top": 25}),
+        dbc.Row([html.Hr(style={"margin-top": 25})]),
+        html.Div(id="prediction", style={"background-color": black}),
+        # html.Img(id="img0", src=Image.open("screen.jpg").convert('L'), n_clicks=0),
+        dcc.Store(id='store'),
         html.Div(id="delete"),
         html.Div(id="ready"),
-        html.Div(id="img0", n_clicks=0),
-        # html.Img(id="img0", src=Image.open("screen.jpg").convert('L'), n_clicks=0),
-        dcc.Store(id='delete-image')
     ], style={'background-color': black, "height": "100vh", "width": "100%", "overflow": "scroll"})
 
 
 @app.callback(
-    Output("pics", "style"),
-    Input("ready", "n_clicks")
+    Output("prediction", "children"),
+    Input("ready", "n_clicks"),
+    State("store", 'data')
 )
-def ready(click):
+def ready(click, data):
+    client = wolframalpha.Client(key)
+    res = client.query("x + 5 * 4 = x * 9")
+    for i in res.results:
+        print(i.text)
     if click != None and click != 0:
         img_list = []
         zahlenList = scan_process("screen.jpg")
         for i, zahl in enumerate(zahlenList):
             if i not in del_img:
                 img_list.append(zahl)
-        predict(img_list)
+        prediction = predict(img_list)
+        if data == 0:
+            '''Calculate'''
+            print("Calculate")
+            ev = eval(prediction)
+            return html.H2(prediction+" = "+str(ev), style={"color": "white"})
 
+        elif data == 1:
+            '''Plot'''
+            print("Plot")
+            a = np.linspace(0, 10, 10)
+            ev = eval(prediction)
+            fig = go.Figure(data=[go.Scatter(x=a, y=ev, line=dict(color=yellow))])
+            fig.update_layout(template="plotly_dark", plot_bgcolor='rgba(0, 0, 0, 0)', paper_bgcolor='rgba(0, 0, 0, 0)')
+
+            return [html.H2("f(a) = " + prediction, style={"color": "white"}),
+                    dcc.Graph(figure=fig, style={"background-color": black})]
+
+        elif data == 2:
+            '''Equation'''
+            print("Equation")
+            client = wolframalpha.Client(key)
+            res = client.query(prediction)
+            # Includes only text from the response
+            answer = [prediction, html.Br()]
+            for i in res.results:
+                answer.append(i.text)
+                answer.append(html.Br())
+
+            return html.H2(answer, style={"color": "white"})
 
 def parse_contents(contents, filename):
     data = contents.encode("utf8").split(b";base64,")[1]
@@ -233,7 +270,7 @@ def update_input(click, content, filename):
                                     #        "background-color": "#C2654E", "border": "none", "margin-left": 30}
                                     ))
                     return img_list, html.Div([html.H5("Webcam photo", style={"color": "white","margin-bottom":5}),
-                                               html.Img(src=Image.open("screen.jpg"), style={'height': '90%', 'width': '90%', "border": "2px white solid", "margin-top": 5})])
+                                               html.Img(src=Image.open("screen.jpg"), style={'height': '30%', 'width': '30%', "border": "2px white solid", "margin-top": 5})])
         else:
             return html.Div(), webcam
     else:
@@ -242,7 +279,7 @@ def update_input(click, content, filename):
             return parse_contents(content, filename),html.Div([
                 html.H5(filename, style={"color":"white", "margin-bottom":5}),
                 html.Img(src=Image.open("screen.jpg"),
-                         style={"height": "90%", "width": "90%", "border": "2px white solid", "margin-top": 5})])
+                         style={"height": "30%", "width": "30%", "border": "2px white solid", "margin-top": 5})])
 
 
 del_img = []
@@ -299,23 +336,26 @@ def delete_images(click):
 
 @app.callback(
     Output({"type": "operation", "index": ALL}, "style"),
-    Input({"type": "operation", "index": ALL}, "n_clicks")
+    Output("store", "data"),
+    Input({"type": "operation", "index": ALL}, "n_clicks"),
+    State("store", 'data')
 )
-def operation_select(click):
+def operation_select(click, data):
+    print(data)
     try:
         index = dash.ctx.triggered_id["index"]
     except TypeError:
-        return operation_button_style_clicked, operation_button_style, operation_button_style
+        return [operation_button_style_clicked, operation_button_style, operation_button_style], 0
 
     match index:
         case 0:
-            return operation_button_style_clicked, operation_button_style, operation_button_style
+            return [operation_button_style_clicked, operation_button_style, operation_button_style], 0
         case 1:
-            return operation_button_style, operation_button_style_clicked, operation_button_style
+            return [operation_button_style, operation_button_style_clicked, operation_button_style], 1
         case 2:
-            return operation_button_style, operation_button_style, operation_button_style_clicked
+            return [operation_button_style, operation_button_style, operation_button_style_clicked], 2
         case _:
-            return operation_button_style_clicked, operation_button_style, operation_button_style
+            return [operation_button_style_clicked, operation_button_style, operation_button_style], 0
 
 
 if __name__ == '__main__':

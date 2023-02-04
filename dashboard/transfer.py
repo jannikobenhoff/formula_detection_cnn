@@ -2,33 +2,41 @@ import torch
 import torchvision
 from torchvision import transforms
 from PIL import Image
-
 from Neural.data_loader import shutil_or_just_labels
 
-labels = {'!': 0, '(': 1, ')': 2, '+': 3, ',': 4, '-': 5, '0': 6, '1': 7, '2': 8, '3': 9, '4': 10, '5': 11, '6': 12, '7': 13, '8': 14, '9': 15, '=': 16, 'A': 17, 'C': 18, 'Delta': 19, 'G': 20, 'H': 21, 'M': 22, 'N': 23, 'R': 24, 'S': 25, 'T': 26, 'X': 27, '[': 28, ']': 29, 'alpha': 30, 'ascii_124': 31, 'b': 32, 'beta': 33, 'cos': 34, 'd': 35, 'div': 36, 'e': 37, 'exists': 38, 'f': 39, 'forall': 40, 'forward_slash': 41, 'gamma': 42, 'geq': 43, 'gt': 44, 'i': 45, 'in': 46, 'infty': 47, 'int': 48, 'j': 49, 'k': 50, 'l': 51, 'lambda': 52, 'ldots': 53, 'leq': 54, 'lim': 55, 'log': 56, 'lt': 57, 'mu': 58, 'neq': 59, 'o': 60, 'p': 61, 'phi': 62, 'pi': 63, 'pm': 64, 'prime': 65, 'q': 66, 'rightarrow': 67, 'sigma': 68, 'sin': 69, 'sqrt': 70, 'sum': 71, 'tan': 72, 'theta': 73, 'times': 74, 'u': 75, 'v': 76, 'w': 77, 'y': 78, 'z': 79, '{': 80, '}': 81}
+labels = {0: '!', 1: '(', 2: ')', 3: '+', 5: ',', 6: '-', 7: '0', 8: '1', 9: '2', 10: '3', 11: '4', 12: '5',
+          13: '6', 14: '7', 15: '8', 16: '9', 17: '=', 18: 'a', 19: 'b', 20: 'd', 21: 'div', 22: 'e', 23: 'f',
+          24: 'i', 25: 'l', 26: 'n', 27: 'o', 28: 'p', 29: '*'}
 def predict(img_list):
-    model = torch.jit.load("__files/model.torch")
-    img = img_list[0].imagearray
+    model = torch.jit.load("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/testing/model_stroke.torch")
+    predictions = []
+    for img in img_list:
+        img = img.imagearray
+        custom_image = torch.from_numpy(img).type(torch.float32) / 255
+        custom_image = custom_image.unsqueeze(0)
 
-    img = Image.fromarray(img)# .convert("L") # .convert("RGB")
-    img.save("custom.jpg")
+        # img = Image.fromarray(img)  # .convert("L") # .convert("RGB")
+        # img.save("custom.jpg")
+        #
+        # custom_image = torchvision.io.read_image("custom.jpg").type(torch.float32) / 255
+        # torch.reshape(custom_image, (1, 28, 28))
+        # print(custom_image.shape)
+        # print(type(custom_image))
+        # custom_image = torchvision.io.read_image("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/testing/s.jpg").type(torch.float32) / 255
+        # custom_transforms = transforms.Compose([transforms.Resize((28, 28))])
+        # custom_image = custom_transforms(custom_image)
 
-    #custom_image = torchvision.io.read_image("custom.jpg").type(torch.float32) / 255
+        model.eval()
+        with torch.inference_mode():
+            custom_pred = model(custom_image.unsqueeze(dim=0))
 
-    custom_image = torchvision.io.read_image("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/testing/s.jpg").type(torch.float32) / 255
-    custom_transforms = transforms.Compose([transforms.Resize((28, 28))])
-    custom_image = custom_transforms(custom_image)
-
-    model.eval()
-    with torch.inference_mode():
-        custom_pred = model(custom_image.unsqueeze(dim=0))
-
-    custom_image_pred_probs = torch.softmax(custom_pred, dim=1)
-    custom_image_pred_label = torch.argmax(custom_image_pred_probs, dim=1)
-    custom_image_pred_label = list(labels.keys())[custom_image_pred_label.data]
-
-    print("Custom Image Prediction: " + str(custom_image_pred_label))
-    #print("True Symbol: ", symbol)
+        custom_image_pred_probs = torch.softmax(custom_pred, dim=1)
+        custom_image_pred_label = torch.argmax(custom_image_pred_probs, dim=1)
+        custom_image_pred_label = list(labels.values())[custom_image_pred_label.data]
+        predictions.append(custom_image_pred_label)
+        #print("Custom Image Prediction: " + str(custom_image_pred_label))
+    print(predictions)
+    return "".join(predictions)
 
     # if show_image:
     #     plt.imshow(custom_image.squeeze().permute(1, 2, 0))
