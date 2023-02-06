@@ -31,6 +31,8 @@ def predict(img_list):
             custom_pred = model(custom_image.unsqueeze(dim=0))
 
         custom_image_pred_probs = torch.softmax(custom_pred, dim=1)
+        print(custom_image_pred_probs)
+
         custom_image_pred_label = torch.argmax(custom_image_pred_probs, dim=1)
         custom_image_pred_label = list(labels.values())[custom_image_pred_label.data]
         predictions.append(custom_image_pred_label)

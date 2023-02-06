@@ -20,6 +20,11 @@ class Zahl():
 def baw(imagearray):
     # imagearray[imagearray < 70] = 0
     # imagearray[imagearray > 0] = 255
+    """black: 0, white: 255"""
+    maxi = imagearray.max()
+    mini = imagearray.min()
+    print("Max: ", maxi)
+    print("Min: ", mini)
     imagearray[imagearray > 70] = 0
     imagearray[imagearray > 0] = 255
     return imagearray
@@ -48,35 +53,71 @@ def scanning(imagearray):
             start = 0
             end = 0
 
-    zahldrin = []
     zahlen2 = []
     '''Reihen'''
+    # for zahl in zahlen:
+    #     start = 0
+    #     end = 0
+    #     for i in range(len(zahl)):
+    #         if sum(zahl[i, :]) > 0 and sum(zahl[i+1, :]) > 0:
+    #             start = i
+    #             break
+    #     for i in range(len(zahl)-1, 0, -1):
+    #         if sum(zahl[i, :]) > 0 and sum(zahl[i-1, :]) > 0:
+    #             end = i
+    #             break
+    #     zahlen2.append(zahl[start:end, :])
+    endlist = []
+    startlist = []
     start = 0
     end = 0
     for zahl in zahlen:
-        # zahl = np.transpose(np.array(k))
         for i in range(len(zahl)):
             if sum(zahl[i, :]) > 0:
                 if start == 0:
+                    startlist.append(i)
                     start = i
-                zahldrin.append(zahl[i, :])
+                #zahldrin.append(zahl[i, :])
             elif start != 0:
                 end = i
+                endlist.append(i)
             if end != 0 and start != 0:
-                zahlen2.append(np.array(zahldrin))
-                zahldrin = []
+                #zahlen2.append(np.array(zahldrin))
+                #zahldrin = []
                 start = 0
                 end = 0
+    heightlist = [x - i for x, i in zip(endlist, startlist)]
+    max_index = heightlist.index(max(heightlist))
+    for zahl in zahlen:
+        zahlen2.append(zahl[startlist[max_index]:endlist[max_index],:])
+
+    start = 0
+    end = 0
+    zahldrin = []
+    zahlen3 = []
+    for zahl in zahlen2:
+        start = 0
+        end = 0
+        for i in range(len(zahl)):
+            if sum(zahl[i, :]) > 0 and sum(zahl[i+1, :]) > 0:
+                start = i
+                break
+        for i in range(len(zahl)-1, 0, -1):
+            if sum(zahl[i, :]) > 0 and sum(zahl[i-1, :]) > 0:
+                end = i
+                break
+        zahlen3.append(zahl[start:end, :])
+
     delete = []
-    for i in range(len(zahlen2)):
-        zahl = zahlen2[i]
+    for i in range(len(zahlen3)):
+        zahl = zahlen3[i]
         if min(zahl.shape)/max(zahl.shape) < 0.1:
             delete.append(i)
 
     for i in reversed(delete):
-        del zahlen2[i]
-
-    return zahlen2
+        del zahlen3[i]
+    print(endlist, startlist, heightlist)
+    return zahlen3
 
 
 def scale(imagearray):
@@ -116,6 +157,10 @@ def scan_process(img_file, plot=True, save=False):
         image.save("screen.jpg")
     image = np.array(image)
     image = baw(image)
+
+    # plt.imshow(image, cmap="gray")
+    # plt.show()
+
     imageList = scanning(image)
     zahlenListe = []
     for image in imageList:
@@ -139,19 +184,13 @@ def scan_process(img_file, plot=True, save=False):
     return zahlenListe
 
 if __name__ == "__main__":
-    img = Image.open("../testing/__files/test.jpg").convert('L')
+    img = Image.open("../testing/__files/zahl4.jpg").convert('L')
 
-    img = np.array(img)
+    #img = np.array(img)
     # plt.imshow(img, cmap="gray")
     # plt.show()
 
-    img = baw(img)
-    images = scanning(img)
-    zahlen = []
-    for img in images:
-        img = addBorder(img)
-        img = scale(img)
-        zahlen.append(Zahl(img))
+    zahlen = scan_process("../testing/__files/IMG_1003.jpg")
 
     fig, axes = plt.subplots(1, len(zahlen))
 
