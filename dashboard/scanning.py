@@ -25,7 +25,7 @@ def baw(imagearray):
     mini = imagearray.min()
     print("Max: ", maxi)
     print("Min: ", mini)
-    imagearray[imagearray > 70] = 0
+    imagearray[imagearray > 60] = 0
     imagearray[imagearray > 0] = 255
     return imagearray
 
@@ -89,7 +89,8 @@ def scanning(imagearray):
     heightlist = [x - i for x, i in zip(endlist, startlist)]
     max_index = heightlist.index(max(heightlist))
     for zahl in zahlen:
-        zahlen2.append(zahl[startlist[max_index]:endlist[max_index],:])
+        # zahlen2.append(zahl[startlist[max_index]:endlist[max_index],:])
+        zahlen2.append(zahl[min(startlist):max(endlist), :])
 
     start = 0
     end = 0

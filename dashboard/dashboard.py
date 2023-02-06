@@ -84,19 +84,7 @@ button_group = html.Div([
 
 webcam_group = dbc.Row(style={"margin-top": 25},
                  children=[
-                     dbc.Col(width=7, id="screen"),
-                     dbc.Col(width=1, children=html.Div(id='output-image-upload')),
-                     dbc.Col(width=4, children=html.Div([
-                         html.Button(id={"type": "input", "index": 0}, n_clicks=0, style=button_style,
-                                     children=html.Div([
-                                         html.H5('Take Photo'),
-                                         html.Img(src="/assets/icons/webcam.png",
-                                                  height=50,
-                                                  style={"filter": "brightness(1) invert(0)",
-                                                         "margin-top": 5}
-                                                  ),
-                                     ])),
-
+                     dbc.Col(width=3, children=html.Div([
                          html.Button(
                              children=dcc.Upload(id={"type": "input", "index": 1}, children=[html.Div(
                                  [html.H5('Select Files'), html.Img(src="/assets/icons/upload.png",
@@ -108,6 +96,32 @@ webcam_group = dbc.Row(style={"margin-top": 25},
                                   ],
                              )]),
                              style=button_style)
+                     ], style={"height": "100%", "justify-content": "center", "display": "flex",
+                               "align-items": "center", "flex-direction": "column", }))    ,
+                     dbc.Col(width=6, id="screen"),
+                     #dbc.Col(width=1, children=html.Div(id='output-image-upload')),
+                     dbc.Col(width=3, children=html.Div([
+                         html.Button(id={"type": "input", "index": 0}, n_clicks=0, style=button_style,
+                                     children=html.Div([
+                                         html.H5('Take Photo'),
+                                         html.Img(src="/assets/icons/webcam.png",
+                                                  height=50,
+                                                  style={"filter": "brightness(1) invert(0)",
+                                                         "margin-top": 5}
+                                                  ),
+                                     ])),
+
+                         # html.Button(
+                         #     children=dcc.Upload(id={"type": "input", "index": 1}, children=[html.Div(
+                         #         [html.H5('Select Files'), html.Img(src="/assets/icons/upload.png",
+                         #                                            height=50,
+                         #                                            style={
+                         #                                                "filter": "brightness(1) invert(0)",
+                         #                                                "margin-top": 5}
+                         #                                            ),
+                         #          ],
+                         #     )]),
+                         #     style=button_style)
                      ], style={"height": "100%", "justify-content": "center", "display": "flex",
                                "align-items": "center", "flex-direction": "column", }))
                  ])
@@ -175,7 +189,8 @@ def ready(click, data):
         elif data == 1:
             '''Plot'''
             print("Plot")
-            a = np.linspace(0, 10, 10)
+            a = np.linspace(-50, 50, 100)
+            n = np.linspace(-50, 50, 100)
             ev = eval(prediction)
             fig = go.Figure(data=[go.Scatter(x=a, y=ev, line=dict(color=yellow))])
             fig.update_layout(template="plotly_dark", plot_bgcolor='rgba(0, 0, 0, 0)', paper_bgcolor='rgba(0, 0, 0, 0)')
