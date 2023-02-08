@@ -139,7 +139,7 @@ app.layout = html.Div(
                      dbc.Col([
                          html.H1("MATHTECTION",
                                  style={'margin-top': 25, 'margin-bottom': 0, "color": "white"}),
-                         html.Span("Machine Learning Algorithm", style={"color": "white"})
+                         html.Span("Deep Learning Algorithm evaluating Mathematical Formulas", style={"color": "white"})
                      ], width=12)], justify="left"), ),
 
         button_group,
@@ -387,4 +387,10 @@ rechnen/plotten/lösen lassen
 
 computation time (animieren lassen?) / performance / auslastung 
 
+REPORT:
+- wie brüche, integrale
+- ausblick, richtig -> in data set
+- ausblick bruch integral erkennung
+- histogram zeichenerkennung, bild
+- data set mod
 '''

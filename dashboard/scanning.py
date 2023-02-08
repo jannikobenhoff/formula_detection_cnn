@@ -17,16 +17,36 @@ class Zahl():
         return self.imagearray.reshape(-1, 28*28)
 
 
+def gkern(l=5, sig=1.):
+    """\
+    creates gaussian kernel with side length `l` and a sigma of `sig`
+    """
+    ax = np.linspace(-(l - 1) / 2., (l - 1) / 2., l)
+    gauss = np.exp(-0.5 * np.square(ax) / np.square(sig))
+    kernel = np.ones(shape=(l, l))
+    return kernel / np.sum(kernel)
+
+
 def baw(imagearray):
+    maxi = imagearray.max()
+    mini = imagearray.min()
+    mean = np.mean(imagearray)
+    print("Max: ", maxi)
+    print("Min: ", mini)
+    print("Mean: ", mean)
+    imagearray2 = scipy.signal.convolve2d(imagearray, gkern(l=7), 'same')
+    imagearray2 = scipy.signal.convolve2d(imagearray2, gkern(l=7), 'same')
+    imagearray2 = imagearray2 - (50-mini)
     # imagearray[imagearray < 70] = 0
     # imagearray[imagearray > 0] = 255
     """black: 0, white: 255"""
-    maxi = imagearray.max()
-    mini = imagearray.min()
-    print("Max: ", maxi)
-    print("Min: ", mini)
-    imagearray[imagearray > 60] = 0
+
+    imagearray[imagearray > imagearray2] = 0
     imagearray[imagearray > 0] = 255
+    # imagearray[imagearray > mean] = 0
+    # imagearray[imagearray > 0] = 255
+
+
     return imagearray
 
 
@@ -37,11 +57,12 @@ def wab(imagearray):
 def scanning(imagearray):
     zahldrin = []
     zahlen = []
+    thresh = 255
     '''Spalten'''
     start = 0
     end = 0
-    for i in range(len(imagearray[0])):
-        if sum(imagearray[:, i]) > 0:  # 2040:
+    for i in range(len(imagearray[0])-1):
+        if sum(imagearray[:, i]) > thresh: # and sum(imagearray[:, i+1]) > thresh:  # 2040:
             if start == 0:
                 start = i
             zahldrin.append(imagearray[:, i])
@@ -73,7 +94,7 @@ def scanning(imagearray):
     end = 0
     for zahl in zahlen:
         for i in range(len(zahl)):
-            if sum(zahl[i, :]) > 0:
+            if sum(zahl[i, :]) > thresh:
                 if start == 0:
                     startlist.append(i)
                     start = i
@@ -87,9 +108,9 @@ def scanning(imagearray):
                 start = 0
                 end = 0
     heightlist = [x - i for x, i in zip(endlist, startlist)]
-    max_index = heightlist.index(max(heightlist))
+    #max_index = heightlist.index(max(heightlist))
     for zahl in zahlen:
-        # zahlen2.append(zahl[startlist[max_index]:endlist[max_index],:])
+        #zahlen2.append(zahl[startlist[max_index]:endlist[max_index],:])
         zahlen2.append(zahl[min(startlist):max(endlist), :])
 
     start = 0
@@ -99,15 +120,15 @@ def scanning(imagearray):
     for zahl in zahlen2:
         start = 0
         end = 0
-        for i in range(len(zahl)):
-            if sum(zahl[i, :]) > 0 and sum(zahl[i+1, :]) > 0:
+        for i in range(len(zahl)-1):
+            if sum(zahl[i, :]) > thresh and sum(zahl[i+1, :]) > thresh:
                 start = i
                 break
         for i in range(len(zahl)-1, 0, -1):
-            if sum(zahl[i, :]) > 0 and sum(zahl[i-1, :]) > 0:
+            if sum(zahl[i, :]) > thresh and sum(zahl[i-1, :]) > thresh:
                 end = i
                 break
-        zahlen3.append(zahl[start:end, :])
+        zahlen3.append(zahl[start:end+1, :])
 
     delete = []
     for i in range(len(zahlen3)):
@@ -135,7 +156,7 @@ def addBorder(imagearray, reverse=False):
     sidelength = border + sidelength
     print(imagearray.shape, sidelength)
 
-    if sidelength < 25:
+    if sidelength < 10:
         return np.empty(shape=0)
     out = np.zeros([sidelength, sidelength], dtype=np.uint8)
     if reverse:
@@ -154,13 +175,18 @@ def scan_process(img_file, plot=True, save=False):
     Output: List array mit Zahlen() Elementen
     """
     image = Image.open(img_file).convert('L')
+
     if save:
         image.save("screen.jpg")
+
     image = np.array(image)
+    print(image.shape)
+    image = cv2.resize(image, (int(image.shape[1] / 8), int(image.shape[0] / 8)))
+
     image = baw(image)
 
-    # plt.imshow(image, cmap="gray")
-    # plt.show()
+    plt.imshow(image, cmap="gray")
+    plt.show()
 
     imageList = scanning(image)
     zahlenListe = []
@@ -185,13 +211,13 @@ def scan_process(img_file, plot=True, save=False):
     return zahlenListe
 
 if __name__ == "__main__":
-    img = Image.open("../testing/__files/zahl4.jpg").convert('L')
+    img = Image.open("../testing/__files/zahl5.jpg").convert('L')
 
     #img = np.array(img)
     # plt.imshow(img, cmap="gray")
     # plt.show()
 
-    zahlen = scan_process("../testing/__files/IMG_1003.jpg")
+    zahlen = scan_process("../testing/__files/calc_test.jpg")
 
     fig, axes = plt.subplots(1, len(zahlen))
 
