@@ -1,3 +1,5 @@
+import os
+
 from PIL import Image
 import numpy as np
 import cv2
@@ -39,7 +41,40 @@ def stroking(imagepath):
     # img[img > 0] = 255
     img = Image.fromarray(img)
 
-    img.save(imagepath)
+    return img # img.save(imagepath)
 
 
 # stroking("=_444.jpg")
+
+def stroke_all():
+    train_clean = "__files/train_images_clean"
+    test_clean = "__files/test_images_clean"
+    train_path = "__files/train_images"
+    test_path = "__files/test_images"
+
+    for folder in os.listdir(train_clean):
+        print("Applying stroking() to folder train: ", folder)
+        if folder == ".DS_Store":
+            continue
+        for img in os.listdir(train_clean+"/"+folder):
+            new_img = stroking(train_clean+"/"+folder+"/"+img)
+            if not os.path.exists(train_path+"/"+folder):
+                os.mkdir(train_path+"/"+folder)
+                print("Directory '% s' created" % (train_path+"/"+folder))
+            new_img.save(train_path+"/"+folder+"/"+img)
+
+    for folder in os.listdir(test_clean):
+        print("Applying stroking() to folder test: ", folder)
+        if folder == ".DS_Store":
+            continue
+        for img in os.listdir(test_clean+"/"+folder):
+            new_img = stroking(test_clean+"/"+folder+"/"+img)
+            if not os.path.exists(test_path+"/"+folder):
+                os.mkdir(test_path+"/"+folder)
+                print("Directory '% s' created" % (test_path+"/"+folder))
+            new_img.save(test_path+"/"+folder+"/"+img)
+
+
+
+stroke_all()
+
