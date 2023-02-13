@@ -4,18 +4,12 @@ from torchvision import transforms
 from PIL import Image
 from Neural.data_loader import shutil_or_just_labels
 
-labels = {'!': 0, '(': 1, ')': 2, '+': 3, ',': 4, '-': 5, '0': 6, '1': 7, '2': 8,
-          '3': 9, '4': 10, '5': 11, '6': 12, '7': 13, '8': 14, '9': 15, '=': 16,
-          'A': 17, 'C': 18, 'Delta': 19, 'G': 20, 'H': 21, 'M': 22, 'N': 23, 'R': 24,
-          'S': 25, 'T': 26, 'X': 27, '[': 28, ']': 29, 'alpha': 30, 'ascii_124': 31,
-          'b': 32, 'beta': 33, 'cos': 34, 'd': 35, '/': 36, 'e': 37, 'exists': 38,
-          'f': 39, 'forall': 40, 'forward_slash': 41, 'gamma': 42, 'geq': 43, 'gt': 44,
-          'i': 45, 'in': 46, 'infty': 47, 'int': 48, 'j': 49, 'k': 50, 'l': 51,
-          'lambda': 52, 'ldots': 53, 'leq': 54, 'lim': 55, 'log': 56, 'lt': 57,
-          'mu': 58, 'neq': 59, 'o': 60, 'p': 61, 'phi': 62, 'pi': 63, 'pm': 64,
-          'prime': 65, 'q': 66, 'rightarrow': 67, 'sigma': 68, 'sin': 69, 'sqrt': 70,
-          'sum': 71, 'tan': 72, 'theta': 73, 'times': 74, 'u': 75, 'v': 76, 'w': 77,
-          'y': 78, 'z': 79, '{': 80, '}': 81}
+labels = {'!': 0, '(': 1, ')': 2, '+': 3, ',': 4, '-': 5, '0': 6, '1': 7, '2': 8, '3': 9, '4': 10,
+          '5': 11, '6': 12, '7': 13, '8': 14, '9': 15, '=': 16, 'a': 17, 'C': 18, 'G': 19, 'H': 20,
+          'M': 21, 'n': 22, 'R': 23, 'S': 24, 'T': 25, '[': 26, ']': 27, 'b': 28, 'd': 29,
+          '/': 30, 'e': 31, 'f': 32, '/': 33, 'i': 34, 'infty': 35, 'int': 36,
+          'l': 37, 'o': 38, 'p': 39, 'pi': 40, 'q': 41, 'sum': 42, '*': 43, 'y': 44,
+          '{': 45, '}': 46}
 
 def predict(img_list):
     model = torch.jit.load("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/testing/model_thick.torch")
