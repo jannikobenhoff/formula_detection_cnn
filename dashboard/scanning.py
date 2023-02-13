@@ -154,7 +154,7 @@ def addBorder(imagearray, reverse=False):
     sidelength = max(imagearray.shape)
     border = int(sidelength*0.4)
     sidelength = border + sidelength
-    print(imagearray.shape, sidelength)
+    # print(imagearray.shape, sidelength)
 
     if sidelength < 10:
         return np.empty(shape=0)
@@ -185,8 +185,8 @@ def scan_process(img_file, plot=True, save=False):
 
     image = baw(image)
 
-    plt.imshow(image, cmap="gray")
-    plt.show()
+    # plt.imshow(image, cmap="gray")
+    # plt.show()
 
     imageList = scanning(image)
     zahlenListe = []
