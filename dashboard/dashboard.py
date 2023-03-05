@@ -393,4 +393,12 @@ REPORT:
 - ausblick bruch integral erkennung
 - histogram zeichenerkennung, bild
 - data set mod
+
+Intro/Abstract: was Ziel, welche Funktionen
+Data: TrainingsData, RealData
+Model
+Functionalities
+Performance and Results: scanning, erkennung
+Outlook and Improvements
+References
 '''
