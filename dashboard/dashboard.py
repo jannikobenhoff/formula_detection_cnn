@@ -129,7 +129,7 @@ webcam_group = dbc.Row(style={"margin-top": 25},
 webcam = html.Div([html.H5("Webcam", style={"color": " white", "margin-bottom": 5}),
                              html.Img(src="/video_feed",
                                       style={'height': '90%', 'width': '90%', "margin-left": 25,
-                                             "margin-right": 25, "border-radius": "2em"})])
+                                             "margin-right": 25, "border-radius": "0.3em"})])
 
 app.layout = html.Div(
     [
@@ -184,7 +184,7 @@ def ready(click, data):
             '''Calculate'''
             print("Calculate")
             ev = eval(prediction)
-            return html.H2(prediction+" = "+str(ev), style={"color": "white"})
+            return html.Div([html.H2("Result:"), html.Br(), html.H2(prediction+" = "+str(ev), style={"color": "white"})])
 
         elif data == 1:
             '''Plot'''

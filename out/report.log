@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  13 FEB 2023 12:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  7 MAR 2023 11:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1251,52 +1251,59 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 10.40245pt on input line 22.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 13.67995pt on input line 27.
+(Font)              scaled to size 13.67995pt on input line 32.
 
-Overfull \hbox (6.39288pt too wide) in paragraph at lines 37--52
-\T1/phv/m/n/10.95 able (e.g., those pub-lished by the Ger-man Aerospace
+Overfull \hbox (1.21033pt too wide) in paragraph at lines 45--50
+\T1/phv/m/n/10.95 re-duce the data to the nec-es-sary char-ac-ters needed
  []
 
 
-Overfull \hbox (4.591pt too wide) in paragraph at lines 37--52
-\T1/phv/m/n/10.95 Cen-ter (DLR) [[]7[]] and the Nether-lands eScience Cen-
+Overfull \hbox (0.36955pt too wide) in paragraph at lines 45--50
+\T1/phv/m/n/10.95 for the im-ple-mented func-tion-al-i-ties. There-fore, char-
+ []
+
+<figures/4_clean.jpg, id=13, 45.16875pt x 45.16875pt>
+File: figures/4_clean.jpg Graphic file (type jpg)
+<use figures/4_clean.jpg>
+Package pdftex.def Info: figures/4_clean.jpg  used on input line 63.
+(pdftex.def)             Requested size: 81.26257pt x 81.27057pt.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 9.49997pt on input line 64.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 65.
+<figures/4_sampled.jpg, id=14, 28.105pt x 28.105pt>
+File: figures/4_sampled.jpg Graphic file (type jpg)
+<use figures/4_sampled.jpg>
+Package pdftex.def Info: figures/4_sampled.jpg  used on input line 68.
+(pdftex.def)             Requested size: 81.26257pt x 81.27208pt.
+<figures/real_data_1.jpg, id=17, 2149.02875pt x 800.9925pt>
+File: figures/real_data_1.jpg Graphic file (type jpg)
+<use figures/real_data_1.jpg>
+Package pdftex.def Info: figures/real_data_1.jpg  used on input line 90.
+(pdftex.def)             Requested size: 162.51999pt x 60.57295pt.
+<figures/convolve.jpg, id=18, 268.00125pt x 99.37125pt>
+File: figures/convolve.jpg Graphic file (type jpg)
+<use figures/convolve.jpg>
+Package pdftex.def Info: figures/convolve.jpg  used on input line 96.
+(pdftex.def)             Requested size: 162.51999pt x 60.26004pt.
+<figures/real_data_2.jpg, id=19, 268.00125pt x 99.37125pt>
+File: figures/real_data_2.jpg Graphic file (type jpg)
+<use figures/real_data_2.jpg>
+Package pdftex.def Info: figures/real_data_2.jpg  used on input line 103.
+(pdftex.def)             Requested size: 155.5551pt x 57.67781pt.
+<figures/histogram.pdf, id=20, 462.52798pt x 346.89601pt>
+File: figures/histogram.pdf Graphic file (type pdf)
+<use figures/histogram.pdf>
+Package pdftex.def Info: figures/histogram.pdf  used on input line 109.
+(pdftex.def)             Requested size: 208.95377pt x 156.71576pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--112
+[]$[]$
  []
 
 
-Overfull \hbox (0.12762pt too wide) in paragraph at lines 37--52
-\T1/phv/m/n/10.95 ter [[]8[]]) fur-ther un-der-lines the im-por-tance of the to
-pic
- []
-
-
-Overfull \hbox (3.28038pt too wide) in paragraph at lines 53--71
-\T1/phv/m/n/10.95 es-sen-tial best prac-tices in soft-ware en-gi-neer-ing from
- []
-
-
-Overfull \hbox (9.48022pt too wide) in paragraph at lines 53--71
-\T1/phv/m/n/10.95 to the user. These pro-gram-ming lan-guages are widely
- []
-
-
-Overfull \hbox (3.46776pt too wide) in paragraph at lines 53--71
-\T1/phv/m/n/10.95 ac-cepted in both open-source and high-performance
- []
-
-
-Overfull \hbox (0.35736pt too wide) in paragraph at lines 72--78
-\T1/phv/m/n/10.95 quired) but con-cen-trates on one par-tic-u-lar use case.
- []
-
-
-Overfull \hbox (19.73892pt too wide) in paragraph at lines 72--78
-\T1/phv/m/n/10.95 lit-er-a-ture, which are kept gen-eral and language-agnostic
- []
-
-
-Overfull \hbox (5.01741pt too wide) in paragraph at lines 79--92
-\T1/phv/m/n/10.95 that are re-quired to en-sure high-quality sci-en-tific soft-
-
+Overfull \hbox (11.11356pt too wide) in paragraph at lines 116--126
+\T1/phv/m/n/10.95 thresh-old di-men-sion shape of min(shape)/max(shape)
  []
 
 [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
@@ -1304,372 +1311,83 @@ Overfull \hbox (5.01741pt too wide) in paragraph at lines 79--92
 
 
 
-]
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 9.49997pt on input line 108.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 110.
+ <./figures/4_clean.jpg> <./figures/4_sampled.jpg>]
+<figures/real_data_3.png, id=41, 896.34875pt x 188.705pt>
+File: figures/real_data_3.png Graphic file (type png)
+<use figures/real_data_3.png>
+Package pdftex.def Info: figures/real_data_3.png  used on input line 130.
+(pdftex.def)             Requested size: 208.95377pt x 43.98863pt.
+<figures/dash.png, id=43, 1342.01375pt x 985.6825pt>
+File: figures/dash.png Graphic file (type png)
+<use figures/dash.png>
+Package pdftex.def Info: figures/dash.png  used on input line 150.
+(pdftex.def)             Requested size: 208.95377pt x 153.47105pt.
 
-Overfull \hbox (5.79782pt too wide) in paragraph at lines 192--201
-\T1/phv/m/n/10.95 men-tion the us-age of a ver-sion con-trol sys-tem (VCS).
- []
-
-
-Overfull \hbox (1.65762pt too wide) in paragraph at lines 192--201
-\T1/phv/m/n/10.95 the ``Make In-cre-men-tal Changes'' paradigm [[]5[], []6[]] c
-an
- []
-
-
-Overfull \hbox (0.399pt too wide) in paragraph at lines 202--218
-\T1/phv/m/n/10.95 means of com-mu-ni-ca-tion within the de-vel-oper team,
- []
-
-
-Overfull \hbox (4.02983pt too wide) in paragraph at lines 202--218
-\T1/phv/m/n/10.95 com-mu-ni-ca-tion logs are avail-able for de-vel-op-ers who
- []
-
-
-Overfull \hbox (0.75414pt too wide) in paragraph at lines 221--234
-\T1/phv/m/n/10.95 agreed code for-mat-ting rules [[]8[]]. Anal-o-gously, static
+Overfull \hbox (11.92514pt too wide) in paragraph at lines 155--164
+\T1/phv/m/n/10.95 To make easy han-dling pos-si-ble a Plotly Dash-board [[]2[]]
 
  []
 
 
-Overfull \hbox (15.09943pt too wide) in paragraph at lines 238--246
-\T1/phv/m/n/10.95 sets [[]8[]]). Thereby, ven-dor lock-in sit-u-a-tions are avo
-ided
- []
-
-
-Overfull \hbox (0.45268pt too wide) in paragraph at lines 256--267
-\T1/phv/m/n/10.95 and de-ploy-ing the gen-er-ated ar-ti-facts (typ-i-cally, sof
-t-
- []
-
-
-Overfull \hbox (15.99217pt too wide) in paragraph at lines 256--267
-\T1/phv/m/n/10.95 are help-ful as dif-fer-ent jobs can be de-fined and grouped
- []
-
-[2]
-Overfull \hbox (3.41582pt too wide) in paragraph at lines 268--281
-\T1/phv/m/n/10.95 can be ex-e-cuted au-to-mat-i-cally on dif-fer-ent plat-forms
-.
- []
-
-
-Overfull \hbox (1.83878pt too wide) in paragraph at lines 291--311
-\T1/phv/m/n/10.95 doc-u-men-ta-tion, class level doc-u-men-ta-tion, overview
- []
-
-[3]
-Overfull \hbox (2.91644pt too wide) in paragraph at lines 323--328
-\T1/phv/m/n/10.95 code de-sign. Since mod-u-lar code is usu-ally testable,
- []
-
-
-LaTeX Warning: File `fig1.pdf' not found on input line 350.
-
-
-./report.tex:350: Package pdftex.def Error: File `fig1.pdf' not found: using dr
-aft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.350 ...cludegraphics[width=\textwidth]{fig1.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Trying to load font information for T1+newtxtt on input lin
-e 350.
-(/usr/local/texlive/2020/texmf-dist/tex/latex/newtxtt/t1newtxtt.fd
-File: t1newtxtt.fd 2020/02/15 Font definitions for T1/newtxtt.
-)
-LaTeX Font Info:    Font shape `T1/newtxtt/m/n' will be
-(Font)              scaled to size 12.04506pt on input line 350.
-
-Overfull \hbox (2.00111pt too wide) in paragraph at lines 365--373
-[]\T1/phv/m/n/10.95 It should be noted that there may be dif-fer-ent ways
- []
-
-
-Overfull \hbox (10.04419pt too wide) in paragraph at lines 382--400
-\T1/phv/m/n/10.95 projects. How-ever, the flex-i-ble branch-ing model might,
- []
-
-
-Overfull \hbox (10.28183pt too wide) in paragraph at lines 382--400
-\T1/phv/m/n/10.95 project should de-fine a work-flow to show how changes
- []
-
-[4]
-Overfull \hbox (4.23763pt too wide) in paragraph at lines 431--439
-[]\T1/phv/m/n/10.95 GitLab.com pro-vides free host-ing and in-ter-nal con-
- []
-
-
-Overfull \hbox (5.34013pt too wide) in paragraph at lines 431--439
-\T1/phv/m/n/10.95 tin-u-ous in-te-gra-tion ser-vices for open-source projects.
- []
-
-
-Overfull \hbox (17.71097pt too wide) in paragraph at lines 448--460
-\T1/phv/m/n/10.95 is in-volved, the CMake project pro-vides well-established
- []
-
-
-Overfull \hbox (1.77222pt too wide) in paragraph at lines 448--460
-\T1/phv/m/n/10.95 ad-van-tage of CMake (com-pared to al-ter-na-tives such
- []
-
-[5]
-Overfull \hbox (7.24419pt too wide) in paragraph at lines 537--542
-[]\T1/phv/m/n/10.95 We note that while Doxy-gen pro-vides un-chal-lenged
- []
-
-
-Overfull \hbox (4.14305pt too wide) in paragraph at lines 537--542
-\T1/phv/m/n/10.95 sign of the gen-er-ated HTML files ap-pears a bit dated.
- []
-
-
-Overfull \hbox (11.166pt too wide) in paragraph at lines 537--542
-\T1/phv/m/n/10.95 More ad-vanced work-flows are avail-able that use Doxy-
- []
-
-[6]
-Overfull \hbox (3.6756pt too wide) in paragraph at lines 575--585
-\T1/phv/m/n/10.95 GitHub (see Fig. []2[]) or Git-Lab (as de-scribed in Fig. []3
-[]).
- []
-
-
-Overfull \hbox (2.66652pt too wide) in paragraph at lines 575--585
-\T1/phv/m/n/10.95 the project is re-quired for con-tin-u-ous in-te-gra-tion sup
--
- []
-
-
-LaTeX Warning: File `fig2.png' not found on input line 588.
-
-
-./report.tex:588: Package pdftex.def Error: File `fig2.png' not found: using dr
-aft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.588 ...cludegraphics[width=\linewidth]{fig2.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `fig3.png' not found on input line 599.
-
-
-./report.tex:599: Package pdftex.def Error: File `fig3.png' not found: using dr
-aft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.599 ...cludegraphics[width=\linewidth]{fig3.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (4.19548pt too wide) in paragraph at lines 639--648
-\T1/phv/m/n/10.95 tool that saves time dur-ing the setup of a new project.
- []
-
-
-Overfull \hbox (5.81055pt too wide) in paragraph at lines 649--666
-[]\T1/phv/m/n/10.95 Furthermore, this con-tri-bu-tion may serve as check-
- []
-
-
-Overfull \hbox (4.27905pt too wide) in paragraph at lines 649--666
-\T1/phv/m/n/10.95 lowed by the per-mis-sive li-cense of the bertha project.
- []
-
-
-Overfull \hbox (0.74402pt too wide) in paragraph at lines 667--674
-[]\T1/phv/m/n/10.95 As a next step, the im-ple-men-ta-tion of fur-ther mea-
- []
-
-[7]
-Overfull \hbox (8.66081pt too wide) in paragraph at lines 677--683
-\T1/phv/m/n/10.95 and Michael Haider from our group, as well as Alexan-
- []
-
-
-Overfull \hbox (11.1615pt too wide) in paragraph at lines 677--683
-\T1/phv/m/n/10.95 der Vala-va-nis, Ca-rina Haupt, Joachim Wut-tke, Richard
+Overfull \hbox (11.38602pt too wide) in paragraph at lines 167--173
+\T1/phv/m/n/10.95 thresh-old and scan-ning pro-cess, to re-duce the amount
  []
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 699.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 178.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 10.40245pt on input line 699.
+(Font)              scaled to size 10.40245pt on input line 178.
 
-Underfull \hbox (badness 2158) in paragraph at lines 698--700
+Underfull \hbox (badness 10000) in paragraph at lines 178--181
+\T1/phv/m/sl/10.95 sym-bols dataset []$\T1/phv/m/n/10.95 https : / / www . kagg
+le . com /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--181
+\T1/phv/m/n/10.95 datasets / xainano / handwrittenmathsymbols$[]
+ []
+
+[2 <./figures/real_data_1.jpg> <./figures/convolve.jpg> <./figures/real_data_2.
+jpg> <./figures/histogram.pdf> <./figures/real_data_3.png> <./figures/dash.png>
+]
+Underfull \hbox (badness 2158) in paragraph at lines 187--189
 []\T1/phv/m/n/10.95 A. Hunt and H. Thomas, \T1/phv/m/sl/10.95 The Prag-matic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 726--728
-[]\T1/phv/m/n/10.95 Netherlands eScience Cen-ter, ``Soft-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 726--728
-\T1/phv/m/n/10.95 ware de-vel-op-ment guide,'' []$https : / / guide .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 734--737
-[]\T1/phv/m/n/10.95 A. Ioan-nides, ``Python pack-age tem-
- []
-
-
-Underfull \hbox (badness 2393) in paragraph at lines 734--737
-\T1/phv/m/n/10.95 plate project for kick-starting new Python
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 734--737
-\T1/phv/m/n/10.95 projects.'' []$https : / / github . com / AlexIoannides /
- []
-
-
-Underfull \hbox (badness 1168) in paragraph at lines 739--743
-[]\T1/phv/m/n/10.95 M. Ri-esch, N. Tchipev, S. Sen-ninger, H.-
- []
-
-
-Underfull \hbox (badness 3260) in paragraph at lines 739--743
-\T1/phv/m/n/10.95 J. Bun-gartz, and C. Ji-rauschek, ``Per-for-
- []
-
-
-Underfull \hbox (badness 1087) in paragraph at lines 739--743
-\T1/phv/m/n/10.95 Maxwell--Liouville--von Neu-mann equa-tions,''
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 745--748
-[]\T1/phv/m/n/10.95 M. Ri-esch and C. Ji-rauschek, ``mb-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 745--748
-\T1/phv/m/n/10.95 solve: An open-source solver tool
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 745--748
-\T1/phv/m/n/10.95 for the Maxwell-Bloch equa-tions,''
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 745--748
-[]$\T1/phv/m/n/10.95 https : / / github . com / mriesch-[]tum / mbsolve$[]
- []
-
-
-Underfull \hbox (badness 1048) in paragraph at lines 750--753
-[]\T1/phv/m/n/10.95 C. Ji-rauschek, M. Ri-esch, and P. Tzenov,
- []
-
-
-Underfull \hbox (badness 1072) in paragraph at lines 755--757
-\T1/phv/m/n/10.95 vel-op-ment se-ries (Addison-Wesley, Boston,
- []
-
-
-Underfull \hbox (badness 1127) in paragraph at lines 759--763
-[]\T1/phv/m/n/10.95 M. D. Wilkin-son, M. Du-mon-tier, I. J. Aal-
- []
-
-
-Underfull \hbox (badness 6493) in paragraph at lines 765--769
-[]\T1/phv/m/n/10.95 A.-L. Lam-precht, L. Gar-cia, M. Kuzak,
- []
-
-[8]
-Underfull \hbox (badness 2865) in paragraph at lines 771--774
-\T1/phv/m/n/10.95 skele-ton for sci-en-tific soft-ware (C++ with
- []
-
-
-Underfull \hbox (badness 1603) in paragraph at lines 780--782
-[]\T1/phv/m/n/10.95 GitLab Inc., ``In-tro-duc-tion to Git-Lab Flow,''
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 780--782
-[]$\T1/phv/m/n/10.95 https : / / docs . gitlab . com / ee / topics / gitlab _ ^
-^]ow .
- []
-
-
-Underfull \hbox (badness 2865) in paragraph at lines 784--787
-\T1/phv/m/n/10.95 skele-ton for sci-en-tific soft-ware (C++ with
- []
-
-
-Underfull \hbox (badness 3291) in paragraph at lines 793--795
-[]\T1/phv/m/n/10.95 ``bertha doc-u-men-ta-tion on Git-Lab Pages,''
- []
-
-
 AED: lastpage setting LastPage
-[9
+[3
 
-] [10] [11] [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 809.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 809.
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 197.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 197.
 
 (/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/out/report.
 aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 809.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 809.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 197.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 197.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 29945 strings out of 480608
- 634472 string characters out of 5903630
- 1050152 words of memory out of 5000000
- 45178 multiletter control sequences out of 15000+600000
- 587392 words of font info for 81 fonts, out of 8000000 for 9000
+ 29854 strings out of 480608
+ 633949 string characters out of 5903630
+ 1046203 words of memory out of 5000000
+ 45137 multiletter control sequences out of 15000+600000
+ 587089 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,20n,105p,10102b,808s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
-exlive/2020/texmf-dist/fonts/enc/dvips/newtxtt/txttAec.enc}</usr/local/texlive/
-2020/texmf-dist/fonts/type1/public/marvosym/marvosym.pfb></usr/local/texlive/20
-20/texmf-dist/fonts/type1/public/newtxtt/newtxtt.pfb></usr/local/texlive/2020/t
-exmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2020/texmf-di
-st/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texmf-dist/font
-s/type1/urw/helvetic/uhvro8a.pfb>
+ 78i,20n,98p,10102b,810s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2020/texmf-dist/fonts/type1/public/marvosym/marvosym.pfb></usr/local/tex
+live/2020/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/20
+20/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texm
+f-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
 Output written on /Users/jannikobenhoff/Documents/pythonProjects/quantum_comput
-ation/out/report.pdf (12 pages, 84102 bytes).
+ation/out/report.pdf (3 pages, 808207 bytes).
 PDF statistics:
- 320 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 66 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 166 PDF objects out of 1000 (max. 8388607)
+ 117 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 157 words of extra memory for PDF output out of 10000 (max. 10000000)
 

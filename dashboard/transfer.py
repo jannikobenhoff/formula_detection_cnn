@@ -30,6 +30,10 @@ def predict(img_list):
         predictions.append(custom_image_pred_label)
         #print("Custom Image Prediction: " + str(custom_image_pred_label))
     print("Prediction: ", predictions)
+    if "y" in predictions:
+        i = predictions.index("y")
+        predictions[i] = "*"
+
     return "".join(predictions)
 
     # if show_image:

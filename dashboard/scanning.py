@@ -36,6 +36,11 @@ def baw(imagearray):
     print("Mean: ", mean)
     imagearray2 = scipy.signal.convolve2d(imagearray, gkern(l=7), 'same')
     imagearray2 = scipy.signal.convolve2d(imagearray2, gkern(l=7), 'same')
+    a = Image.fromarray(imagearray2)
+    a = a.convert("L")
+    a.save("convolve.jpg")
+    # plt.imshow(imagearray2, cmap="gray")
+    # plt.show()
     imagearray2 = imagearray2 - (50-mini)
     # imagearray[imagearray < 70] = 0
     # imagearray[imagearray > 0] = 255
@@ -57,7 +62,7 @@ def wab(imagearray):
 def scanning(imagearray):
     zahldrin = []
     zahlen = []
-    thresh = 255
+    thresh = 250
     '''Spalten'''
     start = 0
     end = 0
@@ -74,6 +79,19 @@ def scanning(imagearray):
             start = 0
             end = 0
 
+
+
+    zahlen_aussortiert = []
+    for zahl in zahlen:
+        print(zahl.shape)
+        if zahl.shape[1] > 2:
+            zahlen_aussortiert.append(zahl)
+
+    zahlen = zahlen_aussortiert
+
+    print("Len: ", len(zahlen))
+    plt.imshow(zahlen[4])
+    plt.show()
     zahlen2 = []
     '''Reihen'''
     # for zahl in zahlen:
@@ -183,20 +201,44 @@ def scan_process(img_file, plot=True, save=False):
     print(image.shape)
     image = cv2.resize(image, (int(image.shape[1] / 8), int(image.shape[0] / 8)))
 
+    histogram, bin_edges = np.histogram(image)
+
+    blue = "#6989ff"
+    yellow = "#e0ea6c"
+    # plt.figure()
+    # plt.plot(bin_edges[0:-1], histogram, color=blue, label="Pre-Threshold", linewidth=3)
+
     image = baw(image)
 
+    # image = np.invert(image)
+    # a = Image.fromarray(image)
+    # a.save("real_data_2.jpg")
+    # print(histogram, bin_edges)
+    # histogram, bin_edges = np.histogram(image)
+    # plt.plot(bin_edges[0:-1], histogram, color=yellow, label="After-Threshold", linewidth=3)
+    # plt.xlabel("Grayscale Value")
+    # plt.ylabel("Pixel Count")
+    # plt.xlim([0, 255])
+    # plt.legend()
+    # plt.savefig("histogram.pdf")
+
+    # plt.figure()
     # plt.imshow(image, cmap="gray")
     # plt.show()
+    # plt.savefig("real_data_2.pdf")
 
     imageList = scanning(image)
     zahlenListe = []
     for image in imageList:
+
         image = addBorder(image)
         if image != np.empty(shape=0):
+
             image = scale(image)
             # image = wab(image)
             '''Schwarze Zahl, weißer Hintergrund'''
             image = np.invert(image)
+
             zahlenListe.append(Zahl(image))
 
     # if plot:
@@ -211,13 +253,16 @@ def scan_process(img_file, plot=True, save=False):
     return zahlenListe
 
 if __name__ == "__main__":
-    img = Image.open("../testing/__files/zahl5.jpg").convert('L')
+    #img = Image.open("../testing/__files/sc.jpg").convert('L')
 
     #img = np.array(img)
     # plt.imshow(img, cmap="gray")
     # plt.show()
 
     zahlen = scan_process("../testing/__files/calc_test.jpg")
+    # for i in range(len(zahlen)):
+    #     a = Image.fromarray(zahlen[i].imagearray)
+    #     a.save("real_data_3_{}.jpg".format(i))
 
     fig, axes = plt.subplots(1, len(zahlen))
 
@@ -226,3 +271,4 @@ if __name__ == "__main__":
         axes[i].get_yaxis().set_visible(False)
         axes[i].get_xaxis().set_visible(False)
     plt.show()
+    # plt.savefig("real_data_3.pdf")

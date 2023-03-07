@@ -41,10 +41,10 @@ def stroking(imagepath):
     # img[img > 0] = 255
     img = Image.fromarray(img)
 
-    return img # img.save(imagepath)
+    return img.save(imagepath)
 
 
-# stroking("=_444.jpg")
+stroking("__files/4_sampled.jpg")
 
 def stroke_all():
     train_clean = "__files/train_images_clean"
@@ -76,5 +76,5 @@ def stroke_all():
 
 
 
-stroke_all()
+# stroke_all()
 
