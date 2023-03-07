@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  7 MAR 2023 11:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  7 MAR 2023 12:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1253,57 +1253,62 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 13.67995pt on input line 32.
 
-Overfull \hbox (1.21033pt too wide) in paragraph at lines 45--50
+Overfull \hbox (1.07495pt too wide) in paragraph at lines 34--41
+\T1/phv/m/n/10.95 Handwritten for-mula de-tec-tion is a chal-leng-ing prob-
+ []
+
+
+Overfull \hbox (6.29686pt too wide) in paragraph at lines 34--41
+\T1/phv/m/n/10.95 ap-proach to hand-writ-ten for-mula de-tec-tion us-ing con-
+ []
+
+
+Overfull \hbox (1.21033pt too wide) in paragraph at lines 53--58
 \T1/phv/m/n/10.95 re-duce the data to the nec-es-sary char-ac-ters needed
  []
 
 
-Overfull \hbox (0.36955pt too wide) in paragraph at lines 45--50
+Overfull \hbox (0.36955pt too wide) in paragraph at lines 53--58
 \T1/phv/m/n/10.95 for the im-ple-mented func-tion-al-i-ties. There-fore, char-
  []
 
 <figures/4_clean.jpg, id=13, 45.16875pt x 45.16875pt>
 File: figures/4_clean.jpg Graphic file (type jpg)
 <use figures/4_clean.jpg>
-Package pdftex.def Info: figures/4_clean.jpg  used on input line 63.
+Package pdftex.def Info: figures/4_clean.jpg  used on input line 71.
 (pdftex.def)             Requested size: 81.26257pt x 81.27057pt.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 9.49997pt on input line 64.
+(Font)              scaled to size 9.49997pt on input line 72.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 65.
+(Font)              <10.95> on input line 73.
 <figures/4_sampled.jpg, id=14, 28.105pt x 28.105pt>
 File: figures/4_sampled.jpg Graphic file (type jpg)
 <use figures/4_sampled.jpg>
-Package pdftex.def Info: figures/4_sampled.jpg  used on input line 68.
+Package pdftex.def Info: figures/4_sampled.jpg  used on input line 76.
 (pdftex.def)             Requested size: 81.26257pt x 81.27208pt.
 <figures/real_data_1.jpg, id=17, 2149.02875pt x 800.9925pt>
 File: figures/real_data_1.jpg Graphic file (type jpg)
 <use figures/real_data_1.jpg>
-Package pdftex.def Info: figures/real_data_1.jpg  used on input line 90.
+Package pdftex.def Info: figures/real_data_1.jpg  used on input line 98.
 (pdftex.def)             Requested size: 162.51999pt x 60.57295pt.
 <figures/convolve.jpg, id=18, 268.00125pt x 99.37125pt>
 File: figures/convolve.jpg Graphic file (type jpg)
 <use figures/convolve.jpg>
-Package pdftex.def Info: figures/convolve.jpg  used on input line 96.
+Package pdftex.def Info: figures/convolve.jpg  used on input line 104.
 (pdftex.def)             Requested size: 162.51999pt x 60.26004pt.
 <figures/real_data_2.jpg, id=19, 268.00125pt x 99.37125pt>
 File: figures/real_data_2.jpg Graphic file (type jpg)
 <use figures/real_data_2.jpg>
-Package pdftex.def Info: figures/real_data_2.jpg  used on input line 103.
+Package pdftex.def Info: figures/real_data_2.jpg  used on input line 111.
 (pdftex.def)             Requested size: 155.5551pt x 57.67781pt.
 <figures/histogram.pdf, id=20, 462.52798pt x 346.89601pt>
 File: figures/histogram.pdf Graphic file (type pdf)
 <use figures/histogram.pdf>
-Package pdftex.def Info: figures/histogram.pdf  used on input line 109.
+Package pdftex.def Info: figures/histogram.pdf  used on input line 117.
 (pdftex.def)             Requested size: 208.95377pt x 156.71576pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--112
+Underfull \hbox (badness 10000) in paragraph at lines 109--120
 []$[]$
- []
-
-
-Overfull \hbox (11.11356pt too wide) in paragraph at lines 116--126
-\T1/phv/m/n/10.95 thresh-old di-men-sion shape of min(shape)/max(shape)
  []
 
 [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
@@ -1312,46 +1317,51 @@ Overfull \hbox (11.11356pt too wide) in paragraph at lines 116--126
 
 
  <./figures/4_clean.jpg> <./figures/4_sampled.jpg>]
-<figures/real_data_3.png, id=41, 896.34875pt x 188.705pt>
+Overfull \hbox (11.11356pt too wide) in paragraph at lines 124--134
+\T1/phv/m/n/10.95 thresh-old di-men-sion shape of min(shape)/max(shape)
+ []
+
+<figures/real_data_3.png, id=40, 896.34875pt x 188.705pt>
 File: figures/real_data_3.png Graphic file (type png)
 <use figures/real_data_3.png>
-Package pdftex.def Info: figures/real_data_3.png  used on input line 130.
+Package pdftex.def Info: figures/real_data_3.png  used on input line 138.
 (pdftex.def)             Requested size: 208.95377pt x 43.98863pt.
-<figures/dash.png, id=43, 1342.01375pt x 985.6825pt>
+<figures/dash.png, id=42, 1342.01375pt x 985.6825pt>
 File: figures/dash.png Graphic file (type png)
 <use figures/dash.png>
-Package pdftex.def Info: figures/dash.png  used on input line 150.
+Package pdftex.def Info: figures/dash.png  used on input line 158.
 (pdftex.def)             Requested size: 208.95377pt x 153.47105pt.
 
-Overfull \hbox (11.92514pt too wide) in paragraph at lines 155--164
+Overfull \hbox (11.92514pt too wide) in paragraph at lines 163--172
 \T1/phv/m/n/10.95 To make easy han-dling pos-si-ble a Plotly Dash-board [[]2[]]
 
  []
 
 
-Overfull \hbox (11.38602pt too wide) in paragraph at lines 167--173
+Overfull \hbox (11.38602pt too wide) in paragraph at lines 175--181
 \T1/phv/m/n/10.95 thresh-old and scan-ning pro-cess, to re-duce the amount
- []
-
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 178.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 10.40245pt on input line 178.
-
-Underfull \hbox (badness 10000) in paragraph at lines 178--181
-\T1/phv/m/sl/10.95 sym-bols dataset []$\T1/phv/m/n/10.95 https : / / www . kagg
-le . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 178--181
-\T1/phv/m/n/10.95 datasets / xainano / handwrittenmathsymbols$[]
  []
 
 [2 <./figures/real_data_1.jpg> <./figures/convolve.jpg> <./figures/real_data_2.
 jpg> <./figures/histogram.pdf> <./figures/real_data_3.png> <./figures/dash.png>
 ]
-Underfull \hbox (badness 2158) in paragraph at lines 187--189
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 186.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 10.40245pt on input line 186.
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--189
+\T1/phv/m/sl/10.95 sym-bols dataset []$\T1/phv/m/n/10.95 https : / / www . kagg
+le . com /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--189
+\T1/phv/m/n/10.95 datasets / xainano / handwrittenmathsymbols$[]
+ []
+
+
+Underfull \hbox (badness 2158) in paragraph at lines 195--197
 []\T1/phv/m/n/10.95 A. Hunt and H. Thomas, \T1/phv/m/sl/10.95 The Prag-matic
  []
 
@@ -1360,13 +1370,13 @@ AED: lastpage setting LastPage
 [3
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 197.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 197.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 205.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 205.
 
 (/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/out/report.
 aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 197.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 197.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 205.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 205.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
@@ -1377,14 +1387,14 @@ Here is how much of TeX's memory you used:
  45137 multiletter control sequences out of 15000+600000
  587089 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,20n,98p,10102b,810s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,20n,99p,10102b,835s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2020/texmf-dist/fonts/type1/public/marvosym/marvosym.pfb></usr/local/tex
 live/2020/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/20
 20/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texm
 f-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
 Output written on /Users/jannikobenhoff/Documents/pythonProjects/quantum_comput
-ation/out/report.pdf (3 pages, 808207 bytes).
+ation/out/report.pdf (3 pages, 808638 bytes).
 PDF statistics:
  166 PDF objects out of 1000 (max. 8388607)
  117 compressed objects within 2 object streams
