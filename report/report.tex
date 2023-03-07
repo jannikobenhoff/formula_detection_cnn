@@ -143,9 +143,30 @@ perfectly fit the training data see Figure~\ref{Fig:Data6}.
 \section{Model}
 \label{sec:implementation}
 
+\subsection{Theoretical background}
 Based on the (general and language-agnostic) best practices introduced in
 the section above, we implement measures for a C++ software library with
 bindings for the Python language in this section.
+
+\subsection{Arcitecture}
+
+The model that has been used for this project is a convolutional deep neural network with a total of six hidden layers.
+As only black and white images are passed to the network, the input size is one which connects to ten neurons as
+illustrated in figure 4.1. In the first layer each neuron performs a convolution of the input tensor (28 x 28 x 1) with
+a kernel size of three and stride and padding of one.After the convolution the ReLU function is used as activation.
+In the second layer again a convolution and RELU activation is performed and after that a MaxPool layer with stride and
+padding of two which results in a (14 x 14 x 1) tensor at each neuron.The same two layers are then again used for
+layers three and four which results in a (7 x 7 x 10) tensor for the whole layer five.The three-dimensional tensors are
+then flatted to an (490) array which is necessary because the following SoftMax function requires a one-dimensional
+array.Finally, the SoftMax function evaluates a probability for each output class.
+
+\begin{figure}
+    \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{figures/CNN_Architecture}
+     \caption{Individual Characters after Scanning}\label{Fig:CNN_A}
+   \end{minipage}
+\end{figure}
 
 \section{Performance and Results}
 \label{sec:customization}
