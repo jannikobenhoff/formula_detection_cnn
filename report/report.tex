@@ -135,30 +135,47 @@ perfectly fit the training data see Figure~\ref{Fig:Data6}.
 \section{Model}
 \label{sec:implementation}
 
+
 \subsection{Theoretical background}
 Based on the (general and language-agnostic) best practices introduced in
 the section above, we implement measures for a C++ software library with
 bindings for the Python language in this section.
 
-\subsection{Arcitecture}
-
-The model that has been used for this project is a convolutional deep neural network with a total of six hidden layers.
-As only black and white images are passed to the network, the input size is one which connects to ten neurons as
-illustrated in figure 4.1. In the first layer each neuron performs a convolution of the input tensor (28 x 28 x 1) with
-a kernel size of three and stride and padding of one.After the convolution the ReLU function is used as activation.
-In the second layer again a convolution and RELU activation is performed and after that a MaxPool layer with stride and
-padding of two which results in a (14 x 14 x 1) tensor at each neuron.The same two layers are then again used for
-layers three and four which results in a (7 x 7 x 10) tensor for the whole layer five.The three-dimensional tensors are
-then flatted to an (490) array which is necessary because the following SoftMax function requires a one-dimensional
-array.Finally, the SoftMax function evaluates a probability for each output class.
-
 \begin{figure}
     \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.9\linewidth]{figures/CNN_Architecture}
-     \caption{Individual Characters after Scanning}\label{Fig:CNN_A}
+     \includegraphics[width=.9\linewidth]{figures/CNN_Arch}
+     \caption{Architecture of the CNN}\label{Fig:CNN_A}
    \end{minipage}
 \end{figure}
+
+\subsection{Architecture}
+
+The model that has been used for this project is a convolutional deep neural network with a total of six hidden layers.
+As only black and white images are passed to the network, the input size is one which connects to ten neurons as
+illustrated in figure~\ref{Fig:CNN_A}. In the first layer each neuron performs a convolution of the input tensor (28 x 28 x 1) with
+a kernel size of three and stride and padding of one.
+After the convolution the ReLU function is used as activation.
+In the second layer again a convolution and ReLU activation is performed and after that a MaxPool layer with stride and
+padding of two which results in a (14 x 14 x 1) tensor at each neuron. The same two layers are then again used for layers three and four which results in a (7 x 7 x 10) tensor for the whole
+layer five. The three-dimensional tensors are then flatted to an (490) array which is necessary because the following SoftMax
+function requires a one-dimensional input. Finally, the SoftMax function evaluates a probability for each output class.
+
+\subsection{Training}
+
+In order to train the network Cross Entropy Loss was used as the loss function as it works very well with probabilistic
+methods in the neural network such as the sigmoid function and the SoftMax and for classification problems in general.
+For the optimization function Adam with a learning rate of 0.001 is used as it generally works well on CNNs because of
+its low computational cost and fast convergence.\\
+Even though the Network is rather small with only a few layers and no
+data augmentation, it performs well on the given dataset and reaches a Training accuracy of 0.86 and Test accuracy of
+0.92 as shown in figure.after training only on a thousand images.\\
+Data augmentation often has the ability to
+significantly improve the performance of a network but in this case, it doesn’t help very much, because for one our
+dataset is already very big with over 300,000 images and the detected images have a very specific format and coloring.
+For example, a classic Data Augmentation like rotating the images or increasing and decreasing their brightness wouldn’t
+have much use because the symbols will usually always be in the correct rotation and are preprocessed in a way that they
+have only pixels with two grayscale values for black and white.
 
 \section{Performance and Results}
 \label{sec:customization}
@@ -212,6 +229,14 @@ Neural Network.
   A.~Prli{\'c} and J.~B. Procter, \enquote{Ten simple rules for the open
     development of scientific software,} PLoS Comput. Biol. \textbf{8}, 1--3
   (2012).
+
+  \bibitem{reviewDL}
+  L.Alzubaidi, J.Zhang, A.Humaidi, A. Al-Dajuaili, Y. Duan, O. Al-Shamma, J. Santamaria, M.Fadhel, M. Al-Amidie, L. Farhan,
+    \emph{]Review of deep learning: concepts, CNN architectures, challenges, applications, future directions}
+    \url{https://journalofbigdata.springeropen.com/articles/10.1186/s40537-021-00444-8}
+    (last accessed)
+
+
 
 \end{thebibliography}
 
