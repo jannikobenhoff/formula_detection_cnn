@@ -50,11 +50,11 @@ various methods like adaptive thresholding.
 \subsection{Training Data}
 \subsubsection{Understanding and Cleaning the Data}
 
-The training data set contains xxx image samples, all in the 45x45 jpg file format.
+The training data set contains over 370.000 image samples, all in the 45x45 jpg file format.
 The first step was to reduce the data to the necessary characters needed for the
 implemented functionalities.
 Therefore, characters like the sum formula and more have been removed, limiting the data set
-to xxx image samples.
+to 300.000 image samples.
 
 \subsubsection{Preprocessing the Data}
 
@@ -190,13 +190,7 @@ have only pixels with two grayscale values for black and white.
 
 \subsection{Dashboard}
 
-\begin{figure}
-    \begin{minipage}{0.48\textwidth}
-     \centering
-     \includegraphics[width=.9\linewidth]{figures/dash}
-     \caption{Plotly Dash}\label{Fig:Dash}
-   \end{minipage}
-\end{figure}
+
 
 To make easy handling possible a Plotly Dashboard~\cite{plotly} is being used.
 The first step for a user is to select one out of three functionalities,
@@ -207,6 +201,14 @@ After the threshold and scanning process\nameref{realdata} the individual charac
 and the user can make a reselection if noise or other undesired parts have been detected.
 The final selection gets hand over to the model to classify the characters.
 Depending on the selected functionality the result is being displayed.
+
+\begin{figure}
+    \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{figures/dash}
+     \caption{Plotly Dash}\label{Fig:Dash}
+   \end{minipage}
+\end{figure}
 
 \section{Outlook and Improvements}
 
