@@ -48,10 +48,10 @@ as well as the image processing methods for the real world data.
 \subsection{Training Data}
 \subsubsection{Understanding and Cleaning the Data}
 
-The initial training dataset contains over 370.000 image samples, each in the 45x45 jpeg file format.
+The initial training dataset contains over 370,000 image samples, each in the 45x45 jpeg file format.
 The first step was to reduce the dataset to the characters essential for the
 implemented mathematical functionalities (see~\ref{subsec:dash}),
-thus yielding a data set of 300.000 image samples.
+thus yielding a data set of 300,000 image samples.
 
 \subsubsection{Preprocessing the Data}
 
@@ -102,7 +102,7 @@ The result is an image only containing black and white pixels as seen in Figure~
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.7\linewidth]{figures/real_data_1}
-     \caption{Before Thresholding}\label{Fig:Data3}
+     \caption{Input Image}\label{Fig:Data3}
    \end{minipage}\hfill
    \vspace{0.3cm}
    \begin{minipage}{0.48\textwidth}
@@ -210,7 +210,7 @@ Due to its low computational cost and fast convergence the adaptive moment estim
 function with a learning rate of 0.001.\\
 Despite its small size with only a few layers and no data augmentation, the Network performs well on the given dataset,
 achieving a Training accuracy of 0.86 and Test accuracy of 0.92 after training only on a thousand images, as shown in
-figure ~\ref{tp}.\\
+figure ~\ref{Fig:tp}.\\
 After three epochs of the whole training set that contains over 200,000 images and a test set of over 100,000 images the
 Network reaches a test accuracy of 96 percent, which is already quite sufficient for the project as even for the authors
 some images are hard to identify.\\
@@ -230,11 +230,16 @@ Network but in fact only decreased it.
 \label{subsec:dash}
 To make easy handling possible a Plotly~\cite{plotly} Dashboard is being used (Figure ~\ref{Fig:Dash}).
 The dashboard design is kept minimal to maximize the user experience.
-The first step for a user is to select a functionality,
-calculation, plotting, equation.
+The first step for a user is to select a functionality.
+\begin{itemize}
+\item Basic calculations using numbers and simple mathematical operations.
+\item Plotting a function containing one variable.
+\item Solving mathematical equations containing variables by accessing the
+Wolfram Alpha Api~\cite{wolfram}.
+\end{itemize}
 Afterwards you can upload a photo of the handwritten formula or even take a photo
 with the webcam.
-Then the submitted image gets processed accordingly to the above sections\nameref{subsec:realdata},
+The submitted image gets processed accordingly to the techniques from section (2.2 \nameref{subsec:realdata}),
 the individual detected characters get displayed, and the user can make a reselection
 in the case that noise or other undesired parts have been detected.
 The final selection gets hand over to the model to classify the characters.
@@ -248,9 +253,7 @@ Depending on the selected functionality the result is being displayed.
    \end{minipage}
 \end{figure}
 
-\section{Performance and results}
-
-Can be better
+\subsection{Overall}
 
 \section{Outlook and Improvements}
 
@@ -263,6 +266,8 @@ Another possible improvement could be to further develop the threshold and scann
 to reduce the amount of misidentified characters.
 In future the entered real data could be collected in order to extend the training data set for the
 Neural Network.
+
+Integrale, Bruch, etc.
 
 \begin{thebibliography}{10}
   \newcommand{\enquote}[1]{``#1''}
@@ -306,6 +311,10 @@ Neural Network.
   J. Wang and L. Perez: \emph{The Effectiveness of Data Augmentation in Image Classification using Deep Learning}
     \url{https://arxiv.org/pdf/1712.04621.pdf}
     (kast accessed 07.03.2023)
+
+  \bibitem{wolfram}
+  Wolfram Alpha \url{https://www.wolframalpha.com/}
+  (last accessed: 08.03.2023).
 
 
 
