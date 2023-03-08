@@ -154,8 +154,6 @@ The final result can be seen in Figure~\ref{Fig:Data6}.
 \subsection{Theoretical background}
 
 For this classification problem a Convolutional Neural Network is being employed.
-A CNN is a specific type of Deep Neural Network (DNN) that is based on supervised learning as the correct labels of
-classes are always available for the CNN\@.
 As a specific type of Deep Neural Network, a CNN fits under the definition of a supervised learning model as the correct
 labels are always available for the Network.
 The main advantages of CNNs are their use of local connectivity and shared weights.
@@ -182,8 +180,8 @@ In fact, well-trained CNNs have been shown to outperform humans on certain image
 \subsection{Architecture}
 
 The model that has been used for this project is a CNN with a total of six layers, which structure is depicted in
-figure~\ref{Fig:CNN_A}]
-As only black and white images are passed to the network, the input size (channel)was set to one instead of three which
+figure~\ref{Fig:CNN_A}.
+As only black and white images are passed to the network, the input size (channel) was set to one instead of three which
 would have been used for RGB images.
 Each of the following hidden layers consists of thirty-two neurons.
 In the first layer each neuron convolves the input tensor (28x28x1) with a kernel of size three, a stride of one, and
@@ -200,7 +198,7 @@ Finally, the SoftMax function evaluates a probability for each output class.
     \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.9\linewidth]{figures/train_plot}
-     \caption{Train Loss and Train Accuracy}\label{Fig:train_plot}
+     \caption{Train Loss and Train Accuracy}\label{Fig:tp}
    \end{minipage}
 \end{figure}
 
@@ -212,7 +210,7 @@ Due to its low computational cost and fast convergence the adaptive moment estim
 function with a learning rate of 0.001.\\
 Despite its small size with only a few layers and no data augmentation, the Network performs well on the given dataset,
 achieving a Training accuracy of 0.86 and Test accuracy of 0.92 after training only on a thousand images, as shown in
-figure ~\ref{train_plot}.\\
+figure ~\ref{tp}.\\
 After three epochs of the whole training set that contains over 200,000 images and a test set of over 100,000 images the
 Network reaches a test accuracy of 96 percent, which is already quite sufficient for the project as even for the authors
 some images are hard to identify.\\
