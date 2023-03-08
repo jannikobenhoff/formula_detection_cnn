@@ -35,8 +35,8 @@ Handwritten formula detection is a challenging problem in the field of pattern r
 image processing.
 Despite the recent advancements in machine learning algorithms, different styles, sizes and character
 shapes make it difficult to find a perfect detection model.
-In this paper, we present a novel approach to handwritten formula detection using convolutional
-neural networks (CNNs), image processing, and feature extraction to achieve great results
+In this paper, we present an approach to handwritten formula detection using convolutional
+neural networks (CNNs), image processing, and feature extraction to achieve the best possible results
 in real world-scenarios.
 
 \section{Data}
@@ -50,49 +50,53 @@ various methods like adaptive thresholding.
 \subsection{Training Data}
 \subsubsection{Understanding and Cleaning the Data}
 
-The training data set contains over 370.000 image samples, all in the 45x45 jpg file format.
+The original training data set contains over 370.000 image samples, all in the 45x45 jpg file format.
 The first step was to reduce the data to the necessary characters needed for the
-implemented functionalities.
-Therefore, characters like the sum formula and more have been removed, limiting the data set
-to 300.000 image samples.
+implemented functionalities resulting in a data set with 300.000 image samples.
 
 \subsubsection{Preprocessing the Data}
 
-In order to get the best results possible we figured out that the optimal image size would be
-28x28 pixels.
+The optimal image size to train the machine learning model would be 28x28 pixels.
 After scaling down the samples and first tests, the results were not as desired.
 The next preprocessing step was to widen the line thickness of each character.
 After some back and forth the optimal line thickness was 6 pixels for the 45x45 jpg samples and
-4 pixels for the down sampled 28x28 images.
+4 pixels for the down sampled 28x28 images as well as adding a border of 20\% on each side.
+Compare Figure~\ref{Fig:Data1} and Figure~\ref{Fig:Data2}.
 
 \begin{figure}[!htb]
    \begin{minipage}{0.24\textwidth}
      \centering
-     \includegraphics[width=.7\linewidth]{figures/4_clean}
+     \fbox{\includegraphics[width=.7\linewidth]{figures/4_clean}}
      \caption{Raw Data}\label{Fig:Data1}
    \end{minipage}\hfill
    \begin{minipage}{0.24\textwidth}
      \centering
-     \includegraphics[width=.7\linewidth]{figures/4_sampled}
+     \fbox{\includegraphics[width=.7\linewidth]{figures/4_sampled}}
      \caption{Processed Data}\label{Fig:Data2}
    \end{minipage}
 \end{figure}
 
 \subsection{Real Data}
-\label{realdata}
-Just as with the training data there has had to be done preprocessing before handing
-over the real world data to the Machine Learning Model.
+\label{subsec:realdata}
+Before handing the real-world data to the trained machine learning model the submitted image needs
+to be transformed in order to achieve the best possible results.
+The raw input data is a photo of a handwritten mathematical formula, preferable on white paper
+and written in dark color.
 
 \subsubsection{Adaptive Thresholding}
 
-To eliminate distracting background noise an adaptive threshold is applied to the
-image.
-The first steps are two convolutions with a gaussian kernel with side length 7 (Figure ~\ref{Fig:Data4_1}).
-After the convolution the image array gets substituted by 50-minimum value of the original image.
+To eliminate distracting background noise and to separate the desired foreground formula
+from the background based on the difference in pixel intensities of each region,
+an adaptive threshold is applied to the image~\cite{threshold}.
+For each pixel in the submitted image, a threshold has to be calculated with the following operations.
+The first steps are two convolutions with a gaussian kernel with side length of seven (Figure ~\ref{Fig:Data4_1}).
+After the convolution the image array gets substituted by 50-min, where min is the
+minimal pixel value of the original image.
 The last step is to threshold the original image with the obtained threshold image.
 The result is an image only containing black and white pixels as seen in Figure~\ref{Fig:Data4}.
 
 \begin{figure}[!htb]
+    \vspace{0.3cm}
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.7\linewidth]{figures/real_data_1}
@@ -122,15 +126,16 @@ The result is an image only containing black and white pixels as seen in Figure~
 \subsubsection{Scanning and Sampling}
 
 The next step is to scan the image to obtain all individual characters and feed it to the model.
-The image array, only containing black and white values, gets scanned by columns to find the starting
-and ending column of a character.
+The image array, only containing black and white values, gets scanned by columns first to find the starting
+and ending column of each character.
 To eliminate possible noise, charters only containing one or two columns are being deleted.
 After column search, height search is applied to find the character baseline and height.
 Every character column gets reduced in size to the maximal height and minimal baseline found in height search.
-The second last step is again to eliminate noise, characters with a threshold dimension shape of
-min(shape)/max(shape) < 0.1 will get deleted.
+The second last step is to eliminate potential characters with a threshold dimension shape of
+min(shape)/max(shape) < 0.1.
 The final step is to add an artificial border and to resize every character to a 28x28 image to
-perfectly fit the training data see Figure~\ref{Fig:Data6}.
+perfectly fit the training data see.
+The final result can be seen in Figure~\ref{Fig:Data6}.
 
 \begin{figure}
     \begin{minipage}{0.48\textwidth}
@@ -223,15 +228,15 @@ Network but in fact only decreased it.
 
 \subsection{Dashboard}
 
-
-
-To make easy handling possible a Plotly Dashboard~\cite{plotly} is being used.
-The first step for a user is to select one out of three functionalities,
+To make easy handling possible a Plotly~\cite{plotly} Dashboard is being used (Figure ~\ref{Fig:Dash}).
+The dashboard design is kept minimal to maximize the user experience.
+The first step for a user is to select a functionality,
 calculation, plotting, equation.
-After that it is possible to upload a photo of the handwritten formula or even take a photo
+Afterwards you can upload a photo of the handwritten formula or even take a photo
 with the webcam.
-After the threshold and scanning process\nameref{realdata} the individual characters are displayed
-and the user can make a reselection if noise or other undesired parts have been detected.
+Then the submitted image gets processed accordingly to the above sections\nameref{subsec:realdata},
+the individual detected characters get displayed, and the user can make a reselection
+in the case that noise or other undesired parts have been detected.
 The final selection gets hand over to the model to classify the characters.
 Depending on the selected functionality the result is being displayed.
 
@@ -270,6 +275,12 @@ Neural Network.
   \bibitem{plotly}
   Plotly \url{https://plotly.com/dash/}
   (last accessed: 07.03.2023).
+
+  \bibitem{threshold}
+  R. Fisher, S. Perkins, A. Walker, E. Wolfart.
+  \emph{Adaptive Thresholding}
+  \url{https://homepages.inf.ed.ac.uk/rbf/HIPR2/adpthrsh.htm}
+  (last accessed: 08.03.2023).
 
   \bibitem{hunt1999pragmatic}
   A.~Hunt and H.~Thomas, \emph{The Pragmatic Programmer: From Journeyman to

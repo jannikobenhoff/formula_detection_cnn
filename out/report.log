@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  7 MAR 2023 13:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  8 MAR 2023 11:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1258,28 +1258,23 @@ Overfull \hbox (1.07495pt too wide) in paragraph at lines 34--41
  []
 
 
-Overfull \hbox (6.29686pt too wide) in paragraph at lines 34--41
-\T1/phv/m/n/10.95 ap-proach to hand-writ-ten for-mula de-tec-tion us-ing con-
+Overfull \hbox (1.28342pt too wide) in paragraph at lines 59--65
+\T1/phv/m/n/10.95 ing model would be 28x28 pix-els. Af-ter scal-ing down
  []
 
-
-Overfull \hbox (1.88892pt too wide) in paragraph at lines 53--58
-\T1/phv/m/n/10.95 There-fore, char-ac-ters like the sum for-mula and more
- []
-
-<figures/4_clean.jpg, id=13, 45.16875pt x 45.16875pt>
+<figures/4_clean.jpg, id=15, 45.16875pt x 45.16875pt>
 File: figures/4_clean.jpg Graphic file (type jpg)
 <use figures/4_clean.jpg>
-Package pdftex.def Info: figures/4_clean.jpg  used on input line 71.
+Package pdftex.def Info: figures/4_clean.jpg  used on input line 69.
 (pdftex.def)             Requested size: 81.26257pt x 81.27057pt.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 9.49997pt on input line 72.
+(Font)              scaled to size 9.49997pt on input line 70.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 73.
-<figures/4_sampled.jpg, id=14, 28.105pt x 28.105pt>
+(Font)              <10.95> on input line 71.
+<figures/4_sampled.jpg, id=16, 28.105pt x 28.105pt>
 File: figures/4_sampled.jpg Graphic file (type jpg)
 <use figures/4_sampled.jpg>
-Package pdftex.def Info: figures/4_sampled.jpg  used on input line 76.
+Package pdftex.def Info: figures/4_sampled.jpg  used on input line 74.
 (pdftex.def)             Requested size: 81.26257pt x 81.27208pt.
 [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -1287,130 +1282,150 @@ Package pdftex.def Info: figures/4_sampled.jpg  used on input line 76.
 
 
  <./figures/4_clean.jpg> <./figures/4_sampled.jpg>]
-<figures/real_data_1.jpg, id=35, 2149.02875pt x 800.9925pt>
+<figures/real_data_1.jpg, id=37, 2149.02875pt x 800.9925pt>
 File: figures/real_data_1.jpg Graphic file (type jpg)
 <use figures/real_data_1.jpg>
-Package pdftex.def Info: figures/real_data_1.jpg  used on input line 98.
+Package pdftex.def Info: figures/real_data_1.jpg  used on input line 102.
 (pdftex.def)             Requested size: 162.51999pt x 60.57295pt.
-<figures/convolve.jpg, id=36, 268.00125pt x 99.37125pt>
+<figures/convolve.jpg, id=38, 268.00125pt x 99.37125pt>
 File: figures/convolve.jpg Graphic file (type jpg)
 <use figures/convolve.jpg>
-Package pdftex.def Info: figures/convolve.jpg  used on input line 104.
+Package pdftex.def Info: figures/convolve.jpg  used on input line 108.
 (pdftex.def)             Requested size: 162.51999pt x 60.26004pt.
-<figures/real_data_2.jpg, id=37, 268.00125pt x 99.37125pt>
+<figures/real_data_2.jpg, id=39, 268.00125pt x 99.37125pt>
 File: figures/real_data_2.jpg Graphic file (type jpg)
 <use figures/real_data_2.jpg>
-Package pdftex.def Info: figures/real_data_2.jpg  used on input line 111.
+Package pdftex.def Info: figures/real_data_2.jpg  used on input line 115.
 (pdftex.def)             Requested size: 155.5551pt x 57.67781pt.
-<figures/histogram.pdf, id=38, 462.52798pt x 346.89601pt>
+<figures/histogram.pdf, id=40, 462.52798pt x 346.89601pt>
 File: figures/histogram.pdf Graphic file (type pdf)
 <use figures/histogram.pdf>
-Package pdftex.def Info: figures/histogram.pdf  used on input line 117.
+Package pdftex.def Info: figures/histogram.pdf  used on input line 121.
 (pdftex.def)             Requested size: 208.95377pt x 156.71576pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--120
+Underfull \hbox (badness 10000) in paragraph at lines 113--124
 []$[]$
  []
 
 
-Overfull \hbox (11.11356pt too wide) in paragraph at lines 124--134
+Overfull \hbox (11.11356pt too wide) in paragraph at lines 128--139
 \T1/phv/m/n/10.95 thresh-old di-men-sion shape of min(shape)/max(shape)
  []
 
-<figures/real_data_3.png, id=40, 896.34875pt x 188.705pt>
+<figures/real_data_3.png, id=42, 896.34875pt x 188.705pt>
 File: figures/real_data_3.png Graphic file (type png)
 <use figures/real_data_3.png>
-Package pdftex.def Info: figures/real_data_3.png  used on input line 138.
+Package pdftex.def Info: figures/real_data_3.png  used on input line 143.
 (pdftex.def)             Requested size: 208.95377pt x 43.98863pt.
 
-./report.tex:155: LaTeX Error: File `figures/CNN_Arch' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.155 ...ics[width=.9\linewidth]{figures/CNN_Arch}
-                                                  
-I could not locate the file with any of these extensions:
-.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (3.80049pt too wide) in paragraph at lines 174--187
-\T1/phv/m/n/10.95 with prob-a-bilis-tic meth-ods in the neu-ral net-work such
- []
-
-
-Overfull \hbox (9.80266pt too wide) in paragraph at lines 174--187
-\T1/phv/m/n/10.95 or in-creas-ing and de-creas-ing their bright-ness wouldn't
+Overfull \hbox (10.10461pt too wide) in paragraph at lines 154--171
+\T1/phv/m/n/10.95 on su-per-vised learn-ing as the cor-rect la-bels of classes
  []
 
 [2 <./figures/real_data_1.jpg> <./figures/convolve.jpg> <./figures/real_data_2.
 jpg> <./figures/histogram.pdf> <./figures/real_data_3.png>]
-Overfull \hbox (11.92514pt too wide) in paragraph at lines 195--204
-\T1/phv/m/n/10.95 To make easy han-dling pos-si-ble a Plotly Dash-board [[]2[]]
+<figures/CNN_Arch_5.png, id=90, 276.17464pt x 298.54393pt>
+File: figures/CNN_Arch_5.png Graphic file (type png)
+<use figures/CNN_Arch_5.png>
+Package pdftex.def Info: figures/CNN_Arch_5.png  used on input line 175.
+(pdftex.def)             Requested size: 208.95377pt x 225.87987pt.
 
+Overfull \hbox (13.37056pt too wide) in paragraph at lines 182--196
+\T1/phv/m/n/10.95 five. As the Soft-max func-tion re-quires one-dimensional
  []
 
-<figures/dash.png, id=89, 1342.01375pt x 985.6825pt>
+<figures/train_plot.png, id=92, 380.70804pt x 280.04625pt>
+File: figures/train_plot.png Graphic file (type png)
+<use figures/train_plot.png>
+Package pdftex.def Info: figures/train_plot.png  used on input line 200.
+(pdftex.def)             Requested size: 208.95377pt x 153.70541pt.
+
+LaTeX Warning: Reference `train_plot' on page 3 undefined on input line 213.
+
+
+Overfull \hbox (3.80049pt too wide) in paragraph at lines 207--225
+\T1/phv/m/n/10.95 with prob-a-bilis-tic meth-ods in the neu-ral net-work such
+ []
+
+[3 <./figures/CNN_Arch_5.png> <./figures/train_plot.png>]
+<figures/dash.png, id=110, 1342.01375pt x 985.6825pt>
 File: figures/dash.png Graphic file (type png)
 <use figures/dash.png>
-Package pdftex.def Info: figures/dash.png  used on input line 208.
+Package pdftex.def Info: figures/dash.png  used on input line 246.
 (pdftex.def)             Requested size: 208.95377pt x 153.47105pt.
-
-Overfull \hbox (11.38602pt too wide) in paragraph at lines 215--221
-\T1/phv/m/n/10.95 thresh-old and scan-ning pro-cess, to re-duce the amount
- []
-
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 226.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 271.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 10.40245pt on input line 226.
+(Font)              scaled to size 10.40245pt on input line 271.
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--229
+Underfull \hbox (badness 10000) in paragraph at lines 271--274
 \T1/phv/m/sl/10.95 sym-bols dataset []$\T1/phv/m/n/10.95 https : / / www . kagg
 le . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--229
+Underfull \hbox (badness 10000) in paragraph at lines 271--274
 \T1/phv/m/n/10.95 datasets / xainano / handwrittenmathsymbols$[]
  []
 
 
-Underfull \hbox (badness 2158) in paragraph at lines 235--237
+Underfull \hbox (badness 10000) in paragraph at lines 280--284
+\T1/phv/m/sl/10.95 Adap-tive Thresh-old-ing []$\T1/phv/m/n/10.95 https : / / ho
+mepages .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--284
+\T1/phv/m/n/10.95 inf . ed . ac . uk / rbf / HIPR2 / adpthrsh . htm$[] (last
+ []
+
+
+Underfull \hbox (badness 2158) in paragraph at lines 286--288
 []\T1/phv/m/n/10.95 A. Hunt and H. Thomas, \T1/phv/m/sl/10.95 The Prag-matic
  []
 
 
-Underfull \hbox (badness 6493) in paragraph at lines 244--248
-[]\T1/phv/m/n/10.95 L.Alzubaidi, J.Zhang, A.Humaidi, A. Al-
+Underfull \hbox (badness 1270) in paragraph at lines 295--299
+[]\T1/phv/m/n/10.95 L.Alzubaidi, J. Zhang, A. Hu-maidi, A. Al-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--248
+Underfull \hbox (badness 10000) in paragraph at lines 295--299
 \T1/phv/m/n/10.95 com / articles / 10 . 1186 / s40537-[]021-[]00444-[]8$[]
  []
 
 
+Underfull \hbox (badness 3108) in paragraph at lines 301--304
+[]\T1/phv/m/n/10.95 D. Kingma, J.Lei Ba, \T1/phv/m/sl/10.95 ADAM: A method
+ []
+
+
+Underfull \hbox (badness 3179) in paragraph at lines 301--304
+\T1/phv/m/n/10.95 / / arxiv . org / pdf / 1412 . 6980 . pdf$[] (last ac-cessed
+ []
+
+
 AED: lastpage setting LastPage
-[3 <./figures/dash.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 253.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 253.
+[4 <./figures/dash.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 314.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 314.
 
 (/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/out/report.
 aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 253.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 253.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 314.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 314.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
  29892 strings out of 480608
- 634436 string characters out of 5903630
- 1045203 words of memory out of 5000000
- 45158 multiletter control sequences out of 15000+600000
+ 634560 string characters out of 5903630
+ 1046203 words of memory out of 5000000
+ 45162 multiletter control sequences out of 15000+600000
  587089 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,20n,98p,10102b,810s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1420,10 +1435,10 @@ live/2020/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/20
 20/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texm
 f-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
 Output written on /Users/jannikobenhoff/Documents/pythonProjects/quantum_comput
-ation/out/report.pdf (3 pages, 813110 bytes).
+ation/out/report.pdf (4 pages, 866710 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
- 134 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 213 PDF objects out of 1000 (max. 8388607)
+ 159 compressed objects within 2 object streams
+ 36 named destinations out of 1000 (max. 500000)
+ 199 words of extra memory for PDF output out of 10000 (max. 10000000)
 
