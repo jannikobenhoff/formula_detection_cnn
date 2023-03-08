@@ -11,6 +11,7 @@ labels = {'!': 0, '(': 1, ')': 2, '+': 3, ',': 4, '-': 5, '0': 6, '1': 7, '2': 8
           'l': 37, 'o': 38, 'p': 39, 'pi': 40, 'q': 41, 'sum': 42, '*': 43, 'y': 44,
           '{': 45, '}': 46}
 
+
 def predict(img_list):
     model = torch.jit.load("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/testing/model_thick.torch")
     predictions = []
@@ -28,15 +29,9 @@ def predict(img_list):
         custom_image_pred_label = torch.argmax(custom_image_pred_probs, dim=1)
         custom_image_pred_label = list(labels.keys())[custom_image_pred_label.data]
         predictions.append(custom_image_pred_label)
-        #print("Custom Image Prediction: " + str(custom_image_pred_label))
     print("Prediction: ", predictions)
-    if "y" in predictions:
-        i = predictions.index("y")
-        predictions[i] = "*"
+    # if "y" in predictions:
+    #     i = predictions.index("y")
+    #     predictions[i] = "*"
 
     return "".join(predictions)
-
-    # if show_image:
-    #     plt.imshow(custom_image.squeeze().permute(1, 2, 0))
-    #     plt.title("Prediction: " + custom_image_pred_label + " True: " + symbol)
-    #     plt.axis = False

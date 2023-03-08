@@ -8,7 +8,7 @@ from dashboard.scanning import addBorder
 
 
 def stroking(imagepath):
-    #img = Image.open("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/dashboard/__files/4_546.jpg")
+    """Adding line thickness to character"""
     img = Image.open(imagepath)
     img = np.array(img)
     img = addBorder(img, reverse=True)
@@ -35,16 +35,11 @@ def stroking(imagepath):
                 img[ii+2, i] = 0
                 img[ii+3, i] = 0
 
-    #img = addBorder(img, reverse=True)
-
     img = cv2.resize(img, (28, 28))
-    # img[img > 0] = 255
     img = Image.fromarray(img)
 
     return img.save(imagepath)
 
-
-stroking("__files/4_sampled.jpg")
 
 def stroke_all():
     train_clean = "__files/train_images_clean"
@@ -75,6 +70,6 @@ def stroke_all():
             new_img.save(test_path+"/"+folder+"/"+img)
 
 
-
-# stroke_all()
+if __name__ == "__main__":
+    stroke_all()
 

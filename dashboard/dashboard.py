@@ -97,9 +97,8 @@ webcam_group = dbc.Row(style={"margin-top": 25},
                              )]),
                              style=button_style)
                      ], style={"height": "100%", "justify-content": "center", "display": "flex",
-                               "align-items": "center", "flex-direction": "column", }))    ,
+                               "align-items": "center", "flex-direction": "column", })),
                      dbc.Col(width=6, id="screen"),
-                     #dbc.Col(width=1, children=html.Div(id='output-image-upload')),
                      dbc.Col(width=3, children=html.Div([
                          html.Button(id={"type": "input", "index": 0}, n_clicks=0, style=button_style,
                                      children=html.Div([
@@ -110,18 +109,6 @@ webcam_group = dbc.Row(style={"margin-top": 25},
                                                          "margin-top": 5}
                                                   ),
                                      ])),
-
-                         # html.Button(
-                         #     children=dcc.Upload(id={"type": "input", "index": 1}, children=[html.Div(
-                         #         [html.H5('Select Files'), html.Img(src="/assets/icons/upload.png",
-                         #                                            height=50,
-                         #                                            style={
-                         #                                                "filter": "brightness(1) invert(0)",
-                         #                                                "margin-top": 5}
-                         #                                            ),
-                         #          ],
-                         #     )]),
-                         #     style=button_style)
                      ], style={"height": "100%", "justify-content": "center", "display": "flex",
                                "align-items": "center", "flex-direction": "column", }))
                  ])
@@ -145,7 +132,6 @@ app.layout = html.Div(
         button_group,
         webcam_group,
         html.Dialog(children=html.P("hallo")),
-        #html.Div(id="screen"),
         dbc.Row([html.Hr(style={"margin-top":25})]),
         html.Div(id={"type": "pics", "index": 0}, n_clicks=0,
                  style={"justify-content": "center", "display": "flex",
@@ -231,8 +217,7 @@ def parse_contents(contents, filename):
                                                 ),
                                        ], style={"flex-direction": "column", "justify-content": "center",
                                                  "align-items": "center"}),
-                    style=select_button_style#{"height": "100px", "border-radius": "1.5rem",
-                           #"background-color": "#C2654E", "border": "none", "margin-left": 30}
+                    style=select_button_style
                     ))
     return img_list
 
@@ -343,8 +328,7 @@ def delete_images(click):
                                                     ),
                                            ], style={"flex-direction": "column", "justify-content": "center",
                                                      "align-items": "center"}),
-                        style=ready_button_style #{"height": "100px", "border-radius": "1.5rem",
-                               #"background-color": "green", "border": "none", "margin-left": 30}
+                        style=ready_button_style
         ))
         return img_list
 
@@ -377,28 +361,3 @@ if __name__ == '__main__':
     OPENCV_AVFOUNDATION_SKIP_AUTH = 1
     app.run_server(debug=True)
 
-'''
-
-Rechnen, Plotten, Gleichungen 
-Webcam / Datei hochladen
-stimmt das so? -> neu oder auswählen und entfernen (Webcam weg)
-
-rechnen/plotten/lösen lassen
-
-computation time (animieren lassen?) / performance / auslastung 
-
-REPORT:
-- wie brüche, integrale
-- ausblick, richtig -> in data set
-- ausblick bruch integral erkennung
-- histogram zeichenerkennung, bild
-- data set mod
-
-Intro/Abstract: was Ziel, welche Funktionen
-Data: TrainingsData, RealData
-Model
-Functionalities
-Performance and Results: scanning, erkennung
-Outlook and Improvements
-References
-'''
