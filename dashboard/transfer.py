@@ -2,7 +2,7 @@ import torch
 import torchvision
 from torchvision import transforms
 from PIL import Image
-from Neural.data_loader import shutil_or_just_labels
+from neural.data_loader import shutil_or_just_labels
 
 labels = {'!': 0, '(': 1, ')': 2, '+': 3, ',': 4, '-': 5, '0': 6, '1': 7, '2': 8, '3': 9, '4': 10,
           '5': 11, '6': 12, '7': 13, '8': 14, '9': 15, '=': 16, 'a': 17, 'C': 18, 'G': 19, 'H': 20,
