@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 
 
-\title{Handwritten Mathematical Formula Detection using Deep Learning}
+\title{Handwritten Mathematical Formula Detection using Convolutional Neural Networks}
 
 \author[affil={1}, email={niklas.schweiger@tum.de}]{Niklas Schweiger}
 \author[affil={1}, email={jannik.obenhoff@tum.de}]{Jannik Obenhoff}
@@ -25,7 +25,6 @@
   serves as a mathematical formula classifier model.
   The final model is applied to real handwritten formulas over a plotly dashboard to demonstrate the model
   performance in the real-world use case.
-  In addition, there will be an outlook on future improvements and application scenarios.
 
 \end{abstract}
 
@@ -37,30 +36,33 @@ Despite the recent advancements in machine learning algorithms, different styles
 shapes make it difficult to find a perfect detection model.
 In this paper, we present an approach to handwritten formula detection using convolutional
 neural networks (CNNs), image processing, and feature extraction to achieve the best possible results
-in real world-scenarios.
+in real world scenarios.
 
 \section{Data}
 \label{sec:measures}
 
 This section describes the essential preprocessing that has had to be done to the raw
-data set~\cite{kaggledataset} before handing it over to the Deep Neural Network,
-as well as the scanning process that was made to the real-world data using
-various methods like adaptive thresholding.
+data set~\cite{kaggledataset} before handing it over to the CNN,
+as well as the image processing methods for the real world data.
 
 \subsection{Training Data}
 \subsubsection{Understanding and Cleaning the Data}
 
-The original training data set contains over 370.000 image samples, all in the 45x45 jpg file format.
-The first step was to reduce the data to the necessary characters needed for the
-implemented functionalities resulting in a data set with 300.000 image samples.
+The initial training dataset contains over 370.000 image samples, each in the 45x45 jpeg file format.
+The first step was to reduce the dataset to the characters essential for the
+implemented mathematical functionalities (see~\ref{subsec:dash}),
+thus yielding a data set of 300.000 image samples.
 
 \subsubsection{Preprocessing the Data}
 
-The optimal image size to train the machine learning model would be 28x28 pixels.
+The optimal image size to train the CNN would be 28x28 pixels, a good compromise between
+memory complexity and detail loss.
+In this case a higher resolution is not needed, as the subject of the images are rather simple.
+
 After scaling down the samples and first tests, the results were not as desired.
 The next preprocessing step was to widen the line thickness of each character.
 After some back and forth the optimal line thickness was 6 pixels for the 45x45 jpg samples and
-4 pixels for the down sampled 28x28 images as well as adding a border of 20\% on each side.
+4 pixels for the down sampled 28x28 images as well as adding a white border of 20\% on each side.
 Compare Figure~\ref{Fig:Data1} and Figure~\ref{Fig:Data2}.
 
 \begin{figure}[!htb]
@@ -78,7 +80,7 @@ Compare Figure~\ref{Fig:Data1} and Figure~\ref{Fig:Data2}.
 
 \subsection{Real Data}
 \label{subsec:realdata}
-Before handing the real-world data to the trained machine learning model the submitted image needs
+Before handing the real-world data to the CNN the submitted image needs
 to be transformed in order to achieve the best possible results.
 The raw input data is a photo of a handwritten mathematical formula, preferable on white paper
 and written in dark color.
@@ -90,7 +92,7 @@ from the background based on the difference in pixel intensities of each region,
 an adaptive threshold is applied to the image~\cite{threshold}.
 For each pixel in the submitted image, a threshold has to be calculated with the following operations.
 The first steps are two convolutions with a gaussian kernel with side length of seven (Figure ~\ref{Fig:Data4_1}).
-After the convolution the image array gets substituted by 50-min, where min is the
+After the convolution each value of the image array gets subtracted by 50 minus Min, where Min is the
 minimal pixel value of the original image.
 The last step is to threshold the original image with the obtained threshold image.
 The result is an image only containing black and white pixels as seen in Figure~\ref{Fig:Data4}.
@@ -100,20 +102,20 @@ The result is an image only containing black and white pixels as seen in Figure~
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.7\linewidth]{figures/real_data_1}
-     \caption{Pre-Thresholding}\label{Fig:Data3}
+     \caption{Before Thresholding}\label{Fig:Data3}
    \end{minipage}\hfill
    \vspace{0.3cm}
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.7\linewidth]{figures/convolve}
-     \caption{After-Convolution}\label{Fig:Data4_1}
+     \caption{After Convolution}\label{Fig:Data4_1}
    \end{minipage}
       \vspace{0.3cm}
 
    \begin{minipage}{0.48\textwidth}
      \centering
      \fbox{\includegraphics[width=.67\linewidth]{figures/real_data_2}}
-     \caption{After-Thresholding}\label{Fig:Data4}
+     \caption{After Thresholding}\label{Fig:Data4}
    \end{minipage}
   \hfill
    \begin{minipage}{0.48\textwidth}
@@ -125,16 +127,16 @@ The result is an image only containing black and white pixels as seen in Figure~
 
 \subsubsection{Scanning and Sampling}
 
-The next step is to scan the image to obtain all individual characters and feed it to the model.
+The next step is to scan the image obtaining all individual characters.
 The image array, only containing black and white values, gets scanned by columns first to find the starting
 and ending column of each character.
-To eliminate possible noise, charters only containing one or two columns are being deleted.
+To eliminate possible noise, characters only containing one or two columns are being deleted.
 After column search, height search is applied to find the character baseline and height.
 Every character column gets reduced in size to the maximal height and minimal baseline found in height search.
-The second last step is to eliminate potential characters with a threshold dimension shape of
+The second last step is to remove potential characters with a threshold dimension shape of\\
 min(shape)/max(shape) < 0.1.
 The final step is to add an artificial border and to resize every character to a 28x28 image to
-perfectly fit the training data see.
+perfectly fit the training dataset.
 The final result can be seen in Figure~\ref{Fig:Data6}.
 
 \begin{figure}
@@ -227,7 +229,7 @@ Network but in fact only decreased it.
 \label{sec:customization}
 
 \subsection{Dashboard}
-
+\label{subsec:dash}
 To make easy handling possible a Plotly~\cite{plotly} Dashboard is being used (Figure ~\ref{Fig:Dash}).
 The dashboard design is kept minimal to maximize the user experience.
 The first step for a user is to select a functionality,
