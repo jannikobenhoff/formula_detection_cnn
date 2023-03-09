@@ -159,7 +159,7 @@ def ready(click, data):
     res = client.query("x + 5 * 4 = x * 9")
     for i in res.results:
         print(i.text)
-    if click != None and click != 0:
+    if click is not None and click != 0:
         img_list = []
         zahlenList = scan_process("screen.jpg")
         for i, zahl in enumerate(zahlenList):
