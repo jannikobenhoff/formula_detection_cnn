@@ -13,7 +13,7 @@ labels = {'!': 0, '(': 1, ')': 2, '+': 3, ',': 4, '-': 5, '0': 6, '1': 7, '2': 8
 
 
 def predict(img_list):
-    model = torch.jit.load("/Users/jannikobenhoff/Documents/pythonProjects/quantum_computation/testing/model_thick.torch")
+    model = torch.jit.load("/Users/jannikobenhoff/Documents/pythonProjects/formula_detection_cnn/utilities/model_thick.torch")
     predictions = []
     for img in img_list:
         img = img.imagearray
@@ -30,8 +30,8 @@ def predict(img_list):
         custom_image_pred_label = list(labels.keys())[custom_image_pred_label.data]
         predictions.append(custom_image_pred_label)
     print("Prediction: ", predictions)
-    # if "y" in predictions:
-    #     i = predictions.index("y")
-    #     predictions[i] = "*"
-
+    # if "infinity" in predictions:
+    #     i = predictions.index("infinity")
+    #     predictions[i] = "i"
+    #predictions = ['n', '*', '3', '+', '5']
     return "".join(predictions)

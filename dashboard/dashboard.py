@@ -1,6 +1,6 @@
 import base64
 import io
-
+import math
 import dash
 import dash_bootstrap_components as dbc
 import numpy as np
@@ -175,13 +175,14 @@ def ready(click, data):
         elif data == 1:
             '''Plot'''
             print("Plot")
-            a = np.linspace(-50, 50, 100)
-            n = np.linspace(-50, 50, 100)
-            ev = eval(prediction)
-            fig = go.Figure(data=[go.Scatter(x=a, y=ev, line=dict(color=yellow))])
+            print(prediction)
+            a = np.linspace(-50, 50, 1000)
+            n = np.linspace(-50, 50, 1000)
+            #ev = eval("math.sin(a)")
+            fig = go.Figure(data=[go.Scatter(x=a, y=np.sin(a), line=dict(color=yellow))])
             fig.update_layout(template="plotly_dark", plot_bgcolor='rgba(0, 0, 0, 0)', paper_bgcolor='rgba(0, 0, 0, 0)')
 
-            return [html.H2("f(a) = " + prediction, style={"color": "white"}),
+            return [html.H2("f(a) = " + "sin(a)", style={"color": "white"}),
                     dcc.Graph(figure=fig, style={"background-color": black})]
 
         elif data == 2:

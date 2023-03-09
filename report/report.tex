@@ -3,8 +3,9 @@
 
 \usepackage{cite}
 \usepackage{multirow}
-\usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{csquotes}
 
 
 \title{Handwritten Mathematical Formula Detection using Convolutional Neural Networks}
@@ -92,10 +93,10 @@ from the background based on the difference in pixel intensities of each region,
 an adaptive threshold is applied to the image~\cite{threshold}.
 For each pixel in the submitted image, a threshold has to be calculated with the following operations.
 The first steps are two convolutions with a gaussian kernel with side length of seven (Figure ~\ref{Fig:Data4_1}).
-After the convolution each value of the image array gets subtracted by 50 minus Min, where Min is the
-minimal pixel value of the original image.
+Following the convolution, each value of the image array gets subtracted by 50 minus the minimum
+pixel value (Min) of the original image.
 The last step is to threshold the original image with the obtained threshold image.
-The result is an image only containing black and white pixels as seen in Figure~\ref{Fig:Data4}.
+The outcome of this process is an image only containing black and white pixels, as illustrated in Figure~\ref{Fig:Data4}.
 
 \begin{figure}[!htb]
     \vspace{0.3cm}
@@ -232,18 +233,18 @@ improving network performance and, in fact, were observed to have a detrimental 
 
 \subsection{Dashboard}
 \label{subsec:dash}
-To make easy handling possible a Plotly~\cite{plotly} Dashboard is being used (Figure ~\ref{Fig:Dash}).
+To make easy handling possible a Plotly~\cite{plotly} Dashboard is being used (Figure~\ref{Fig:Dash}).
 The dashboard design is kept minimal to maximize the user experience.
 The first step for a user is to select a functionality.
 \begin{itemize}
 \item Basic calculations using numbers and simple mathematical operations.
-\item Plotting a function containing one variable.
+\item Plotting a function containing one variable\\ (Figure~\ref{Fig:Dash2}).
 \item Solving mathematical equations containing variables by accessing the
 Wolfram Alpha Api~\cite{wolfram}.
 \end{itemize}
 Afterwards you can upload a photo of the handwritten formula or even take a photo
 with the webcam.
-The submitted image gets processed accordingly to the techniques from section (2.2 \nameref{subsec:realdata}),
+The submitted image gets processed accordingly to the techniques from section (2.2\nameref{subsec:realdata}),
 the individual detected characters get displayed, and the user can make a reselection
 in the case that noise or other undesired parts have been detected.
 The final selection gets hand over to the model to classify the characters.
@@ -256,6 +257,13 @@ Depending on the selected functionality the result is being displayed.
      \caption{Plotly Dash}\label{Fig:Dash}
    \end{minipage}
 \end{figure}
+\begin{figure}
+    \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{figures/dash3}
+     \caption{Plot Functionality}\label{Fig:Dash2}
+   \end{minipage}
+\end{figure}
 
 \subsection{Overall}
 
@@ -266,12 +274,13 @@ or by increasing the size of the hidden layers might increase the performance of
 not significantly change the performance of the Network when classifying real handwritten symbols.
 Instead, training on a real human generated dataset of handwritten symbols would be a better option.
 
-Another possible improvement could be to further develop the threshold and scanning process,
-to reduce the amount of misidentified characters.
-In future the entered real data could be collected in order to extend the training data set for the
-Neural Network.
+One approach to achieve this would be to collect the submitted formula images and utilize them to train the CNN\@.
+Additionally, it may be beneficial to enhance the threshold and scanning process
+to minimize the amount of inaccurately detected characters.
 
-Integrale, Bruch, etc.
+In the future, additional features could be added to the application,
+such as support for more complex mathematical expressions, including integrals and fractions.
+However, this would require a better image recognition and an improved CNN as a foundation.
 
 \begin{thebibliography}{10}
   \newcommand{\enquote}[1]{``#1''}
