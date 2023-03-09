@@ -156,14 +156,14 @@ The final result can be seen in Figure~\ref{Fig:Data6}.
 
 For this classification problem a Convolutional Neural Network is being employed.
 As a specific type of Deep Neural Network, a CNN fits under the definition of a supervised learning model as the correct
-labels are always available for the Network~\cite{reviewDL} p.9.
+labels are always available for the Network~\cite[p.~9]{reviewDL}.
 The main advantages of CNNs are their use of local connectivity and shared weights.
 CNNs use convolutional layers that are specifically designed to take advantage of the spatial relationship between
 adjacent pixels in an image.
 By using local connectivity, CNNs are able to learn features that are translation invariant, meaning they can
 recognize the same feature in different parts of an image.
 The shared weights approach reduces the number of parameters in the model by using the same weights for each part of the
-image, which makes the training process faster and more efficient~\cite{reviewDL} p.13-14.
+image, which makes the training process faster and more efficient~\cite[p.~13-14]{reviewDL}.
 Also, CNNs often use pooling layers like Max or Average Pooling in order to reduce the dimensionality of the feature maps,
 which further reduces the computational cost and helps to avoid overfitting.
 For these reasons CNNs are very suitable for image recognition but also find applications in speech
@@ -192,26 +192,26 @@ The second layer follows a similar structure, where convolution and ReLU activat
 layer with stride and padding of two, resulting in a (14x14x1) tensor at each neuron.
 The same three-layer structure is then applied for layers four, five and six which results in thirty-two (7x7x1) tensors for
 layer six.
-As the Softmax function requires one-dimensional input, the three-dimensional tensors are flattened into a (1568) array.
+As the Softmax function requires one-dimensional input, the three-dimensional tensors are flattened into an array of size (1568).
 Finally, the SoftMax function evaluates a probability for each output class.
 
 \begin{figure}
     \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.9\linewidth]{figures/train_plot}
-     \caption{Train Loss and Train Accuracy}\label{Fig:tp}
+     \caption{Train Loss and Train Accuracy over a thousand images}\label{Fig:tp}
    \end{minipage}
 \end{figure}
 
 \subsection{Training}
 
-In order to train the network Cross Entropy Loss was utilized as it demonstrates exceptional efficacy with probabilistic
-methods in the neural network SoftMax as well as in classification problems in overall.
+In order to train the network Cross Entropy Loss was utilized as it demonstrates exceptional efficiency with probabilistic
+methods such as the SoftMax function as well as in classification problems overall.
 Due to its low computational cost and fast convergence the adaptive moment estimation Adam~\cite{Adam} was used as the optimization
 function with a learning rate of 0.001.\\
 Despite its small size with only a few layers and no data augmentation, the Network performs well on the given dataset,
-achieving a Training accuracy of 0.86 and Test accuracy of 0.92 after training only on a thousand images, as shown in
-figure ~\ref{Fig:tp}.\\
+achieving a Training accuracy of 0.84 and Test accuracy of 0.92 after training only on a thousand images, as shown in
+Figure~\ref{Fig:tp}.\\
 Upon completion of three training epochs utilizing a comprehensive dataset consisting of over 200,000 images, in
 addition to a test dataset consisting of over 100,000 images, the network achieved a remarkable test accuracy of 96 percent.
 This outcome is deemed highly satisfactory for the given project, as even for the authors, the identification of certain
@@ -269,10 +269,9 @@ Depending on the selected functionality the result is being displayed.
 
 \section{Outlook and Improvements}
 
-As the Network already has a good test accuracy on the given test set further improvements with a more complex Network
-or by increasing the size of the hidden layers might increase the performance of the Network on the test set but would
-not significantly change the performance of the Network when classifying real handwritten symbols.
-Instead, training on a real human generated dataset of handwritten symbols would be a better option.
+As the Network already has a good test accuracy on the given test set, further improvements with a more complex Network
+might increase the performance of the CNN on the test set, but would not significantly change the performance when classifying real handwritten symbols.
+Instead, training on a real human generated dataset of handwritten characters would be a better option.
 
 One approach to achieve this would be to collect the submitted formula images and utilize them to train the CNN\@.
 Additionally, it may be beneficial to enhance the threshold and scanning process
