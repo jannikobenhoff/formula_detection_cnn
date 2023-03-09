@@ -49,7 +49,7 @@ as well as the image processing methods for the real world data.
 \subsection{Training Data}
 \subsubsection{Understanding and Cleaning the Data}
 
-The initial training dataset contains over 370,000 image samples, each in the 45x45 jpeg file format.
+The initial training dataset contains over 370,000 computer generated image samples, each in the 45x45 jpeg file format.
 The first step was to reduce the dataset to the characters essential for the
 implemented mathematical functionalities (see~\ref{subsec:dash}),
 thus yielding a data set of 300,000 image samples.
@@ -134,10 +134,10 @@ and ending column of each character.
 To eliminate possible noise, characters only containing one or two columns are being deleted.
 After column search, height search is applied to find the character baseline and height.
 Every character column gets reduced in size to the maximal height and minimal baseline found in height search.
-The second last step is to remove potential characters with a threshold dimension shape of\\
-min(shape)/max(shape) < 0.1.
-The final step is to add an artificial border and to resize every character to a 28x28 image to
-perfectly fit the training dataset.
+The second last step involves the elimination of possible characters, whereby those with a threshold
+dimension shape of min(shape)/max(shape) < 0.1 are excluded.
+The final step includes appending an artificial border to each character and resizing every them to a 28x28 image to
+perfectly fit the dimensions of the training dataset.
 The final result can be seen in Figure~\ref{Fig:Data6}.
 
 \begin{figure}
@@ -239,12 +239,12 @@ The first step for a user is to select a functionality.
 \begin{itemize}
 \item Basic calculations using numbers and simple mathematical operations.
 \item Plotting a function containing one variable\\ (Figure~\ref{Fig:Dash2}).
-\item Solving mathematical equations containing variables by accessing the
+\item Solving mathematical equations containing\\variables by accessing the\\
 Wolfram Alpha Api~\cite{wolfram}.
 \end{itemize}
 Afterwards you can upload a photo of the handwritten formula or even take a photo
 with the webcam.
-The submitted image gets processed accordingly to the techniques from section (2.2\nameref{subsec:realdata}),
+The submitted image gets processed accordingly to the techniques from section~\ref{subsec:realdata},
 the individual detected characters get displayed, and the user can make a reselection
 in the case that noise or other undesired parts have been detected.
 The final selection gets hand over to the model to classify the characters.
@@ -265,7 +265,14 @@ Depending on the selected functionality the result is being displayed.
    \end{minipage}
 \end{figure}
 
-\subsection{Overall}
+\subsection{Application Performance}
+
+The evaluation was conducted under certain constraints,
+including limited availability of real-world data and time limitations for testing.
+The application demonstrated some notable strengths, including impressive computational
+speed across all stages of the process.
+However, the successful detection rate fell short of optimal performance (about 50\%), indicating room
+for improvement for the model and the image processing.
 
 \section{Outlook and Improvements}
 
@@ -283,7 +290,6 @@ such as support for more complex mathematical expressions, including integrals a
 However, this would require a better image recognition and an improved CNN as a foundation.
 
 \begin{thebibliography}{10}
-  \newcommand{\enquote}[1]{``#1''}
 
   \bibitem{kaggledataset}
   Xai Nano, \emph{Kaggle Data set: Handwritten math symbols dataset}
@@ -302,28 +308,28 @@ However, this would require a better image recognition and an improved CNN as a 
 
   \bibitem{hunt1999pragmatic}
   A.~Hunt and H.~Thomas, \emph{The Pragmatic Programmer: From Journeyman to
-    Master} (Addison-Wesley, Boston, 1999), 1st ed.
+  Master} (Addison-Wesley, Boston, 1999), 1st ed.
 
   \bibitem{prlic2012}
   A.~Prli{\'c} and J.~B. Procter, \enquote{Ten simple rules for the open
-    development of scientific software,} PLoS Comput. Biol. \textbf{8}, 1--3
+  development of scientific software,} PLoS Comput. Biol. \textbf{8}, 1--3
   (2012).
 
   \bibitem{reviewDL}
   L.Alzubaidi, J. Zhang, A. Humaidi, A. Al-Dajuaili, Y. Duan, O. Al-Shamma, J. Santamaria, M.Fadhel, M. Al-Amidie, L. Farhan,
-    \emph{Review of deep learning: concepts, CNN architectures, challenges, applications, future directions}
-    \url{https://journalofbigdata.springeropen.com/articles/10.1186/s40537-021-00444-8}
-    (last accessed 07.03.2023).
+  \emph{Review of deep learning: concepts, CNN architectures, challenges, applications, future directions}
+  \url{https://journalofbigdata.springeropen.com/articles/10.1186/s40537-021-00444-8}
+  (last accessed 07.03.2023).
 
   \bibitem{Adam}
   D. Kingma, J.Lei Ba, \emph{ADAM: A method for stochastic optimization page 6--7}
-    \url{https://arxiv.org/pdf/1412.6980.pdf}
-        (last accessed 07.03.2023).
+  \url{https://arxiv.org/pdf/1412.6980.pdf}
+  (last accessed 07.03.2023).
 
   \bibitem{DataAugm}
   J. Wang and L. Perez: \emph{The Effectiveness of Data Augmentation in Image Classification using Deep Learning}
-    \url{https://arxiv.org/pdf/1712.04621.pdf}
-    (kast accessed 07.03.2023)
+  \url{https://arxiv.org/pdf/1712.04621.pdf}
+  (kast accessed 07.03.2023)
 
   \bibitem{wolfram}
   Wolfram Alpha \url{https://www.wolframalpha.com/}
