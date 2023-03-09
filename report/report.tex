@@ -181,16 +181,16 @@ In fact, well-trained CNNs have been shown to outperform humans on certain image
 
 The model that has been used for this project is a CNN with a total of six layers, which structure is depicted in
 figure~\ref{Fig:CNN_A}.
-As only black and white images are passed to the network, the input size (channel) was set to one instead of three which
-would have been used for RGB images.
+Given that only monochromatic images are fed into the network, the input size, specifically the number of channels,
+was specified as one, as opposed to the three channels that would typically be utilized for RGB images.
 Each of the following hidden layers consists of thirty-two neurons.
 In the first layer each neuron convolves the input tensor (28x28x1) with a kernel of size three, a stride of one, and
 a padding of one.
 The Rectified Linear Unit (ReLU) function is applied as activation after the convolution.
 The second layer follows a similar structure, where convolution and ReLU activation are performed, followed by a MaxPool
 layer with stride and padding of two, resulting in a (14x14x1) tensor at each neuron.
-The same three-layer structure is then applied for layers three, four and five which results in thirty-two (7x7x1) tensors for
-layer five.
+The same three-layer structure is then applied for layers four, five and six which results in thirty-two (7x7x1) tensors for
+layer six.
 As the Softmax function requires one-dimensional input, the three-dimensional tensors are flattened into a (1568) array.
 Finally, the SoftMax function evaluates a probability for each output class.
 
@@ -204,24 +204,28 @@ Finally, the SoftMax function evaluates a probability for each output class.
 
 \subsection{Training}
 
-In order to train the network Cross Entropy Loss was used as the loss function as it works very well with probabilistic
-methods in the neural network such as the sigmoid function and the SoftMax and for classification problems in general.
+In order to train the network Cross Entropy Loss was utilized as it demonstrates exceptional efficacy with probabilistic
+methods in the neural network SoftMax as well as in classification problems in overall.
 Due to its low computational cost and fast convergence the adaptive moment estimation Adam~\cite{Adam} was used as the optimization
 function with a learning rate of 0.001.\\
 Despite its small size with only a few layers and no data augmentation, the Network performs well on the given dataset,
 achieving a Training accuracy of 0.86 and Test accuracy of 0.92 after training only on a thousand images, as shown in
 figure ~\ref{Fig:tp}.\\
-After three epochs of the whole training set that contains over 200,000 images and a test set of over 100,000 images the
-Network reaches a test accuracy of 96 percent, which is already quite sufficient for the project as even for the authors
-some images are hard to identify.\\
+Upon completion of three training epochs utilizing a comprehensive dataset consisting of over 200,000 images, in
+addition to a test dataset consisting of over 100,000 images, the network achieved a remarkable test accuracy of 96 percent.
+This outcome is deemed highly satisfactory for the given project, as even for the authors, the identification of certain
+images presented a challenge.\\
+
+\subsubsection{Data Augmentation}
 Data augmentation often has the ability to significantly improve the performance of a network but in this case, it
 was not useful, as the dataset is already very large with over 300,000 images with a specific format and coloring for
 the detected images.
-For example, a classic Data Augmentation like rotating the images or modifying their brightness ~\cite{DataAugm}
-wouldn’t have much use because the symbols will usually always be in the correct rotation and are preprocessed in a
-way that they have only pixels with two grayscale values for black and white.
-Standard Data Augmentation techniques were tried in the project but were not able to increase the performance of the
-Network but in fact only decreased it.
+As an illustration, implementing conventional data augmentation techniques, such as image rotation or brightness
+modification~\cite{DataAugm}, would not be of significant benefit.
+This is due to the inherent characteristics of the symbols, which are generally already correctly oriented and
+preprocessed in such a way that the pixels only contain two grayscale values for black and white.
+While standard data augmentation techniques were evaluated in the project, they were found to be ineffective in
+improving network performance and, in fact, were observed to have a detrimental effect.
 
 \section{Performance and Results}
 \label{sec:customization}
