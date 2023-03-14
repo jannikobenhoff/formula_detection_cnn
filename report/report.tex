@@ -24,8 +24,6 @@
   In this analysis project, a data set~\cite{kaggledataset} containing numbers, mathematical
   symbols and letters has been processed in order to train a deep neural network (DNN) that
   serves as a mathematical formula classifier model.
-  The final model is applied to real handwritten formulas over a plotly dashboard to demonstrate the model
-  performance in the real-world use case.
 
 \end{abstract}
 
@@ -59,29 +57,27 @@ thus yielding a data set of 300,000 image samples.
 The optimal image size to train the CNN would be 28x28 pixels, a good compromise between
 memory complexity and detail loss.
 In this case a higher resolution is not needed, as the subject of the images are rather simple.
-
-After scaling down the samples and first tests, the results were not as desired.
-The next preprocessing step was to widen the line thickness of each character.
-After some back and forth the optimal line thickness was 6 pixels for the 45x45 jpg samples and
-4 pixels for the down sampled 28x28 images as well as adding a white border of 20\% on each side.
+The next preprocessing step involved increasing the line thickness of each character to 6 pixels
+for the 45x45 jpg images and 4 pixels for the down sampled 28x28 images,
+as well as incorporating a white border that spans 20\% on each side.
 Compare Figure~\ref{Fig:Data1} and Figure~\ref{Fig:Data2}.
 
 \begin{figure}[!htb]
    \begin{minipage}{0.24\textwidth}
      \centering
-     \fbox{\includegraphics[width=.7\linewidth]{figures/4_clean}}
+     \fbox{\includegraphics[width=.4\linewidth]{figures/4_clean}}
      \caption{Raw Data}\label{Fig:Data1}
    \end{minipage}\hfill
    \begin{minipage}{0.24\textwidth}
      \centering
-     \fbox{\includegraphics[width=.7\linewidth]{figures/4_sampled}}
+     \fbox{\includegraphics[width=.4\linewidth]{figures/4_sampled}}
      \caption{Processed Data}\label{Fig:Data2}
    \end{minipage}
 \end{figure}
 
 \subsection{Real Data}
 \label{subsec:realdata}
-Before handing the real-world data to the CNN the submitted image needs
+Before handing the real-world data to the CNN a submitted image needs
 to be transformed in order to achieve the best possible results.
 The raw input data is a photo of a handwritten mathematical formula, preferable on white paper
 and written in dark color.
@@ -102,20 +98,20 @@ The outcome of this process is an image only containing black and white pixels, 
     \vspace{0.3cm}
    \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.7\linewidth]{figures/real_data_1}
+     \includegraphics[width=.6\linewidth]{figures/real_data_1}
      \caption{Input Image}\label{Fig:Data3}
    \end{minipage}\hfill
    \vspace{0.3cm}
    \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.7\linewidth]{figures/convolve}
+     \includegraphics[width=.6\linewidth]{figures/convolve}
      \caption{After Convolution}\label{Fig:Data4_1}
    \end{minipage}
       \vspace{0.3cm}
 
    \begin{minipage}{0.48\textwidth}
      \centering
-     \fbox{\includegraphics[width=.67\linewidth]{figures/real_data_2}}
+     \fbox{\includegraphics[width=.58\linewidth]{figures/real_data_2}}
      \caption{After Thresholding}\label{Fig:Data4}
    \end{minipage}
   \hfill
@@ -132,7 +128,6 @@ The next step is to scan the image obtaining all individual characters.
 The image array, only containing black and white values, gets scanned by columns first to find the starting
 and ending column of each character.
 To eliminate possible noise, characters only containing one or two columns are being deleted.
-After column search, height search is applied to find the character baseline and height.
 Every character column gets reduced in size to the maximal height and minimal baseline found in height search.
 The second last step involves the elimination of possible characters, whereby those with a threshold
 dimension shape of min(shape)/max(shape) < 0.1 are excluded.
@@ -221,10 +216,9 @@ images presented a challenge.\\
 Data augmentation often has the ability to significantly improve the performance of a network but in this case, it
 was not useful, as the dataset is already very large with over 300,000 images with a specific format and coloring for
 the detected images.
-As an illustration, implementing conventional data augmentation techniques, such as image rotation or brightness
-modification~\cite{DataAugm}, would not be of significant benefit.
-This is due to the inherent characteristics of the symbols, which are generally already correctly oriented and
-preprocessed in such a way that the pixels only contain two grayscale values for black and white.
+Conventional data augmentation techniques, such as image rotation or brightness modification~\cite{DataAugm},
+were deemed unbeneficial, given the inherent characteristics of the symbols, which are already correctly
+oriented and preprocessed to contain only two grayscale values of black and white.
 While standard data augmentation techniques were evaluated in the project, they were found to be ineffective in
 improving network performance and, in fact, were observed to have a detrimental effect.
 
@@ -233,22 +227,19 @@ improving network performance and, in fact, were observed to have a detrimental 
 
 \subsection{Dashboard}
 \label{subsec:dash}
-To make easy handling possible a Plotly~\cite{plotly} Dashboard is being used (Figure~\ref{Fig:Dash}).
-The dashboard design is kept minimal to maximize the user experience.
-The first step for a user is to select a functionality.
+The final model is applied to real handwritten formulas over a Plotly Dashboard~\cite{plotly},
+with a minimalist design approach employed to optimize the user experience (Figure~\ref{Fig:Dash}).
+The initial step for the user is to select a functionality:
 \begin{itemize}
 \item Basic calculations using numbers and simple mathematical operations.
 \item Plotting a function containing one variable\\ (Figure~\ref{Fig:Dash2}).
 \item Solving mathematical equations containing\\variables by accessing the\\
 Wolfram Alpha Api~\cite{wolfram}.
 \end{itemize}
-Afterwards you can upload a photo of the handwritten formula or even take a photo
-with the webcam.
-The submitted image gets processed accordingly to the techniques from section~\ref{subsec:realdata},
-the individual detected characters get displayed, and the user can make a reselection
-in the case that noise or other undesired parts have been detected.
-The final selection gets hand over to the model to classify the characters.
-Depending on the selected functionality the result is being displayed.
+The individual identified characters get displayed and the user can make a reselection
+in the event that noise or other undesired elements were detected.
+The final selection is handed over to the model for character classification,
+with the results displayed based on the selected functionality.
 
 \begin{figure}
     \begin{minipage}{0.48\textwidth}
@@ -271,33 +262,28 @@ The evaluation was conducted under certain constraints,
 including limited availability of real-world data and time limitations for testing.
 The application demonstrated some notable strengths, including impressive computational
 speed across all stages of the process.
-However, the successful detection rate fell short of optimal performance (about 50\%), indicating room
+However, the successful detection rate fell short of optimal performance (about 60\%), indicating room
 for improvement for the model and the image processing.
 
 \section{Outlook and Improvements}
 
-As the Network already has a good test accuracy on the given test set, further improvements with a more complex Network
-might increase the performance of the CNN on the test set, but would not significantly change the performance when classifying real handwritten symbols.
+Further improvements with a more complex Network might increase the performance of the CNN on the test set,
+but would not significantly change the performance when classifying real handwritten symbols.
 Instead, training on a real human generated dataset of handwritten characters would be a better option.
 
 One approach to achieve this would be to collect the submitted formula images and utilize them to train the CNN\@.
-Additionally, it may be beneficial to enhance the threshold and scanning process
-to minimize the amount of inaccurately detected characters.
 
 In the future, additional features could be added to the application,
 such as support for more complex mathematical expressions, including integrals and fractions.
 However, this would require a better image recognition and an improved CNN as a foundation.
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{7}
 
   \bibitem{kaggledataset}
-  Xai Nano, \emph{Kaggle Data set: Handwritten math symbols dataset}
+  Xai Nano,
+  \emph{Kaggle Data Set: Handwritten math symbols dataset}
   \url{https://www.kaggle.com/datasets/xainano/handwrittenmathsymbols}
   (last accessed: 20.02.2023).
-
-  \bibitem{plotly}
-  Plotly \url{https://plotly.com/dash/}
-  (last accessed: 07.03.2023).
 
   \bibitem{threshold}
   R. Fisher, S. Perkins, A. Walker, E. Wolfart.
@@ -306,7 +292,7 @@ However, this would require a better image recognition and an improved CNN as a 
   (last accessed: 08.03.2023).
 
   \bibitem{reviewDL}
-  L.Alzubaidi, J. Zhang, A. Humaidi, A. Al-Dajuaili, Y. Duan, O. Al-Shamma, J. Santamaria, M.Fadhel, M. Al-Amidie, L. Farhan,
+  L. Alzubaidi, J. Zhang, A. Humaidi, A. Al-Dajuaili, Y. Duan, O. Al-Shamma, J. Santamaria, M.Fadhel, M. Al-Amidie, L. Farhan,
   \emph{Review of deep learning: concepts, CNN architectures, challenges, applications, future directions}
   \url{https://journalofbigdata.springeropen.com/articles/10.1186/s40537-021-00444-8}
   (last accessed 07.03.2023).
@@ -319,10 +305,18 @@ However, this would require a better image recognition and an improved CNN as a 
   \bibitem{DataAugm}
   J. Wang and L. Perez: \emph{The Effectiveness of Data Augmentation in Image Classification using Deep Learning}
   \url{https://arxiv.org/pdf/1712.04621.pdf}
-  (kast accessed 07.03.2023)
+  (last accessed 07.03.2023)
+
+  \bibitem{plotly}
+  Plotly,
+  \emph{Dash Enterprise}
+  \url{https://plotly.com/dash/}
+  (last accessed: 14.03.2023).
 
   \bibitem{wolfram}
-  Wolfram Alpha \url{https://www.wolframalpha.com/}
+  Wolfram Research Inc.,
+  \emph{Wolfram Alpha API}
+  \url{https://products.wolframalpha.com/api}
   (last accessed: 08.03.2023).
 
 
