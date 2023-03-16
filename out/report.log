@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  14 MAR 2023 19:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.23)  16 MAR 2023 19:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1316,16 +1316,6 @@ File: figures/real_data_2.jpg Graphic file (type jpg)
 <use figures/real_data_2.jpg>
 Package pdftex.def Info: figures/real_data_2.jpg  used on input line 114.
 (pdftex.def)             Requested size: 134.66043pt x 49.92961pt.
-<figures/histogram.pdf, id=44, 462.52798pt x 346.89601pt>
-File: figures/histogram.pdf Graphic file (type pdf)
-<use figures/histogram.pdf>
-Package pdftex.def Info: figures/histogram.pdf  used on input line 120.
-(pdftex.def)             Requested size: 208.95377pt x 156.71576pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 112--123
-[]$[]$
- []
-
 
 Overfull \hbox (8.29433pt too wide) in paragraph at lines 127--137
 \T1/phv/m/n/10.95 only con-tain-ing one or two columns are be-ing deleted.
@@ -1341,12 +1331,12 @@ Overfull \hbox (11.11356pt too wide) in paragraph at lines 127--137
 \T1/phv/m/n/10.95 thresh-old di-men-sion shape of min(shape)/max(shape)
  []
 
-<figures/real_data_3.png, id=46, 896.34875pt x 188.705pt>
+<figures/real_data_3.png, id=45, 896.34875pt x 188.705pt>
 File: figures/real_data_3.png Graphic file (type png)
 <use figures/real_data_3.png>
 Package pdftex.def Info: figures/real_data_3.png  used on input line 141.
 (pdftex.def)             Requested size: 208.95377pt x 43.98863pt.
-<figures/CNN_Arch_5.png, id=50, 276.17464pt x 298.54393pt>
+<figures/CNN_Arch_5.png, id=49, 276.17464pt x 298.54393pt>
 File: figures/CNN_Arch_5.png Graphic file (type png)
 <use figures/CNN_Arch_5.png>
 Package pdftex.def Info: figures/CNN_Arch_5.png  used on input line 171.
@@ -1362,12 +1352,12 @@ Overfull \hbox (10.3663pt too wide) in paragraph at lines 178--192
  []
 
 [2 <./figures/real_data_1.jpg> <./figures/convolve.jpg> <./figures/real_data_2.
-jpg> <./figures/histogram.pdf> <./figures/real_data_3.png>]
-<figures/train_plot.png, id=97, 380.70804pt x 280.04625pt>
-File: figures/train_plot.png Graphic file (type png)
-<use figures/train_plot.png>
-Package pdftex.def Info: figures/train_plot.png  used on input line 196.
-(pdftex.def)             Requested size: 208.95377pt x 153.70541pt.
+jpg> <./figures/real_data_3.png>]
+<figures/convolution.png, id=63, 248.93pt x 236.885pt>
+File: figures/convolution.png Graphic file (type png)
+<use figures/convolution.png>
+Package pdftex.def Info: figures/convolution.png  used on input line 196.
+(pdftex.def)             Requested size: 208.95377pt x 198.8483pt.
 
 Overfull \hbox (3.81139pt too wide) in paragraph at lines 203--214
 \T1/phv/m/n/10.95 was uti-lized as it demon-strates ex-cep-tional ef-fi-ciency
@@ -1389,16 +1379,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 203--214
 
  []
 
+<figures/train_plot.png, id=66, 380.70804pt x 280.04625pt>
+File: figures/train_plot.png Graphic file (type png)
+<use figures/train_plot.png>
+Package pdftex.def Info: figures/train_plot.png  used on input line 218.
+(pdftex.def)             Requested size: 208.95377pt x 153.70541pt.
 
-Overfull \hbox (20.1739pt too wide) in paragraph at lines 216--224
+Overfull \hbox (20.1739pt too wide) in paragraph at lines 224--230
 \T1/phv/m/n/10.95 ori-ented and pre-pro-cessed to con-tain only two grayscale
  []
 
-[3 <./figures/CNN_Arch_5.png> <./figures/train_plot.png>]
+[3 <./figures/CNN_Arch_5.png> <./figures/convolution.png> <./figures/train_plot
+.png>]
 LaTeX Font Info:    Trying to load font information for TS1+phv on input line 2
-34.
-
-(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1phv.fd
+40.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
 
 
@@ -1418,93 +1413,93 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
 
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 10.40245pt on input line 234.
+(Font)              scaled to size 10.40245pt on input line 240.
 
-Overfull \hbox (5.09067pt too wide) in paragraph at lines 239--243
+Overfull \hbox (5.09067pt too wide) in paragraph at lines 245--249
 \T1/phv/m/n/10.95 The in-di-vid-ual iden-ti-fied char-ac-ters get dis-played an
 d
  []
 
-<figures/dash.png, id=116, 1342.01375pt x 985.6825pt>
+<figures/dash.png, id=85, 1342.01375pt x 985.6825pt>
 File: figures/dash.png Graphic file (type png)
 <use figures/dash.png>
-Package pdftex.def Info: figures/dash.png  used on input line 247.
+Package pdftex.def Info: figures/dash.png  used on input line 253.
 (pdftex.def)             Requested size: 208.95377pt x 153.47105pt.
-<figures/dash3.png, id=117, 1366.10374pt x 790.955pt>
+<figures/dash3.png, id=86, 1366.10374pt x 790.955pt>
 File: figures/dash3.png Graphic file (type png)
 <use figures/dash3.png>
-Package pdftex.def Info: figures/dash3.png  used on input line 254.
+Package pdftex.def Info: figures/dash3.png  used on input line 260.
 (pdftex.def)             Requested size: 208.95377pt x 120.9795pt.
 
-Overfull \hbox (6.58871pt too wide) in paragraph at lines 261--267
+Overfull \hbox (6.58871pt too wide) in paragraph at lines 267--273
 \T1/phv/m/n/10.95 ing im-pres-sive com-pu-ta-tional speed across all stages
  []
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 284.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 290.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 10.40245pt on input line 284.
+(Font)              scaled to size 10.40245pt on input line 290.
 
-Underfull \hbox (badness 2521) in paragraph at lines 283--287
+Underfull \hbox (badness 2521) in paragraph at lines 289--293
 []\T1/phv/m/n/10.95 Xai Nano, \T1/phv/m/sl/10.95 Kag-gle Data Set: Hand-writ-te
 n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--287
+Underfull \hbox (badness 10000) in paragraph at lines 289--293
 \T1/phv/m/n/10.95 datasets / xainano / handwrittenmathsymbols$[]
  []
 
 
-Underfull \hbox (badness 1675) in paragraph at lines 289--293
+Underfull \hbox (badness 1675) in paragraph at lines 295--299
 []\T1/phv/m/n/10.95 R. Fisher, S. Perkins, A. Walker, E. Wol-
  []
 
 
-Underfull \hbox (badness 5050) in paragraph at lines 289--293
+Underfull \hbox (badness 5050) in paragraph at lines 295--299
 \T1/phv/m/n/10.95 inf . ed . ac . uk / rbf / HIPR2 / adpthrsh . htm$[] (last ac
 -
  []
 
 
-Underfull \hbox (badness 1137) in paragraph at lines 295--299
+Underfull \hbox (badness 1137) in paragraph at lines 301--305
 []\T1/phv/m/n/10.95 L. Alzubaidi, J. Zhang, A. Hu-maidi, A. Al-
  []
 
 
-Underfull \hbox (badness 1721) in paragraph at lines 295--299
+Underfull \hbox (badness 1721) in paragraph at lines 301--305
 \T1/phv/m/n/10.95 maria, M.Fadhel, M. Al-Amidie, L. Farhan,
  []
 
 
-Underfull \hbox (badness 4048) in paragraph at lines 295--299
+Underfull \hbox (badness 4048) in paragraph at lines 301--305
 \T1/phv/m/sl/10.95 rec-tions []$\T1/phv/m/n/10.95 https : / / journalofbigdata 
 . springeropen .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--299
+Underfull \hbox (badness 10000) in paragraph at lines 301--305
 \T1/phv/m/n/10.95 com / articles / 10 . 1186 / s40537-[]021-[]00444-[]8$[]
  []
 
 
-Underfull \hbox (badness 4899) in paragraph at lines 301--304
+Underfull \hbox (badness 4899) in paragraph at lines 307--310
 []\T1/phv/m/n/10.95 D. Kingma, J.Lei Ba, \T1/phv/m/sl/10.95 ADAM: A method
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--304
+Underfull \hbox (badness 10000) in paragraph at lines 307--310
 \T1/phv/m/sl/10.95 for stochas-tic op-ti-miza-tion page 6--7
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--304
+Underfull \hbox (badness 10000) in paragraph at lines 307--310
 []$\T1/phv/m/n/10.95 https : / / arxiv . org / pdf / 1412 . 6980 . pdf$[] (last
  ac-
  []
 
 [4 <./figures/dash.png> <./figures/dash3.png>]
-Underfull \hbox (badness 1377) in paragraph at lines 306--309
+Underfull \hbox (badness 1377) in paragraph at lines 312--315
 \T1/phv/m/sl/10.95 ing Deep Learn-ing []$\T1/phv/m/n/10.95 https : / / arxiv . 
 org / pdf / 1712 .
  []
@@ -1514,21 +1509,21 @@ AED: lastpage setting LastPage
 [5
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 324.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 324.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 330.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 330.
 
 (/Users/jannikobenhoff/Documents/pythonProjects/formula_detection_cnn/out/repor
 t.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 324.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 324.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 330.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 330.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 30502 strings out of 480608
- 644632 string characters out of 5903630
+ 30504 strings out of 480608
+ 644660 string characters out of 5903630
  1063659 words of memory out of 5000000
- 45757 multiletter control sequences out of 15000+600000
+ 45758 multiletter control sequences out of 15000+600000
  587402 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,20n,98p,10102b,815s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1538,10 +1533,10 @@ live/2020/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/20
 20/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texm
 f-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
 Output written on /Users/jannikobenhoff/Documents/pythonProjects/formula_detect
-ion_cnn/out/report.pdf (5 pages, 1048017 bytes).
+ion_cnn/out/report.pdf (5 pages, 1073064 bytes).
 PDF statistics:
- 230 PDF objects out of 1000 (max. 8388607)
- 173 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
+ 199 PDF objects out of 1000 (max. 8388607)
+ 169 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
  212 words of extra memory for PDF output out of 10000 (max. 10000000)
 
