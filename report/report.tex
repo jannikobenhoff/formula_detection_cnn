@@ -11,7 +11,7 @@
 \title{Handwritten Mathematical Formula Detection using Convolutional Neural Networks}
 
 \author[affil={1}, email={niklas.schweiger@tum.de}]{Niklas Schweiger, 03739305}
-\author[affil={1}, email={jannik.obenhoff@tum.de}]{Jannik Obenhoff, 03742939}
+\author[affil={2}, email={jannik.obenhoff@tum.de}]{Jannik Obenhoff, 03742939}
 
 \affil{Department of Electrical and Computer Engineering, Technical
   University of Munich, Arcisstr. 21, 80333 Munich, Germany}
@@ -115,11 +115,11 @@ The outcome of this process is an image only containing black and white pixels, 
      \caption{After Thresholding}\label{Fig:Data4}
    \end{minipage}
   \hfill
-   \begin{minipage}{0.48\textwidth}
-     \centering
-     \includegraphics[width=.9\linewidth]{figures/histogram}
-     \caption{Pixel Distribution Histogram}\label{Fig:Data5}
-   \end{minipage}
+   %\begin{minipage}{0.48\textwidth}
+   %  \centering
+    % \includegraphics[width=.9\linewidth]{figures/histogram}
+   %  \caption{Pixel Distribution Histogram}\label{Fig:Data5}
+   %\end{minipage}
 \end{figure}
 
 \subsubsection{Scanning and Sampling}
@@ -147,7 +147,7 @@ The final result can be seen in Figure~\ref{Fig:Data6}.
 \label{sec:implementation}
 
 
-\subsection{Theoretical background}
+\subsection{Theoretical Background}
 
 For this classification problem a Convolutional Neural Network is being employed.
 As a specific type of Deep Neural Network, a CNN fits under the definition of a supervised learning model as the correct
@@ -193,8 +193,8 @@ Finally, the SoftMax function evaluates a probability for each output class.
 \begin{figure}
     \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.9\linewidth]{figures/train_plot}
-     \caption{Train Loss and Train Accuracy over a thousand images}\label{Fig:tp}
+     \includegraphics[width=.9\linewidth]{figures/convolution}
+     \caption{Exemplary convolution with an 6x6 input, kernel size three, stride one, and padding one.}\label{Fig:conv}
    \end{minipage}
 \end{figure}
 
@@ -212,6 +212,14 @@ addition to a test dataset consisting of over 100,000 images, the network achiev
 This outcome is deemed highly satisfactory for the given project, as even for the authors, the identification of certain
 images presented a challenge.\\
 
+\begin{figure}
+    \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{figures/train_plot}
+     \caption{Train Loss and Train Accuracy over a thousand images}\label{Fig:tp}
+   \end{minipage}
+\end{figure}
+
 \subsubsection{Data Augmentation}
 Data augmentation often has the ability to significantly improve the performance of a network but in this case, it
 was not useful, as the dataset is already very large with over 300,000 images with a specific format and coloring for
@@ -219,8 +227,6 @@ the detected images.
 Conventional data augmentation techniques, such as image rotation or brightness modification~\cite{DataAugm},
 were deemed unbeneficial, given the inherent characteristics of the symbols, which are already correctly
 oriented and preprocessed to contain only two grayscale values of black and white.
-While standard data augmentation techniques were evaluated in the project, they were found to be ineffective in
-improving network performance and, in fact, were observed to have a detrimental effect.
 
 \section{Performance and Results}
 \label{sec:customization}
